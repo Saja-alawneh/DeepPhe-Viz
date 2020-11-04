@@ -1,6 +1,7 @@
 'use strict';
 
 const Hapi = require('@hapi/hapi');
+const HapiPino= require('hapi-pino')
 
 const Inert = require('@hapi/inert');
 
@@ -27,7 +28,38 @@ const server = new Hapi.Server({
         stripTrailingSlash: true // removes trailing slashes on incoming paths
     }
 });
+//server.log(['test', 'error'], 'Test event');
+//server.events.on('log', (event, tags) => {
 
+  //  if (tags.error) {
+   //     console.log(`Server error: ${event.error ? event.error.message : 'unknown'}`);
+  //  }
+//});
+// Serevr Start Event
+server.events.on('start', () => {
+
+    //console.log('Server started');
+    console.log(server.info.started);       
+});
+server.events.on('log', (event) => {
+
+    console.log(`Server Event: ${event.timestamp ,event.data}`);
+    
+});
+// Request Event
+server.events.on('response', function (request) {
+    console.log(request.info.remoteAddress + ': ' + request.method.toUpperCase() + ' ' + request.path + ' --> ' + request.response.statusCode);
+});
+
+server.events.on('response', (request) => {
+
+    console.log(`Response sent for request: ${request.info.id}`);
+});
+//Server Stop Event
+server.events.on('stop', () => {
+
+    console.log('Server stopped');
+});
 // Serve all routes defined in the routes array
 // server.route() takes an array of route objects
 server.route(routes);
@@ -69,10 +101,27 @@ const init = async function() {
         layoutPath: './client/templates/layout',
         helpersPath: './client/templates/helpers'
     });
+    function resSerializer(res) {
+        return {
+            body:res.raw.body
+        };
+      }
+
+      await server.register({
+        plugin: HapiPino,
+        options:{
+            logPayload: true,
+            serializers:{
+            res: resSerializer
+        },
+        }
+    })
 
     // Start the server
     await server.start();
     console.log(`DeepPhe-Viz HTTP Server is running at: ${server.info.uri}`);
+    console.log('Server started successfully')
+    
 };
 
 process.on('unhandledRejection', (err) => {
