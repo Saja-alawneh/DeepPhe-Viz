@@ -1984,9 +1984,10 @@ function getLabelSummary(patientIds) {
 	})
 	.done(function(response) {
 		showHeatMap("HeatMap", response.label);
-		showEpisode("sankey", response.episode);
-		console.log("This is the Labels Response")
+		
+		console.log("This is the Episode Response")
 		console.log('response', response.episode);
+		showEpisode("sankey", response.episode);
 	})
 	.fail(function () { 
 	    console.log("Ajax error - can't get patients labels info");
