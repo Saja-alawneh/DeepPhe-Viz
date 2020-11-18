@@ -1,4 +1,6 @@
 // Global settings
+
+
 const transitionDuration = 800; // time in ms
 
 // Keep the pateints data in memory
@@ -943,16 +945,21 @@ function showDerivedCharts(patientsArr, stage, firstEncounterAgeRange) {
 
 	    // Make another ajax call to get diagnosis for the list of patients
 	    getDiagnosis(patientIds);
+// Make another ajax call to get biomarkers info for the list of patients
+		
+		getBiomarkers(patientIds);
 
-	    // Make another ajax call to get biomarkers info for the list of patients
-	    getBiomarkers(patientIds);
+	    //Make another ajax call to get Labels info for the list of patients
+	    getLabelSummary(patientIds);
     } else {
         console.log("Empty target patients list");
 
         // We'll need to remove the previous resulting charts
         removeChart("patients");
         removeChart("diagnosis");
-        removeChart("biomarkers");
+		removeChart("biomarkers");
+		removeChart("HeatMap")
+		removeChart("Sankey")
     }
 }
 
@@ -1646,6 +1653,295 @@ function showPatientsWithBiomarkersChart(svgContainerId, data) {
             });
     }
 }
+//*********************************************************************************
+//****************** HeatMAP D3****************************************************
+function showHeatMap(svgContainerId, data) {
+	
+
+let values = data
+//console.log('This is the values array',values)
+//console.log(data)
+let xScale
+let yScale
+
+let minMonth
+let maxMonth
+let numberOfMonths = maxMonth-minMonth
+
+let width =800
+let height=300
+let pad = 100
+let svg = d3.select("#" + svgContainerId).append("svg")
+//let svg = d3.select('svg')
+var Labels=["FindingCount", "DrugCount", "DisorderCount", "LabCount", "ProcedureCount","OtherCount"]
+let canvas =d3.select ('#canvas')
+//d3.select("#" + svgContainerId).append("svg") //
+canvas.attr('width', width)
+canvas.attr('height',height)
+
+let tooltip = d3.select('#tooltip')
+
+//let generateScales = ()=> {
+
+        minMonth= d3.min(values, (item) => {
+            return item['month']
+        })
+        //console.log(minMonth)
+
+        maxMonth=d3.max(values, (item)=> {
+            return item['month']
+        })
+
+        //console.log(maxMonth)
+    
+         xScale=d3.scaleLinear()
+                .domain([minMonth,maxMonth +8])
+                .range([pad, width-pad/2])
+
+            
+                yScale= d3.scaleBand()//d3.scaleTime
+                .domain(Labels)
+                .range([pad, height-pad/2])
+                .padding(0.001)
+
+//}
+//let drawCanvas = () => {
+    svg.attr('width', width)
+    svg.attr('height', height)
+//}
+
+//let drawCells= () => {
+canvas.selectAll('rect')
+        .data(values)
+        .enter()
+        .append('rect')
+        .attr('class', 'cell')
+        .style("stroke-width", 2)
+        .style("stroke", 'white')
+        .attr('fill', (item)=> {
+            frequency= item['value']
+            if(frequency ==0){
+            	return 'DarkBlue'
+         	}else if(frequency <= 25){
+                return 'SteelBlue'
+            }else if(frequency<=50){
+                return  'Navy'
+            } else if(frequency <=75) {
+                return 'Turquoise'
+            } else if(frequency <=100){
+                return 'Aqua'
+            }else if(frequency <=200){
+                return 'Yellow'
+            }else if(frequency <= 300){
+                return 'Salmon'
+            } else if(frequency<=500){
+                return 'Orange'
+            }else if (frequency <=1000){
+            return 'Crimson'
+            } else { return 'DarkMagenta'}
+        })
+        .attr('data-month', (item)=> {
+                return item['month']
+                
+        })
+        
+        .attr('data-label', (item)=> { // month
+            return item['field']
+        })
+        .attr('data-value', (item)=> {
+            return item['value']
+        })
+        .attr('height', (height - (2 * pad)) / 6)
+        .attr('y', (item)=> {
+                return yScale(item['field'])
+         })
+         .attr('width', (item)=> {
+             let numberOfMonths = maxMonth-minMonth
+             return (width -(2* pad)) / numberOfMonths
+         })
+         .attr('x', (item)=> {
+            return xScale(item['month'])
+         })
+         .on('mouseover',(item)=> {
+             tooltip.transition ()
+                        .style('visibility', 'visible')
+                        tooltip.text('Year: ' + item['year'] + ' '+
+                                    'month: ' + item['month'] + '  ' + 
+                                    'Label: ' + item['field']+ ' ' + 
+                                    'Value: ' + item ['value'])
+
+         })
+         .on('mouseout',(item)=> {
+            tooltip.transition ()
+                       .style('visibility', 'hidden')
+         })
+
+//}
+
+//let drawAxes = () => {
+
+    let xAxis = d3.axisBottom(xScale)
+                .ticks(25)
+            
+        
+    let yAxis = d3.axisLeft(yScale)
+
+    canvas.append('g')
+            .call(xAxis)
+            .attr('id', 'x-axis')
+            .attr('transform', 'translate(0, ' + (height-pad/2) + ')')
+            .attr('font-size', 15)
+
+    
+    canvas.append('g') 
+            .call(yAxis)
+            .attr('id','y-axis')
+            .attr('transform', 'translate('+ pad + ', 0)')
+            .attr('font-size', 15)
+
+//}
+//*********************************************************************************
+//****************** Sankey D3****************************************************
+function showEpisode(svgContainerId, data) {
+	// https://github.com/vasturiano/d3-sankey Version 0.4.2.
+    
+    let width =800
+	let height=300
+     
+      animDuration = 500;
+
+    //var formatNumber = d3.format(",.0f"),
+    //  format = function(d) {
+     //   return formatNumber(d) + " TWh";
+     // },
+      color = d3.scaleOrdinal(d3.schemeCategory20);
+
+    var svg = d3.select("#chart").append("svg")
+      .attr("width", width)
+      .attr("height", height )
+      .append("g")
+      .attr("transform", "translate(" + 1 + "," + 1 + ")");
+
+    var links = svg.append("g"),
+        nodes = svg.append("g");
+
+    var sankey = d3.sankey()
+      .nodeWidth(15)
+      .nodePadding(10)
+      .size([width, height])
+      .align('justify');
+
+    var path = sankey.link();
+    
+    var data1=data.episode
+      sankey
+        .nodes(data1 .nodes)
+        .links(data1 .links)
+        .layout(32);
+
+      d3Digest();
+    };
+
+    function d3Digest() {
+
+      var link = links.selectAll(".link")
+        .data(sankey.links());
+
+      var newLink = link.enter().append("path")
+          .attr("class", "link")
+          .style("stroke-width", function (d) {
+            return Math.max(1, d.dy) + 'px';
+          });
+
+      newLink.append("title")
+        .text(function (d) {
+          return d.source.name + " → " + d.target.name + "\n" + d.value;
+        });
+
+      link = newLink.merge(link);
+
+      link.transition().duration(animDuration)
+        .attr("d", path)
+        .style("stroke-width", function (d) {
+          return Math.max(1, d.dy) + 'px';
+        });
+
+      var node = nodes.selectAll(".node")
+        .data(sankey.nodes());
+
+      var newNode = node.enter().append("g")
+        .attr("class", "node");
+
+      newNode.attr("transform", function (d) {
+        return "translate(" + d.x + "," + d.y + ")";
+      });
+
+      node.transition().duration(animDuration)
+        .attr("transform", function (d) {
+          return "translate(" + d.x + "," + d.y + ")";
+        });
+
+      node = newNode.merge(node);
+
+      newNode.append('rect');
+      newNode.append('text');
+
+      newNode.select("rect")
+        .attr("width", sankey.nodeWidth())
+        .attr("height", function (d) {
+          return d.dy;
+        })
+        .append("title")
+          .text(function (d) {
+            return d.name + "\n" + d.value;
+          });
+
+      node.select("rect")
+        .style("fill", function (d) {
+          return d.color = color(d.name.replace(/ .*/, ""));
+        })
+        .style("stroke", function (d) {
+          return d3.rgb(d.color).darker(2);
+        })
+        .transition().duration(animDuration)
+          .attr("height", function (d) {
+            return d.dy;
+          });
+
+      newNode.select("text")
+        .attr("dy", ".35em")
+        .attr("transform", null)
+        .attr("y", function (d) {
+          return d.dy / 2;
+        });
+
+      node.select("text")
+        .text(function (d) {
+          return d.name;
+        })
+        .attr("x", -6)
+        .attr("text-anchor", "end")
+        .filter(function (d) {
+          return d.x < width / 2;
+        })
+          .attr("x", 6 + sankey.nodeWidth())
+          .attr("text-anchor", "start");
+
+      node.select('text').transition().duration(animDuration)
+        .attr("y", function (d) {
+          return d.dy / 2;
+        });
+    }
+
+    // Radio button change
+    d3.selectAll('.sankey-align').on('change', function() {
+      sankey.align(this.value)
+            .layout(32);
+      d3Digest();
+    });
+
+}
+//********************************************************************************
 
 
 function getBiomarkers(patientIds) {
@@ -1679,3 +1975,21 @@ function getDiagnosis(patientIds) {
 	    console.log("Ajax error - can't get patients diagnosis info");
 	});
 }
+function getLabelSummary(patientIds) {
+    $.ajax({
+	    url: baseUri + '/labels/' + patientIds.join('+'),
+	    method: 'GET', 
+	    async : true,
+	    dataType : 'json' 
+	})
+	.done(function(response) {
+		showHeatMap("HeatMap", response.label);
+		showEpisode("sankey", response.episode);
+		console.log("This is the Labels Response")
+		console.log('response', response.episode);
+	})
+	.fail(function () { 
+	    console.log("Ajax error - can't get patients labels info");
+	});
+}
+
