@@ -1655,47 +1655,62 @@ function showPatientsWithBiomarkersChart(svgContainerId, data) {
 }
 //*********************************************************************************
 //****************** HeatMAP D3****************************************************
-function showHeatMap(svgContainerId, data) {
+function showPatientList(containerId, data) {
+    
+
+    let html = '<ul class="patient_list_click">';
+
+    data.patienList.forEach(function(patient) {
+    	html += '<li><a id="' + patient.patienList + '")</li>';
+    });
+
+    html += '</ul>';
+    
+    $("#" + containerId).html(html);
+}
+function showHeatMap(svgContainerId, data) 
+{
+	//removeChart(svgContainerId);
+	
+	let values = data
+	let xScale
+	let yScale
+
+	let minMonth
+	let maxMonth
+	const svgPadding = {top: 10, right: 15, bottom: 15, left: 180};
+
+	let width =800
+	let height=300
+	let pad = 100
+	let svg = d3.select("#" + svgContainerId).append("svg")
+	//let svg = d3.select('svg')
+	var Labels=["FindingCount", "DrugCount", "DisorderCount", "LabCount", "ProcedureCount","OtherCount"]
+	let canvas =d3.select ('#canvas')
+
+	canvas.attr('width', width)
+	canvas.attr('height')
 	
 
-let values = data
-//console.log('This is the values array',values)
-//console.log(data)
-let xScale
-let yScale
+	let tooltip = d3.select('#tooltip')
+	
 
-let minMonth
-let maxMonth
-let numberOfMonths = maxMonth-minMonth
-
-let width =800
-let height=300
-let pad = 100
-let svg = d3.select("#" + svgContainerId).append("svg")
-//let svg = d3.select('svg')
-var Labels=["FindingCount", "DrugCount", "DisorderCount", "LabCount", "ProcedureCount","OtherCount"]
-let canvas =d3.select ('#canvas')
-//d3.select("#" + svgContainerId).append("svg") //
-canvas.attr('width', width)
-canvas.attr('height',height)
-
-let tooltip = d3.select('#tooltip')
-
-//let generateScales = ()=> {
+	let generateScales = ()=> 
+	{
 
         minMonth= d3.min(values, (item) => {
             return item['month']
         })
         //console.log(minMonth)
 
-        maxMonth=d3.max(values, (item)=> {
-            return item['month']
+        maxMonth=d3.max(values, (item) => {
+          return item['month']
         })
-
-        //console.log(maxMonth)
+        console.log('***************')
+        console.log(maxMonth)
     
          xScale=d3.scaleLinear()
-                .domain([minMonth,maxMonth +8])
+                .domain([minMonth,maxMonth+10])
                 .range([pad, width-pad/2])
 
             
@@ -1704,21 +1719,27 @@ let tooltip = d3.select('#tooltip')
                 .range([pad, height-pad/2])
                 .padding(0.001)
 
-//}
-//let drawCanvas = () => {
+	}
+	
+	let numberOfMonths = maxMonth-minMonth
+
+	let drawCanvas = () => 
+	{
     svg.attr('width', width)
     svg.attr('height', height)
-//}
+	}
 
-//let drawCells= () => {
-canvas.selectAll('rect')
+	let drawCells= () => 
+	{
+		canvas.selectAll('rect')
         .data(values)
         .enter()
         .append('rect')
         .attr('class', 'cell')
         .style("stroke-width", 2)
         .style("stroke", 'white')
-        .attr('fill', (item)=> {
+        .attr('fill', (item)=> 
+        {
             frequency= item['value']
             if(frequency ==0){
             	return 'DarkBlue'
@@ -1740,57 +1761,70 @@ canvas.selectAll('rect')
             return 'Crimson'
             } else { return 'DarkMagenta'}
         })
-        .attr('data-month', (item)=> {
-                return item['month']
+        .attr('data-month', (item)=> 
+        {
+            return item['month']
                 
         })
         
-        .attr('data-label', (item)=> { // month
+        .attr('data-label', (item)=> 
+        { // month
             return item['field']
         })
-        .attr('data-value', (item)=> {
+        .attr('data-value', (item)=> 
+        {
             return item['value']
         })
         .attr('height', (height - (2 * pad)) / 6)
-        .attr('y', (item)=> {
-                return yScale(item['field'])
+        .attr('y', (item)=> 
+        {
+            return yScale(item['field'])
          })
          .attr('width', (item)=> {
              let numberOfMonths = maxMonth-minMonth
              return (width -(2* pad)) / numberOfMonths
          })
-         .attr('x', (item)=> {
+         .attr('x', (item)=> 
+         {
             return xScale(item['month'])
          })
-         .on('mouseover',(item)=> {
+         .on('mouseover',(item)=> 
+         {
              tooltip.transition ()
                         .style('visibility', 'visible')
                         tooltip.text('Year: ' + item['year'] + ' '+
                                     'month: ' + item['month'] + '  ' + 
                                     'Label: ' + item['field']+ ' ' + 
                                     'Value: ' + item ['value'])
-
+                          
+           //showPatientList("patientsLIST", item['patienList'])
          })
-         .on('mouseout',(item)=> {
+         .on('mouseout',(item)=> 
+         {
             tooltip.transition ()
                        .style('visibility', 'hidden')
          })
+         .on('click',(item)=>{
 
-//}
+         	showPatientList("patientsLIST", item)//['patienList'])
+         })
 
-//let drawAxes = () => {
+	}
+
+	let drawAxes = () => 
+	{
 
     let xAxis = d3.axisBottom(xScale)
-                .ticks(25)
+               .ticks(10)
             
         
     let yAxis = d3.axisLeft(yScale)
 
     canvas.append('g')
-            .call(xAxis)
-            .attr('id', 'x-axis')
-            .attr('transform', 'translate(0, ' + (height-pad/2) + ')')
-            .attr('font-size', 15)
+      .call(xAxis)
+      .attr('id', 'x-axis')
+      .attr('transform', 'translate(0, ' + (height-pad/2) + ')')
+      .attr('font-size', 10)
 
     
     canvas.append('g') 
@@ -1799,10 +1833,24 @@ canvas.selectAll('rect')
             .attr('transform', 'translate('+ pad + ', 0)')
             .attr('font-size', 15)
 
-//}
+	}
+	canvas.append("text")
+        .attr("class", "heatmap_title")
+        .attr("transform", function(d) { 
+			return "translate(" + width/2 + ", " + svgPadding.top + ")"; 
+		})
+        .text("Label Frequency: Document Records from 2000 to 2014");
+
+
+	generateScales();
+	drawCanvas();
+ 	drawCells();
+ 	drawAxes();
+}
 //*********************************************************************************
 //****************** Sankey D3****************************************************
-function showEpisode(svgContainerId, data) {
+function showEpisode(svgContainerId, data) 
+{
 	// https://github.com/vasturiano/d3-sankey Version 0.4.2.
     
     let width =800
@@ -1840,7 +1888,7 @@ function showEpisode(svgContainerId, data) {
         .layout(32);
 
       d3Digest();
-    };
+    
 
     function d3Digest() {
 
@@ -1984,6 +2032,8 @@ function getLabelSummary(patientIds) {
 	})
 	.done(function(response) {
 		showHeatMap("HeatMap", response.label);
+		console.log("This is the Label response");
+		console.log(response.label)
 		
 		console.log("This is the Episode Response")
 		console.log('response', response.episode);
