@@ -1,94 +1,107 @@
-<div class="header">
-<span class="logo">DeepPhe-Viz | </span> <span class="current_patient">Cohort Analysis</span>
-</div>
+	<div class="header">
+	<span class="logo">DeepPhe-Viz | </span> <span class="current_patient">Cohort Analysis</span>
+	</div>
 
-<div class="main">
+	<div class="main">
 
-<!-- Filters -->
-<div class="filters clearfix">
-<div id="stage_patient_count" class="cohort_chart"></div>
-<div id="stage_patient_age" class="cohort_chart"></div>
-</div>
+	<!-- Filters -->
+	<div class="filters clearfix">
+	<div id="stage_patient_count" class="cohort_chart"></div>
+	<div id="stage_patient_age" class="cohort_chart"></div>
+	</div>
 
 
-<!-- Results -->
-<div class="results clearfix">
-<div id="results_title"></div>
-<div id="patients"></div>
-<div id="biomarkers_overview"></div>
-<div id="patients_with_biomarkers"></div>
-<div id="diagnosis"></div>
-<div id = "tooltip" font-size = "10px"  ></div>
-<div id="HeatMap" height= "50px">Label Frequency: Document Records from 2000 to 2014
-	<svg id="canvas">
-		<svg id ='legend' style= "border: 1px solid green">
+	<!-- Results -->
+	<div class="results clearfix">
+	<div id="results_title"></div>
+	<div id="patients"></div>
+	<div id="biomarkers_overview"></div>
+	<div id="patients_with_biomarkers"></div>
+	<div id="diagnosis"></div>
 	
-		<rect x= "100" y="310" width="15" height="15" fill="DarkBlue"></rect>
-	            <text x="120" y="323" fill= "black" font-size= "10px"> =0 </text>
+	<div id= "patientsLIST"></div>
+	<div id="HeatMap" style="border: 2px blue"> 
+		<div id = "tooltip" ></div>
 
-			<g>
-	            <rect x= "100" y="320" width="15" height="15" fill="SteelBlue"></rect>
-	            <text x="120" y="333" fill= "black" font-size= "10px"> < 25 </text>
-	        
-	        </g>
-	        <g>
-	            <rect x= "100" y="330" width="15" height= "15" fill="Navy"></rect>
-	            <text x="120" y="343" fill= "black" font-size= "10px"> < 50</text>
-	        </g>
-	        <g>
-	            <rect x= "100" y="340" width="15" height="15" fill="Turquoise"></rect>
-	            <text x="120" y="353" fill= "black" font-size= "10px"> < 75</text>
-	        </g>
-	        <g>
-	            <rect x= "100" y="350" width="15" height="15" fill="Aqua"></rect>
-	            <text x="120" y="363" fill= "black" font-size= "10px"> < 100</text>
-	        </g>
-	        <g>
-	            <rect x= "100" y="360" width="15" height="15" fill="Yellow"></rect>
-	            <text x="120" y="373" fill= "black" font-size= "10px"> < 200</text>
-	        </g>
-	        <g>
-	            <rect x= "100" y="370" width="15" height="15" fill="Salmon"></rect>
-	            <text x="120" y="383" fill= "black" font-size= "10px"> < 300</text>
-	        </g>
-	        <g>
-	            <rect x= "100" y="380" width="15" height="15" fill="Orange"></rect>
-	            <text x="120" y="393" fill= "black" font-size= "10px"> < 500</text>
-	        </g>
-	        <g>
-	            <rect x= "100" y="390" width="15" height="15" fill="Crimson"></rect>
-	            <text x="120" y="403" fill= "black" font-size= "10px"> < 1000</text>
-	        </g>
-	        <g>
-	            <rect x= "100" y="400" width="15" height="15" fill="DarkMagenta"></rect>
-	            <text x="120" y="413" fill= "black" font-size= "10px"> > 1000</text>
-	        </g>
-	    
-	    </svg>
-	</svg>
+		<svg id="canvas">
+			<svg id ='legend' style= "border: 1px solid green">
+				<g>
+				<rect x= "100" y="310" width="15" height="15" fill="DarkBlue"></rect>
+		        <text x="120" y="323" fill= "black" font-size= "10px"> =0 </text>
+		    	</g>
+
+				<g>
+		         <rect x= "100" y="320" width="15" height="15" fill="SteelBlue"></rect>
+		         <text x="120" y="333" fill= "black" font-size= "10px"> < 25 </text>
+		        </g>
+		        
+		        <g>
+		            <rect x= "100" y="330" width="15" height= "15" fill="Navy"></rect>
+		            <text x="120" y="343" fill= "black" font-size= "10px"> < 50</text>
+		        </g>
+		        
+		        <g>
+		            <rect x= "100" y="340" width="15" height="15" fill="Turquoise"></rect>
+		            <text x="120" y="353" fill= "black" font-size= "10px"> < 75</text>
+		        </g>
+		        
+		        <g>
+		            <rect x= "100" y="350" width="15" height="15" fill="Aqua"></rect>
+		            <text x="120" y="363" fill= "black" font-size= "10px"> < 100</text>
+		        </g>
+		        
+		        <g>
+		            <rect x= "100" y="360" width="15" height="15" fill="Yellow"></rect>
+		            <text x="120" y="373" fill= "black" font-size= "10px"> < 200</text>
+		        </g>
+		        
+		        <g>
+		            <rect x= "100" y="370" width="15" height="15" fill="Salmon"></rect>
+		            <text x="120" y="383" fill= "black" font-size= "10px"> < 300</text>
+		        </g>
+		       
+		        <g>
+		            <rect x= "100" y="380" width="15" height="15" fill="Orange"></rect>
+		            <text x="120" y="393" fill= "black" font-size= "10px"> < 500</text>
+		        </g>
+		        
+		        <g>
+		            <rect x= "100" y="390" width="15" height="15" fill="Crimson"></rect>
+		            <text x="120" y="403" fill= "black" font-size= "10px"> < 1000</text>
+		        </g>
+		        
+		        <g>
+		            <rect x= "100" y="400" width="15" height="15" fill="DarkMagenta"></rect>
+		            <text x="120" y="413" fill= "black" font-size= "10px"> > 1000</text>
+		        </g>
+		    
+		    </svg>
+		</svg>
+
+
+	</div>
+		
+
+	<div id ="sankey">
+		<svg id= "chart">
+
+			<div align="center">
+	    		<b>Layout alignment: </b>
+	    		<input class="sankey-align" type="radio" name="sankey-align" value="left"> Left &nbsp;
+	    		<input class="sankey-align" type="radio" name="sankey-align" value="center"> Center &nbsp;
+	    		<input class="sankey-align" type="radio" name="sankey-align" value="right"> Right &nbsp;
+	    		<input class="sankey-align" type="radio" name="sankey-align" value="justify" checked="checked"> Justify &nbsp;
+	  		</div>
+		</svg>
+	</div>
 </div>
-	
-
-<div id ="sankey">
-	<svg id= "chart">
-
-		<div align="center">
-    	<b>Layout alignment: </b>
-    	<input class="sankey-align" type="radio" name="sankey-align" value="left"> Left &nbsp;
-    	<input class="sankey-align" type="radio" name="sankey-align" value="center"> Center &nbsp;
-    	<input class="sankey-align" type="radio" name="sankey-align" value="right"> Right &nbsp;
-    	<input class="sankey-align" type="radio" name="sankey-align" value="justify" checked="checked"> Justify &nbsp;
-  		</div>
-
-		</div>
-	</svg>
 </div>
 
-<script type="text/javascript">
-const baseUri = '{{baseUri}}';
+	<script type="text/javascript">
+	const baseUri = '{{baseUri}}';
 
-showCohort();
+	showCohort();
 
-</script>
+	</script>
 
 
