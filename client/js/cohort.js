@@ -1681,7 +1681,7 @@ function showHeatMap(svgContainerId, data)
 	const svgPadding = {top: 10, right: 15, bottom: 15, left: 180};
 
 	let width =800
-	let height=300
+	let height=250
 	let pad = 100
 	let svg = d3.select("#" + svgContainerId).append("svg")
 	//let svg = d3.select('svg')
@@ -1804,10 +1804,10 @@ function showHeatMap(svgContainerId, data)
             tooltip.transition ()
                        .style('visibility', 'hidden')
          })
-         .on('click',(item)=>{
+        // .on('click',(item)=>{
 
-         	showPatientList("patientsLIST", item)//['patienList'])
-         })
+         //	showPatientList("patientsLIST", item)//['patienList'])
+        // })
 
 	}
 
@@ -1852,9 +1852,18 @@ function showHeatMap(svgContainerId, data)
 function showEpisode(svgContainerId, data) 
 {
 	// https://github.com/vasturiano/d3-sankey Version 0.4.2.
-    
-    let width =800
-	let height=300
+    var margin = {
+        top: 1,
+        right: 1,
+        bottom: 6,
+        left: 1
+      };
+      width = 1000 - 100 - margin.left - margin.right;
+      height = 680 - margin.top - margin.bottom;
+    //let width =950
+	//let height=650
+	const svgPadding = {top: 10, right: 15, bottom: 15, left: 180};
+
      
       animDuration = 500;
 
@@ -1865,10 +1874,18 @@ function showEpisode(svgContainerId, data)
       color = d3.scaleOrdinal(d3.schemeCategory20);
 
     var svg = d3.select("#chart").append("svg")
-      .attr("width", width)
-      .attr("height", height )
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
       .append("g")
-      .attr("transform", "translate(" + 1 + "," + 1 + ")");
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+		//chart.append("text")
+      //  .attr("class", "Sankey_title")
+      //  .attr("transform", function(d) { 
+		//	return "translate(" + width/2 + ", " + svgPadding.top + ")"; 
+	//	})
+     //   .text("Episode Sequence");
 
     var links = svg.append("g"),
         nodes = svg.append("g");
@@ -1881,10 +1898,10 @@ function showEpisode(svgContainerId, data)
 
     var path = sankey.link();
     
-    var data1=data.episode
+   // var data1=data.episode
       sankey
-        .nodes(data1 .nodes)
-        .links(data1 .links)
+        .nodes(data.nodes)
+        .links(data.links)
         .layout(32);
 
       d3Digest();
@@ -1949,7 +1966,7 @@ function showEpisode(svgContainerId, data)
           return d.color = color(d.name.replace(/ .*/, ""));
         })
         .style("stroke", function (d) {
-          return d3.rgb(d.color).darker(2);
+          return d3.rgb(d.color).darker(1);
         })
         .transition().duration(animDuration)
           .attr("height", function (d) {
@@ -1982,11 +1999,11 @@ function showEpisode(svgContainerId, data)
     }
 
     // Radio button change
-    d3.selectAll('.sankey-align').on('change', function() {
-      sankey.align(this.value)
-            .layout(32);
-      d3Digest();
-    });
+    //d3.selectAll('.sankey-align').on('change', function() {
+    //  sankey.align(this.value)
+           // .layout(32);
+     // d3Digest();
+   // });
 
 }
 //********************************************************************************
