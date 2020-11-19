@@ -31,8 +31,13 @@ svg{
 }
 #canvas{
     
-    min-height: 600px;
+    min-height: 300px;
     min-width: 800px;
+}
+#chart{
+    
+    min-height: 700px;
+    min-width: 1000px;
 }
 .cell:hover{
     fill: black
@@ -64,4 +69,25 @@ g{
     margin-top: 10px;
     margin-bottom: 10px;
     align-items: : center;
+}
+.node rect {
+  cursor: move;
+  fill-opacity: .3;
+  shape-rendering: crispEdges;
+}
+
+.node text {
+  font: 8px sans-serif;
+  pointer-events: none;
+  text-shadow: 0 1px 0 #fff;
+}
+
+.link {
+  fill: none;
+  stroke: green;
+  stroke-opacity: .1;
+}
+
+.link:hover {
+  stroke-opacity: .4;
 }
