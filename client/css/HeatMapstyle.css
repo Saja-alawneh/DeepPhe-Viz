@@ -20,8 +20,17 @@ svg{
     background-color: #fff; 
     padding: 10px;
 }
-
+#HeatMap
+{
+    border-color: blue;
+    border: double;
+    background:#fff;
+    margin:10px;
+    padding:0px;
+    float:left;
+}
 #canvas{
+    
     min-height: 600px;
     min-width: 800px;
 }
@@ -38,8 +47,9 @@ g{
     height: auto;
     width: auto;
     margin-top: 2px;
+    text-align: left;
     color: #000;
-    font-size: 24px;
+    font-size: 15px;
 }
 #legend{
     color: #000;
