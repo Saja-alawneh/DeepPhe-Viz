@@ -1,11 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
 
-*{
-    font-family: 'Source Sans Pro', sans-serif;
-}
-html{
-    min-height: 100%;
-}
+
 
 body{
     background-color: #fff;
@@ -20,10 +14,11 @@ svg{
     background-color: #fff; 
     padding: 10px;
 }
-#HeatMap
+#HeatMap,
+#sankey,
+
 {
-    border-color: blue;
-    border: double;
+    
     background:#fff;
     margin:10px;
     padding:0px;
@@ -31,8 +26,8 @@ svg{
 }
 #canvas{
     
-    min-height: 300px;
-    min-width: 800px;
+    min-height: 400px;
+    min-width: 900px;
 }
 #chart{
     
@@ -40,14 +35,28 @@ svg{
     min-width: 1000px;
 }
 .cell:hover{
-    fill: black
+    fill: black;
 }
+div.tooltip {
+  position: absolute;
+  text-align: left;
+  background-color: #FFE4E1;
+  width: 80px;
+  min-height: 50px;
+  padding: 2px;
+  font: 10px  sans-serif ;
+  font-weight: bold;
+  border: 1px solid darkblue;
+  border-radius: 8px;
+  pointer-events: none; /* keep the mouseover when over the tooltip */
+}
+
 
 g{
     color: #000
 }
 
-#tooltip{
+/*#tooltip{
     visibility: hidden;
     height: auto;
     width: auto;
@@ -55,12 +64,13 @@ g{
     text-align: left;
     color: #000;
     font-size: 15px;
-}
-#legend{
+}*/
+.legend{
     color: #000;
-    font-size: 15px;
-    text-align: center;
-    min-height: 200px;
+    font-size: 12px;
+    stroke-width: 2;
+   /* text-align: center;*/
+   /* min-height: 200px;*/
 }
 #title{
     font-size: 28px;
