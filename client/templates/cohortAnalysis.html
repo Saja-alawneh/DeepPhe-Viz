@@ -5,82 +5,112 @@
 	<div class="main">
 
 	<!-- Filters -->
-	<div class="filters clearfix">
-	<div id="stage_patient_count" class="cohort_chart"></div>
-	<div id="stage_patient_age" class="cohort_chart"></div>
+		<div class="filters clearfix">
+		<div id="stage_patient_count" class="cohort_chart"></div>
+		<div id="stage_patient_age" class="cohort_chart"></div>
 	</div>
 
 
 	<!-- Results -->
 	<div class="results clearfix">
-	<div id="results_title"></div>
-	<div id="patients"></div>
-	<div id="biomarkers_overview"></div>
-	<div id="patients_with_biomarkers"></div>
-	<div id="diagnosis"></div>
-	<!--<div id= "patientsLIST"></div> -->
-	<!--<div id="HeatMap" style="border: 2px blue"> -->
-		<div id = "tooltip" ></div>
+		<div id="results_title"></div>
+		<div id="patients"></div>
+		<div id="biomarkers_overview"></div>
+		<div id="patients_with_biomarkers"></div>
+		<div id="diagnosis"></div>
+		<div id="HeatMap" > 
+			<!--Draw Legend -->
+			<svg id="canvas">
+  				<rect x="100" y="320" width="10" height="10" fill="black"/>
+  				<text x="100" y="340" font-family="sans-serif" font-size="8px" fill="darkblue">0</text>
+  				<rect x="110" y="320" width="40" height="10" fill="#9370DB"/>
+  				<text x="120" y="340" font-family="sans-serif" font-size="8px" fill="darkblue"><=25</text>
+  				<rect x="150" y="320" width="40" height="10" fill="#34568B"/>
+  				<text x="160" y="340" font-family="sans-serif" font-size="8px" fill="darkblue"> <=50</text>
+  				<rect x="190" y="320" width="40" height="10" fill="#8d9db6"/>
+  				<text x="200" y="340" font-family="sans-serif" font-size="8px" fill="darkblue"><=75</text>
+  				<rect x="230" y="320" width="40" height="10" fill="#40E0D0"/>
+  				<text x="240" y="340" font-family="sans-serif" font-size="8px" fill="darkblue"><=100</text>
+  				<rect x="270" y="320" width="40" height="10" fill="#618685"/>
+  				<text x="280" y="340" font-family="sans-serif" font-size="8px" fill="darkblue"><=200</text>
+  				<rect x="310" y="320" width="40" height="10" fill="#88B04B"/>
+  				<text x="320" y="340" font-family="sans-serif" font-size="8px" fill="darkblue"><=300</text>
+  				<rect x="350" y="320" width="40" height="10" fill="#FFD700"/>
+  				<text x="360" y="340" font-family="sans-serif" font-size="8px" fill="darkblue"><=500</text>
+  				<rect x="390" y="320" width="40" height="10" fill="#622569"/>
+  				<text x="400" y="340" font-family="sans-serif" font-size="8px" fill="darkblue"><=1000</text>
+  				<rect x="430" y="320" width="40" height="10" fill="red"/>
+  				<text x="440" y="340" font-family="sans-serif" font-size="8px" fill="darkblue">>1000</text>
+  				</svg>	
+			</div>
+		
+		<div id ="sankey">
+			<svg id= "chart">
+				<rect x="3" y="500" width="15" height="15" fill ="white"stroke-width="2" stroke="black"/>
+				<text x="8" y="512" font-family="sans-serif" font-size="10px" fill="darkblue">0</text>
 
-		<svg id="canvas">
-		<!--	<svg id ='legend' style= "border: 1px solid green">
-				<g>
-				<rect x= "100" y="310" width="15" height="15" fill="DarkBlue"></rect>
-		        <text x="120" y="323" fill= "black" font-size= "10px"> =0 </text>
-		    	</g>
+				<rect x="45" y="500" width="15" height="15" fill ="white"stroke-width="2" stroke="black"/>
+				<text x="50" y="512" font-family="sans-serif" font-size="10px" fill="darkblue">1</text>
 
-				<g>
-		         <rect x= "100" y="320" width="15" height="15" fill="SteelBlue"></rect>
-		         <text x="120" y="333" fill= "black" font-size= "10px"> < 25 </text>
-		        </g>
-		        
-		        <g>
-		            <rect x= "100" y="330" width="15" height= "15" fill="Navy"></rect>
-		            <text x="120" y="343" fill= "black" font-size= "10px"> < 50</text>
-		        </g>
-		        
-		        <g>
-		            <rect x= "100" y="340" width="15" height="15" fill="Turquoise"></rect>
-		            <text x="120" y="353" fill= "black" font-size= "10px"> < 75</text>
-		        </g>
-		        
-		        <g>
-		            <rect x= "100" y="350" width="15" height="15" fill="Aqua"></rect>
-		            <text x="120" y="363" fill= "black" font-size= "10px"> < 100</text>
-		        </g>
-		        
-		        <g>
-		            <rect x= "100" y="360" width="15" height="15" fill="Yellow"></rect>
-		            <text x="120" y="373" fill= "black" font-size= "10px"> < 200</text>
-		        </g>
-		        
-		        <g>
-		            <rect x= "100" y="370" width="15" height="15" fill="Salmon"></rect>
-		            <text x="120" y="383" fill= "black" font-size= "10px"> < 300</text>
-		        </g>
-		       
-		        <g>
-		            <rect x= "100" y="380" width="15" height="15" fill="Orange"></rect>
-		            <text x="120" y="393" fill= "black" font-size= "10px"> < 500</text>
-		        </g>
-		        
-		        <g>
-		            <rect x= "100" y="390" width="15" height="15" fill="Crimson"></rect>
-		            <text x="120" y="403" fill= "black" font-size= "10px"> < 1000</text>
-		        </g>
-		        
-		        <g>
-		            <rect x= "100" y="400" width="15" height="15" fill="DarkMagenta"></rect>
-		            <text x="120" y="413" fill= "black" font-size= "10px"> > 1000</text>
-		        </g>
-		    
-		    </svg>-->
-		</svg>
+				<rect x="87" y="500" width="15" height="15" fill ="white"stroke-width="2" stroke="black"/>
+				<text x="92" y="512" font-family="sans-serif" font-size="10px" fill="darkblue">2</text>
+
+				<rect x="130" y="500" width="15" height="15" fill ="white"stroke-width="2" stroke="black"/>
+				<text x="135" y="512" font-family="sans-serif" font-size="10px" fill="darkblue">3</text>
+
+				<rect x="173" y="500" width="15" height="15" fill ="white"stroke-width="2" stroke="black"/>
+				<text x="178" y="512" font-family="sans-serif" font-size="10px" fill="darkblue">4</text>
+
+				<rect x="217" y="500" width="15" height="15" fill ="white"stroke-width="2" stroke="black"/>
+				<text x="222" y="512" font-family="sans-serif" font-size="10px" fill="darkblue">5</text>
+
+				<rect x="259" y="500" width="15" height="15" fill ="white"stroke-width="2" stroke="black"/>
+				<text x="264" y="512" font-family="sans-serif" font-size="10px" fill="darkblue">6</text>
+
+				<rect x="301" y="500" width="15" height="15" fill ="white"stroke-width="2" stroke="black"/>
+				<text x="306" y="512" font-family="sans-serif" font-size="10px" fill="darkblue">7</text>
+
+				<rect x="344" y="500" width="15" height="15" fill ="white"stroke-width="2" stroke="black"/>
+				<text x="349" y="512" font-family="sans-serif" font-size="10px" fill="darkblue">8</text>
+
+				<rect x="387" y="500" width="15" height="15" fill ="white"stroke-width="2" stroke="black"/>
+				<text x="392" y="512" font-family="sans-serif" font-size="10px" fill="darkblue">9</text>
+
+				<rect x="431" y="500" width="15" height="15" fill ="white"stroke-width="2" stroke="black"/>
+				<text x="433" y="512" font-family="sans-serif" font-size="10px" fill="darkblue">10</text>
 
 
-	<!--</div>	-->
-	<div id ="sankey">
-		<svg id= "chart">
+				<rect x="475" y="500" width="15" height="15" fill ="white"stroke-width="2" stroke="black"/>
+				<text x="478" y="512" font-family="sans-serif" font-size="10px" fill="darkblue">11</text>
+
+				<rect x="519" y="500" width="15" height="15" fill ="white"stroke-width="2" stroke="black"/>
+				<text x="520" y="512" font-family="sans-serif" font-size="10px" fill="darkblue">12</text>
+
+				<rect x="563" y="500" width="15" height="15" fill ="white"stroke-width="2" stroke="black"/>
+				<text x="565" y="512" font-family="sans-serif" font-size="10px" fill="darkblue">13</text>
+
+				<rect x="607" y="500" width="15" height="15" fill ="white"stroke-width="2" stroke="black"/>
+				<text x="609" y="512" font-family="sans-serif" font-size="10px" fill="darkblue">14</text>
+
+				<rect x="651" y="500" width="15" height="15" fill ="white"stroke-width="2" stroke="black"/>
+				<text x="653" y="512" font-family="sans-serif" font-size="10px" fill="darkblue">15</text>
+
+
+				<rect x="695" y="500" width="15" height="15" fill ="white"stroke-width="2" stroke="black"/>
+				<text x="697" y="512" font-family="sans-serif" font-size="10px" fill="darkblue">16</text>
+
+				<text x="330" y="540" font-family="sans-serif" font-size="12px" fill="darkblue">Document-Episode Levels</text>
+
+				<rect x="100" y="580" width="10" height="30" fill="#5DADE2"/>
+  				<text x="115" y="600" font-family="sans-serif" font-size="8px" fill="darkblue">Prediagnostic</text>
+  				<rect x="170" y="580" width="10" height="30" fill="#C39BD3"/>
+  				<text x="185" y="600" font-family="sans-serif" font-size="8px" fill="darkblue">Diagnostic</text>
+  				<rect x="240" y="580" width="10" height="30" fill="#7DCEA0"/>
+  				<text x="255" y="600" font-family="sans-serif" font-size="8px" fill="darkblue">Treatment</text>
+  				<rect x="310" y="580" width="10" height="30" fill="#F0B27A"/>
+  				<text x="325" y="600" font-family="sans-serif" font-size="8px" fill="darkblue">Follow-Up</text>
+  				<rect x="380" y="580" width="10" height="30" fill="#EC7063"/>
+  				<text x="395" y="600" font-family="sans-serif" font-size="8px" fill="darkblue">Medical Decision Making</text>-->
 
 		<!--	<svg align="center">
 	    		<b>Layout alignment: </b>
@@ -89,9 +119,9 @@
 	    		<input class="sankey-align" type="radio" name="sankey-align" value="right"> Right &nbsp;
 	    		<input class="sankey-align" type="radio" name="sankey-align" value="justify" checked="checked"> Justify &nbsp;
 	  		</svg>-->
-		</svg>
+			</svg>
+		</div>
 	</div>
-</div>
 </div>
 
 	<script type="text/javascript">
