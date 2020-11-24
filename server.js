@@ -28,33 +28,7 @@ const server = new Hapi.Server({
         stripTrailingSlash: true // removes trailing slashes on incoming paths
     }
 });
-//server.log(['test', 'error'], 'Test event');
-//server.events.on('log', (event, tags) => {
 
-  //  if (tags.error) {
-   //     console.log(`Server error: ${event.error ? event.error.message : 'unknown'}`);
-  //  }
-//});
-// Serevr Start Event
-server.events.on('start', () => {
-
-    //console.log('Server started');
-    console.log(server.info.started);       
-});
-server.events.on('log', (event) => {
-
-    console.log(`Server Event: ${event.timestamp ,event.data}`);
-    
-});
-// Request Event
-server.events.on('response', function (request) {
-    console.log(request.info.remoteAddress + ': ' + request.method.toUpperCase() + ' ' + request.path + ' --> ' + request.response.statusCode);
-});
-
-server.events.on('response', (request) => {
-
-    console.log(`Response sent for request: ${request.info.id}`);
-});
 //Server Stop Event
 server.events.on('stop', () => {
 
@@ -110,7 +84,10 @@ const init = async function() {
       await server.register({
         plugin: HapiPino,
         options:{
+	    logRequestStart: false,
+	    logRequestComplete: false,
             logPayload: true,
+	    redact: ['req.headers'],
             serializers:{
             res: resSerializer
         },
@@ -125,7 +102,7 @@ const init = async function() {
 };
 
 process.on('unhandledRejection', (err) => {
-    console.log(err);
+    console.loggr(err);
     process.exit(1);
 });
 
