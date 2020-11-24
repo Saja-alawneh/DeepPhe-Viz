@@ -162,7 +162,22 @@ Then just use `nodemon` instead of `node` to start the server, and now your proc
 nodemon server.js
 ````
 
+# Logging 
 
+Hapi-Pino has been configured to only log when requested - there are
+no request start end points by default.  To log some an action of
+interst, make a call of the form 
 
+````
+request.log(['a','b'],request.path) 
+````
 
+inside of a request. The array passed in:
 
+````
+['a','b'] 
+
+````
+
+should contain the information necessary to interpret the request,
+including the type of request and any accompanying information.
