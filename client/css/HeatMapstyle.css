@@ -1,42 +1,30 @@
 
-
-
-body{
-    background-color: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: right;
-    min-height: 100%;
-}
-
 svg{
     background-color: #fff; 
     padding: 10px;
 }
-#HeatMap,
-#sankey,
-
+div.HeatMap, div.sankey
 {
     
     background:#fff;
     margin:10px;
-    padding:0px;
+    padding:10px;
     float:left;
+    display: flex;
+    width: 700;
+    height: 300;
 }
-#canvas{
-    
-    min-height: 400px;
-    min-width: 900px;
-}
-#chart{
-    
-    min-height: 700px;
-    min-width: 1000px;
-}
+
 .cell:hover{
     fill: black;
 }
+
+div.relative {
+  position: relative;
+  left: 30px;
+  }
+
+
 div.tooltip {
   position: absolute;
   text-align: left;
@@ -52,11 +40,15 @@ div.tooltip {
 }
 
 
+.hide{
+  display:block;
+}
+
 g{
     color: #000
 }
 
-/*#tooltip{
+#tooltip{
     visibility: hidden;
     height: auto;
     width: auto;

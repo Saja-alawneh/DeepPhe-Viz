@@ -13,17 +13,17 @@ text-decoration: none;
 .header {
 color:#fff;
 background-color: #1e88e5;
-padding:10px 20px;
+padding:5px 5px;
 margin:0;
 }
 
 .logo {
-font-size:20px;
+font-size:12px;
 font-weight: bold;
 }
 
 .main {
-padding:15px 20px;
+padding:5px 10px;
 }
 
 .section_heading {
@@ -34,7 +34,7 @@ border-left:3px solid #D66061;
 }
 
 .current_patient {
-font-size:20px;
+font-size:15px;
 font-weight: bold;
 }
 
@@ -45,7 +45,7 @@ color:#fff;
 /* Cohort Analysis */
 .filters {
 border: 1px solid #ddd;
-margin-bottom:10px;
+margin-bottom:1px;
 }
 
 .results {
@@ -54,8 +54,16 @@ border: 1px solid #ddd;
 
 /* HTML div, not the svg */
 #stage_patient_age,
-#stage_patient_count,
-#diagnosis,
+#stage_patient_count
+{
+	background: darkblue;
+	border:1px solid darkblue;
+	margin:10px;
+	padding:0px;
+	float:left;
+}
+
+
 #biomarkers,
 #patients,
 #patients2 {
@@ -65,11 +73,38 @@ margin:10px;
 padding:0px;
 float:left;
 }
+#HeatMap
+{
+	
+	float: left;
+}
+#sankey
+{
+	float: right;
+
+}
+#diagnosis{
+	float: left;
+}
+#patients_with_biomarkers
+{
+	float: left
+}
+
+#patients
+{
+background:#fff;
+border:1px solid #fff;
+margin:10 px;
+padding:0px;
+float:left;	
+font-size: 8px;
+}
 
 /* Minimize the text rendering inconsistency across browsers */
 svg .tick text {
 font-family: Helvetica;
-font-size:10px;
+font-size:8.5px;
 }
 
 /* Age selection */
@@ -177,8 +212,8 @@ fill-opacity: 0.3;
 }
 
 #results_title {
-padding:20px;
-font-weight: 700;
+padding:5px;
+font-weight: 600;
 text-align: center;
 }
 
@@ -189,10 +224,11 @@ padding:10px;
 
 .patient_list
  {
-width:330px;
+width:200px;
 list-style: none;
 margin:0;
-padding:0;
+padding:5;
+
 }
 
 .patient_list_click
@@ -204,9 +240,9 @@ padding:0;
 }
 
 .patient_list li {
-float:left;
-width:160px;
-margin:2px 5px 2px 0;
+float:right;
+width:80px;
+margin:1px 2px 1px 0;
 }
 
 .highlighted_target_patient_in_diagnosis {
@@ -220,6 +256,7 @@ text-decoration: underline;
 /* Biomarkers chart */
 #biomarkers_overview {
 margin-bottom:20px;
+float: left;
 }
 
 .stages_chart_title,
@@ -230,8 +267,9 @@ margin-bottom:20px;
 .patients_chart_title,
 .patients_table_title {
 text-anchor: middle;
-font-size:12px;
-font-weight: bold;
+font-size:10px;
+
+
 /* https://stackoverflow.com/questions/12250403/vertical-alignment-of-text-element-in-svg */
 /* upper left corner of the text is the position of text */
 dominant-baseline:text-before-edge;
@@ -247,7 +285,7 @@ shape-rendering: crispEdges;
 .biomarkers_overview_chart_bar_percentage,
 .biomarker_status_percentage,
 .biomarker_status_legend_text {
-font-size:10px;
+font-size:8.5px;
 }
 
 /* Vertical middle alignment */
