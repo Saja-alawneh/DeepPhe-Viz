@@ -8,6 +8,7 @@ let allPatients = [];
 
 // Patients array based on the current stage chart selection
 let patientsByStage = [];
+let patientByLabel =[];
 
 // Patients array based on the current first encounter age chart selection
 let patientsByFirstEncounterAge = [];
@@ -126,15 +127,15 @@ function showPatientCountPerStageChart(svgContainerId, data) {
 	});
 
 	// set the dimensions and margins of the graph
-	const svgWidth = 460;
-	const svgHeight = 360;
+	const svgWidth = 400;
+	const svgHeight = 300;
 	// svgPadding.top is used to position the chart title
 	// svgPadding.left is the space for Y axis labels
-	const svgPadding = {top: 10, right: 15, bottom: 15, left: 110};
+	const svgPadding = {top: 1, right: 10, bottom: 15, left: 90};
 	const chartWidth = svgWidth - svgPadding.left - svgPadding.right;
 	const chartHeight = svgHeight - svgPadding.top - svgPadding.bottom;
 	// Gap between svg top and chart top, nothing to do with svgPadding.top
-	const chartTopMargin = 48;
+	const chartTopMargin = 35;
 
     // All stages found in data
     let allStages = data.map(function(d) { 
@@ -434,16 +435,16 @@ function showPatientFirstEncounterAgePerStageChart(svgContainerId, data) {
     maxAge = Math.max.apply(null, maxAges);
 
 	// set the dimensions and margins of the graph
-	const svgWidth = 460;
-	const svgHeight = 360;
+	const svgWidth = 400;
+	const svgHeight = 300;
 
 	// svgPadding.top is used to position the chart title
 	// svgPadding.left is the space for Y axis labels
-	const svgPadding = {top: 10, right: 15, bottom: 15, left: 110};
+	const svgPadding = {top: 10, right: 3, bottom: 10, left: 90};
 	const chartWidth = svgWidth - svgPadding.left - svgPadding.right;
 	const chartHeight = svgHeight - svgPadding.top - svgPadding.bottom;
 	// Gap between svg top and chart top, nothing to do with svgPadding.top
-	const chartTopMargin = 48;
+	const chartTopMargin = 35;
 
     // Box plot
     const boxHeight = 15;
@@ -984,7 +985,7 @@ function showPatientsList(containerId, data, stage, firstEncounterAgeRange) {
     let html = '<ul class="patient_list">';
 
     data.forEach(function(patient) {
-    	html += '<li><a id="' + patient.patientId + '" class="target_patient" href="' + baseUri + '/patient/' + patient.patientId + '" target="_blank">' + patient.patientId + '</a> (' + patient.firstEncounterAge + ')</li>';
+    	html += '<li><a id="' + patient.patientId + '" class="target_patient" href="' + baseUri + '/patient/' + patient.patientId + '" target="_blank">' + patient.patientId.substring(8) + '</a> (' + patient.firstEncounterAge + ')</li>';
     });
 
     html += '</ul>';
@@ -1027,14 +1028,14 @@ function showDiagnosisChart(svgContainerId, data) {
     const diagnosisDotRadius = 4;
     const highlightedDotRadius = 5;
     const overviewDotRadius = 1.5;
-    const svgPadding = {top: 10, right: 40, bottom: 10, left: 240};
+    const svgPadding = {top: 5, right: 20, bottom: 5, left: 170};
     const gapBetweenYAxisAndXAxis = 10;
-    const chartTopMargin = 40;
+    const chartTopMargin = 20;
     const xAxisHeight = 20;
     // 15 is the line height of each Y axis label
     const yAxisHeight = data.diagnosisGroups.length * 15;
     const overviewHeight = data.diagnosisGroups.length * overviewDotRadius * 3;
-    const svgWidth = 700;
+    const svgWidth = 480;
     const svgHeight = xAxisHeight + yAxisHeight + chartTopMargin + overviewHeight + gapBetweenYAxisAndXAxis * 2;
     const chartWidth = svgWidth - svgPadding.left - svgPadding.right;
     const overviewWidth = chartWidth - gapBetweenYAxisAndXAxis;
@@ -1100,7 +1101,7 @@ function showDiagnosisChart(svgContainerId, data) {
     svg.append("text")
         .attr("class", "diagnosis_chart_title")
         .attr("transform", function(d) { 
-			return "translate(" + svgWidth/2 + ", " + svgPadding.top + ")"; 
+			return "translate(" + svgWidth/1.5 + ", " + svgPadding.top + ")"; 
 		})
         .text("Diagnosis");
 
@@ -1315,9 +1316,9 @@ function highlightTargetPatients(patientsArr) {
 
 // We do NOT remove the biomarkers patients chart on each redraw, due to the animation
 function showBiomarkersOverviewChart(svgContainerId, data) {
-    const svgWidth = 480;
-    const svgHeight = 120;
-	const svgPadding = {top: 10, right: 15, bottom: 15, left: 180};
+    const svgWidth = 380;
+    const svgHeight = 100;
+	const svgPadding = {top: 5, right: 10, bottom: 10, left: 140};
 	const chartWidth = svgWidth - svgPadding.left - svgPadding.right;
 	const chartHeight = svgHeight - svgPadding.top - svgPadding.bottom;
 	const chartTopMargin = 35;
@@ -1433,16 +1434,16 @@ function showBiomarkersOverviewChart(svgContainerId, data) {
 
 // We do NOT remove the biomarkers chart on each redraw, due to the animation
 function showPatientsWithBiomarkersChart(svgContainerId, data) {
-    const svgWidth = 480;
-    const svgHeight = 180;
-	const svgPadding = {top: 10, right: 10, bottom: 15, left: 80};
+    const svgWidth = 370;
+    const svgHeight = 130;
+	const svgPadding = {top: 10, right: 10, bottom: 15, left: 50};
 	const chartWidth = svgWidth - svgPadding.left - svgPadding.right;
 	const chartHeight = svgHeight - svgPadding.top - svgPadding.bottom;
-	const chartTopMargin = 35;
+	const chartTopMargin = 30;
 
-    const legendGroupWidth = 65;
-    const legendRectSize = 10;
-    const legnedTextRectPad = 3;
+    const legendGroupWidth = 55;
+    const legendRectSize = 8;
+    const legnedTextRectPad = 2;
 
     // Band scale of biomarkers
     let y = d3.scaleBand()
@@ -1653,227 +1654,95 @@ function showPatientsWithBiomarkersChart(svgContainerId, data) {
             });
     }
 }
-//*********************************************************************************
-//****************** HeatMAP D3****************************************************
-/*function showPatientList(containerId, data) {
-    
+//Patient List Per Label
+function showPatientsListLabel(containerId, data) {
+    //removeChart(containerId);
+    //console.log(data)
 
-    let html = '<ul class="patient_list_click">';
+	 console.log(data)
+	   
 
-    data.patienList.forEach(function(patient) {
-    	html += '<li><a id="' + patient.patienList + '")</li>';
+    let html = '<ul class="patient_list">';
+
+    data.forEach(function(patientId) {
+    	html += '<li><a id="' + patientId+ '" class="target_patient" href="' + baseUri + '/patient/' + patientId+ '" target="_blank">' + patientId.substring(8) + '</a> </li>';
     });
+    	//html += '<li><a ' +  '>' + patientId + '</a> </li>';
+
+   
+    //});
 
     html += '</ul>';
     
     $("#" + containerId).html(html);
-}*/
+}
+
+
+
+
 function showHeatMap(svgContainerId, data) 
 {
-	//removeChart(svgContainerId);
+	removeChart(svgContainerId);
 	
-	let values = data
-	let xScale
-	let yScale
+// set the dimensions and margins of the graph
+var margin = {top: 15, right: 30, bottom: 30, left: 60},
+  width = 720 - margin.left - margin.right,
+  height = 220 - margin.top - margin.bottom;
 
-	let minMonth
-	let maxMonth
-	const svgPadding = {top: 10, right: 15, bottom: 15, left: 70};
+values=data;
+// append the svg object to the body of the page
+var svg = d3.select("#HeatMap").append('svg')
+		.attr("width", width + margin.left + margin.right)
+  		.attr("height", height + margin.top + margin.bottom)
+		.append("g")
+  		.attr("transform",
+        "translate(" + margin.left + "," + margin.top + ")");
 
-	let width =850
-	let height=310
-	let pad = 120
-	
-	//let svg = d3.select('svg')
-	var Labels=["FindingCount", "DrugCount", "DisorderCount", "LabCount", "ProcedureCount","OtherCount"]
-	//let canvas =d3.select ('#canvas')
-	//d3.select("#" + svgContainerId).remove();
-	var canvas = d3.select("#" + svgContainerId).select ('#canvas').append("svg")
-	canvas.attr('width', width)
-	canvas.attr('height')
-	
-	const tooltip = d3.select("#HeatMap").append("div")
-  									.classed("tooltip", true)
-  									.style("opacity", 0) // start invisible
+//Read the data
+var Labels=["FindingCount", "DrugCount", "DisorderCount", "LabCount", "ProcedureCount","OtherCount"]
 
-  // heat points (rects):
- 
-    
+  // Labels of row and columns -> unique identifier of the column called 'group' and 'variable'
+  
 
-	//let tooltip = d3.select('#tooltip')
-	
+  // Build X scales and axis:
 
-	let generateScales = ()=> 
-	{
-
-        minMonth= d3.min(values, (item) => {
+  minMonth= d3.min(values, (item) => {
             return item['month']
         })
         //console.log(minMonth)
 
-        maxMonth=d3.max(values, (item) => {
+  maxMonth=d3.max(values, (item) => {
           return item['month']
         })
-        console.log('***************')
-        console.log(maxMonth)
-    
-         xScale=d3.scaleLinear()
-                .domain([minMonth,maxMonth+10])
-                .range([pad, width-pad/2])
+  var months=[];
+  values.forEach(function(m){   
+  		months.push(m.month)})   
+    	
+ var x = d3.scaleBand()
+        .domain(months)
+        .range([minMonth, maxMonth +500])
+        .padding(5)
+        svg.append("g")
+    	.style("font-size", 8)
+    	.attr("transform", "translate(0," + height + ")")
+    	.call(d3.axisBottom(x).tickSize(0).ticks(20))
+    	.select(".domain").remove()
 
-            
-                yScale= d3.scaleBand()//d3.scaleTime
-                .domain(Labels)
-                .range([pad, height-pad/2])
-                .padding(0.001)
 
-	}
-	
-	let numberOfMonths = maxMonth-minMonth
 
-	/*let drawCanvas = () => 
-	{
-    svg.attr('width', width)
-    svg.attr('height', height)
-	}*/
 
-	let drawCells= () => 
-	{
-		canvas.selectAll('rect')
-        .data(values)
-        .enter()
-        .append('rect')
-        .attr('class', 'cell')
-        //.style('height', 20)
-       //.style('width', 20)
-        .style("stroke-width", 2)
-        .style("stroke", 'white')
-        .attr('fill', (item)=> 
-        {
-            frequency= item['value']
-            if(frequency == 0){
-            	return 'black'
-         	}
-          if(frequency <= 25){
-                return '#9370DB'
-            }else if(frequency<=50){
-                return  '#34568B'
-            } else if(frequency <=75) {
-                return '#8d9db6'
-            } else if(frequency <=100){
-                return '#40E0D0'
-            }else if(frequency <=200){
-                return '#618685'
-            }else if(frequency <= 300){
-                return '#88B04B'
-            } else if(frequency <=500){
-                return '#FFD700'
-            }else if (frequency <=1000){
-            return '#622569'
-            } else { return 'Red'}
-        })
-        .attr('data-month', (item)=> 
-        {
-            return item['month']
-                
-        })
-        
-        .attr('data-label', (item)=> 
-        { // month
-            return item['field']
-        })
-        .attr('data-value', (item)=> 
-        {
-            return item['value']
-        })
-        .attr('height', (height - (2 * pad)) / 6)
-        .attr('y', (item)=> 
-        {
-            return yScale(item['field'])
-         })
-         .attr('width', (item)=> {
-             let numberOfMonths = maxMonth-minMonth
-             return (width -(2* pad)) / numberOfMonths
-         })
-         .attr('x', (item)=> 
-         {
-            return xScale(item['month'])
-         })
-        .on("mouseover", function(d) {// absolute temperature of this month and year
-    		d3.select(this).classed("overed", true) // add "overed" class to the rect
-    		tooltip.transition()
-    		.duration(300)
-    		.style("opacity", 1) // show the tooltip
-    		//d.source.name.substr(0,d.source.name.indexOf(' '))
-    		let tooltipContent = "Year" + " " + d.year +
-    						"<br> month: " + d.month +  
-    						"<br> Label: " + d.field.substr(0,d.field.indexOf('C')) + 
-    						"<br> value: " + d.value 
-    		tooltip.html(tooltipContent)
-       		.style("left", (d3.event.pageX - d3.select('.tooltip').node().offsetWidth - 5) + "px")
-       		.style("top", (d3.event.pageY - d3.select('.tooltip').node().offsetHeight) + "px");
-    		})
-    .on("mouseleave", function(d) {
-    	d3.select(this).classed("overed", false)
-    	tooltip.transition()
-    		.duration(300)
-    		.style("opacity", 0)
-    		tooltip.html("")
-    })
 
-        /* .on('mouseover',(item)=> 
-         {
-             tooltip.transition ()
-                        .style('visibility', 'visible')
-                        tooltip.text('Year: ' + item['year'] + ' '+
-                                    'month: ' + item['month'] + '  ' + 
-                                    'Label: ' + item['field']+ ' ' + 
-                                    'Value: ' + item ['value'])
-                          
-           //showPatientList("patientsLIST", item['patienList'])
-         })
-         .on('mouseout',(item)=> 
-         {
-            tooltip.transition ()
-                       .style('visibility', 'hidden')
-         })*/
-        // .on('click',(item)=>{
-
-         //	showPatientList("patientsLIST", item)//['patienList'])
-        // })
-
-	}
-
-	let drawAxes = () => 
-	{
-
-    let xAxis = d3.axisBottom(xScale)
-               .ticks(25)
-            
-        
-    let yAxis = d3.axisLeft(yScale)
-
-    canvas.append('g')
-      .call(xAxis)
-      .attr('id', 'x-axis')
-      .attr('transform', 'translate(0, ' + (height-pad/2) + ')')
-      .attr('font-size', 10)
-
-      canvas.append("text")
-      .attr("transform",
-            "translate(" + (width/2) + " ," + 
-                           (height -20 ) + ")")
-		.style("text-anchor", "middle")
-      	.text("Number of Months");
-
-    
-    canvas.append('g') 
-            .call(yAxis)
-            .attr('id','y-axis')
-            .attr('transform', 'translate('+ pad + ', 0)')
-            .attr('font-size', 10)
-            .selectAll("text")
-			.text(function(d) 
+  var y= d3.scaleBand()//d3.scaleTime
+         .domain(Labels)
+         .range([height,0])
+          .padding(0.5)
+         
+         svg.append("g")
+    	.style("font-size", 8)
+    	.call(d3.axisLeft(y).tickSize(0))
+    	.call(g => g.select(".domain").remove())
+    	.selectAll("text")
+    	.text(function(d) 
 				{
 				if (d === "FindingCount") 
 					{
@@ -1903,215 +1772,796 @@ function showHeatMap(svgContainerId, data)
 					{
 					return d.replace("_", " ");
 					}
+
 				})
-	canvas.append("text")
-		.attr("transform", "rotate(-90)")
-      		.attr("y", 0 - svgPadding.left)
-      		.attr("x",0 - (height / 2))
-      		//.attr("dy", "0.5em")
-      		.style("text-anchor", "middle")
-      		.text("Label");
-			
-	}
-			
-	canvas.append("text")
-	.attr("class", "heatmap_title")
+
+    	
+		
+
+  // Build color scale
+ // var myColor =d3.scaleSequentialQuantile().domain([100, 1, 13]) //d3.scaleSequential()
+  //.interpolator(d3.interpolateCubehelixDefault)
+  //.interpolator(d3.interpolatePRGn)
+    //.interpolator(d3.interpolate("purple", "orange"))
+    //.domain([1,500])
+    //d3.scaleSequentialLog(d3.interpolatePuBuGn).domain([1e-8, 1e8])
+
+  // create a tooltip
+  var tooltip = d3.select("#HeatMap")
+    .append("div")
+    .style("opacity", 0)
+    .attr("class", "tooltip")
+    .style("background-color", "white")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "5px")
+    .style("padding", "5px")
+
+  // Three function that change the tooltip when user hover / move / leave a cell
+  var mouseover = function(d) {
+    tooltip
+      .style("opacity", 1)
+    d3.select(this)
+      .style("stroke", "black")
+      .style("opacity", 1)
+  }
+  var mousemove = function(d) {
+    tooltip
+    
+      .html("Year" + " " + d.year + 
+      		"<br> month: " + d.month +  
+    		"<br> Label: " + d.field.substr(0,d.field.indexOf('C')) + 
+    		"<br> value: " + d.value )
+      .style("left", (d3.mouse(this)[0]+100) + "px")
+      .style("top", (d3.mouse(this)[1] + 10)+"px")
+  }
+  var mouseleave = function(d) {
+    tooltip
+      .style("opacity", 0)
+    d3.select(this)
+      .style("stroke", "none")
+      .style("opacity", 0.8)
+  }
+
+  // add the squares
+  svg.selectAll()
+    .data(data, function(d) {return d.month+':'+d.field;})
+    .enter()
+    .append("rect")
+      .attr("x", function(d) { return x(d.month) })
+      .attr("y", function(d) { return y(d.field) })
+     .attr("rx", 2)
+     .attr("ry", 2)
+      .attr("width", 10 )
+      .attr("height", 10 )
+      .style('fill', function(d) 
+        {
+            frequency= d.value
+            if(frequency == 0){
+            	return '#ffffd9'
+         	}
+          if(frequency <= 25){
+                return '#edf8b1'
+            }else if(frequency<=50){
+                return  '#c7e9b4'
+            } else if(frequency <=75) {
+                return '##7fcdbb'
+            } else if(frequency <=100){
+                return '#41b6c4'
+            }else if(frequency <=200){
+                return '#1d91c0'
+            }else if(frequency <= 300){
+                return '#225ea8'
+            } else if(frequency <=500){
+                return '#253494'
+            }else if (frequency <=1000){
+            return '#081d58'
+            } else { return 'Red'}
+        })
+      .style("stroke-width", 4)
+      .style("stroke", "none")
+      .style("opacity", 0.8)
+    .on("mouseover", mouseover)
+    .on("mousemove", mousemove)
+    .on("mouseleave", mouseleave)
+    .on("click", function(d) {  
+			let clickedCell = d3.select(this);	
+         	hasBeenClicked = true;
+         	if(hasBeenClicked){
+         	patientByLabel = d.patienList;
+         	getLabelEpisode(d.patienList);
+         	console.log(d.patienList)
+        	removeChart("patients");
+        	showPatientsListLabel("patients", patientByLabel)
+        	hasBeenClicked= false
+        	}
+        	else{
+        	patientByLabel = allPatients;
+         	getLabelEpisode(patientByLabel);
+         	//console.log(d.patienList)
+        	removeChart("patients");
+        	showPatientsListLabel("patients", patientByLabel)
+        	hasBeenClicked= true
+        	}
+
+        	}) 
+
+var borderPath = svg.append("rect")
+  .attr("x", 0)
+  .attr("y", 0)
+  .attr("height", height)
+  .attr("width", width)
+  .style("stroke", "black")
+  .style("fill", "none")
+  .style("stroke-width", 1);
+
+  svg.append("text")
       .attr("transform",
             "translate(" + (width/2) + " ," + 
-                           (height -240 ) + ")")
+                           (height+20  ) + ")")
+      .attr('font-size', 9)
 		.style("text-anchor", "middle")
-      	.text("Label Frequency: Document Records from 2000 to 2014");
+      	.text("Number of Months");
 
+
+// Add title to graph
+svg.append("text")
+        .attr("transform",
+            "translate(" + (width/2) + " ," + 
+                           (height-180  ) + ")")
+        .attr("text-anchor", "middle")
+        .style("font-size", "10px")
+        .text("Label Frequency: Document Records from 2000 to 2014");
+
+        //create Legend   
+svg.append("rect")
+		
+		.attr("x",width/2 +60)
+		.attr("y",height + 15)
+		.attr("width",8)
+		.attr("height",8).style("fill","#ffffd9")
+svg.append("text")
+		.attr("x", width/2 +62)
+		.attr("y", height + 28)
+		.text("0")
+		.style("font-size", "8px")
+		.attr("alignment-baseline","middle")
+
+svg.append("rect")
+		.attr("x",width/2 +68)
+		.attr("y",height + 15)
+		.attr("width",30)
+		.attr("height",8)
+		.style("fill","#edf8b1")
+svg.append("text")
+		.attr("x", width/2 +70)
+		.attr("y", height + 28)
+		.text("<=25")
+		.style("font-size", "8px")
+		.attr("alignment-baseline","middle")
+
+svg.append("rect")
+		.attr("x",width/2 +98)
+		.attr("y",height + 15)
+		.attr("width",30)
+		.attr("height",8)
+		.style("fill","#c7e9b4")
+svg.append("text")
+		.attr("x", width/2 +102)
+		.attr("y", height + 28)
+		.text("<=50")
+		.style("font-size", "8px")
+		.attr("alignment-baseline","middle")
+
+svg.append("rect")
+		.attr("x",width/2 +128)
+		.attr("y",height + 15)
+		.attr("width",30)
+		.attr("height",8)
+		.style("fill","#7fcdbb")
+svg.append("text")
+		.attr("x",width/2 +132)
+		.attr("y", height + 28)
+		.text("<=75")
+		.style("font-size", "8px")
+		.attr("alignment-baseline","middle")
+
+svg.append("rect")
+		.attr("x",width/2 +158)
+		.attr("y",height + 15)
+		.attr("width",30)
+		.attr("height",8)
+		.style("fill","#41b6c4")
+svg.append("text")
+		.attr("x", width/2 +162)
+		.attr("y", height + 28)
+		.text("<=100")
+		.style("font-size", "8px")
+		.attr("alignment-baseline","middle")
+
+svg.append("rect")
+		.attr("x",width/2 +188)
+		.attr("y",height + 15)
+		.attr("width",30)
+		.attr("height",8)
+		.style("fill","#1d91c0")
+svg.append("text")
+		.attr("x", width/2 +192)
+		.attr("y", height + 28)
+		.text("<=200")
+		.style("font-size", "8px")
+		.attr("alignment-baseline","middle")
+
+svg.append("rect")
+		.attr("x",width/2 +218)
+		.attr("y",height + 15)
+		.attr("width",30)
+		.attr("height",8)
+		.style("fill","#225ea8")
+svg.append("text")
+		.attr("x", width/2 +222)
+		.attr("y", height + 28)
+		.text("<=300")
+		.style("font-size", "8px")
+		.attr("alignment-baseline","middle")
+
+svg.append("rect")
+		.attr("x",width/2 +248)
+		.attr("y",height + 15)
+		.attr("width",30)
+		.attr("height",8)
+		.style("fill","#253494")
+svg.append("text")
+		.attr("x", width/2 +249)
+		.attr("y", height + 28)
+		.text("<=500")
+		.style("font-size", "8px")
+		.attr("alignment-baseline","middle")
+
+svg.append("rect")
+		.attr("x",width/2 +278)
+		.attr("y",height + 15)
+		.attr("width",30)
+		.attr("height",8)
+		.style("fill","#081d58")
+svg.append("text")
+		.attr("x", width/2 +279)
+		.attr("y", height + 28)
+		.text("<=1000")
+		.style("font-size", "8px")
+		.attr("alignment-baseline","middle")
+svg.append("rect")
+		.attr("x",width/2 +308)
+		.attr("y",height + 15)
+		.attr("width",25)
+		.attr("height",8)
+		.style("fill","red")
+svg.append("text")
+		.attr("x", width/2 +311)
+		.attr("y", height + 28)
+		.text(">1000")
+		.style("font-size", "8px")
+		.attr("alignment-baseline","middle")
+
+}
+
+//Prevlance of the Label per each month
+
+function showHeatMap1(svgContainerId, data) 
+{
+	removeChart(svgContainerId);
+	
+// set the dimensions and margins of the graph
+var margin = {top: 15, right: 30, bottom: 30, left: 60},
+  width = 720 - margin.left - margin.right,
+  height = 220 - margin.top - margin.bottom;
+
+values=data;
+// append the svg object to the body of the page
+var svg = d3.select("#HeatMap1").append('svg')
+		.attr("width", width + margin.left + margin.right)
+  		.attr("height", height + margin.top + margin.bottom)
+		.append("g")
+  		.attr("transform",
+        "translate(" + margin.left + "," + margin.top + ")");
+
+//Read the data
+var Labels=["FindingCount", "DrugCount", "DisorderCount", "LabCount", "ProcedureCount","OtherCount"]
+
+  // Labels of row and columns -> unique identifier of the column called 'group' and 'variable'
+  
+
+  // Build X scales and axis:
+
+  minMonth= d3.min(values, (item) => {
+            return item['month']
+        })
+        //console.log(minMonth)
+
+  maxMonth=d3.max(values, (item) => {
+          return item['month']
+        })
+  var months=[];
+  values.forEach(function(m){   
+  		months.push(m.month)})   
+    	
+ var x = d3.scaleBand()
+        .domain(months)
+        .range([minMonth, maxMonth +500])
+        .padding(5)
+        svg.append("g")
+    	.style("font-size", 8)
+    	.attr("transform", "translate(0," + height + ")")
+    	.call(d3.axisBottom(x).tickSize(0).ticks(20))
+    	.select(".domain").remove()
+
+
+
+
+
+  var y= d3.scaleBand()//d3.scaleTime
+         .domain(Labels)
+         .range([height,0])
+          .padding(0.5)
+         
+         svg.append("g")
+    	.style("font-size", 8)
+    	.call(d3.axisLeft(y).tickSize(0))
+    	.call(g => g.select(".domain").remove())
+    	.selectAll("text")
+    	.text(function(d) 
+				{
+				if (d === "FindingCount") 
+					{
+                    return "Finding";
+					} 
+					else if (d === "DrugCount") 
+					{
+                    return "Drug";
+					}
+					else if (d === "LabCount") 
+					{
+					return "LAB";
+					} 
+					else if (d === "DisorderCount") 
+					{
+					return "Disorder";
+					} 
+					else if (d === "ProcedureCount") 
+					{
+					return "Procedure";
+					} 
+					else if (d === "OtherCount")
+					 {
+					return "Other";
+					} 
+					else 
+					{
+					return d.replace("_", " ");
+					}
+
+				})
+
+    	
+		
+
+  // Build color scale
+ // var myColor =d3.scaleSequentialQuantile().domain([100, 1, 13]) //d3.scaleSequential()
+  //.interpolator(d3.interpolateCubehelixDefault)
+  //.interpolator(d3.interpolatePRGn)
+    //.interpolator(d3.interpolate("purple", "orange"))
+    //.domain([1,500])
+    //d3.scaleSequentialLog(d3.interpolatePuBuGn).domain([1e-8, 1e8])
+
+  // create a tooltip
+  var tooltip = d3.select("#HeatMap1")
+    .append("div")
+    .style("opacity", 0)
+    .attr("class", "tooltip")
+    .style("background-color", "white")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "5px")
+    .style("padding", "5px")
+
+  // Three function that change the tooltip when user hover / move / leave a cell
+  var mouseover = function(d) {
+    tooltip
+      .style("opacity", 1)
+    d3.select(this)
+      .style("stroke", "black")
+      .style("opacity", 1)
+  }
+  var mousemove = function(d) {
+    tooltip
+    
+      .html("Year" + " " + d.year + 
+      		"<br> month: " + d.month +  
+    		"<br> Label: " + d.field.substr(0,d.field.indexOf('C')) + 
+    		"<br> value: " + d.value1 + "%")
+      .style("left", (d3.mouse(this)[0]+100) + "px")
+      .style("top", (d3.mouse(this)[1] + 10)+"px")
+  }
+  var mouseleave = function(d) {
+    tooltip
+      .style("opacity", 0)
+    d3.select(this)
+      .style("stroke", "none")
+      .style("opacity", 0.8)
+  }
+
+  // add the squares
+  svg.selectAll()
+    .data(data, function(d) {return d.month+':'+d.field;})
+    .enter()
+    .append("rect")
+      .attr("x", function(d) { return x(d.month) })
+      .attr("y", function(d) { return y(d.field) })
+     .attr("rx", 2)
+     .attr("ry", 2)
+      .attr("width", 10 )
+      .attr("height", 10 )
+      .style('fill', function(d) 
+        {
+            frequency= d.value1
+            if(frequency == 0)
+            {
+            	return '#ffffd9'
+            }
+          	else if(frequency <= 25)
+          	{
+                return '#7fcdbb'
+            }
+            else if(frequency<=50)
+            {
+                return  '#225ea8'
+            } 
+            else if(frequency <=75)
+            {
+                return '#081d58'
+            } 
+            else (frequency <=100)
+            {
+                return 'Red'
+            }
+          
+        })
+      .style("stroke-width", 4)
+      .style("stroke", "none")
+      .style("opacity", 0.8)
+    .on("mouseover", mouseover)
+    .on("mousemove", mousemove)
+    .on("mouseleave", mouseleave)
+    .on("click", function(d) {  
+			let clickedCell = d3.select(this);	
+         	hasBeenClicked = true;
+         	if(hasBeenClicked){
+         	patientByLabel = d.patienList;
+         	getLabelEpisode(d.patienList);
+         	console.log(d.patienList)
+        	removeChart("patients");
+        	showPatientsListLabel("patients", patientByLabel)
+        	hasBeenClicked= false
+        	}
+        	else{
+        	patientByLabel = allPatients;
+         	getLabelEpisode(patientByLabel);
+         	//console.log(d.patienList)
+        	removeChart("patients");
+        	showPatientsListLabel("patients", patientByLabel)
+        	hasBeenClicked= true
+        	}
+
+        	}) 
+
+var borderPath = svg.append("rect")
+  .attr("x", 0)
+  .attr("y", 0)
+  .attr("height", height)
+  .attr("width", width)
+  .style("stroke", "black")
+  .style("fill", "none")
+  .style("stroke-width", 1);
+
+  svg.append("text")
+      .attr("transform",
+            "translate(" + (width/2) + " ," + 
+                           (height+20  ) + ")")
+      .attr('font-size', 9)
+		.style("text-anchor", "middle")
+      	.text("Number of Months");
+
+
+// Add title to graph
+svg.append("text")
+        .attr("transform",
+            "translate(" + (width/2) + " ," + 
+                           (height-180  ) + ")")
+        .attr("text-anchor", "middle")
+        .style("font-size", "10px")
+        .text("Label Prevlance per each month");
+
+        //create Legend 
+svg.append("rect")
+		
+		.attr("x",width/2 +70)
+		.attr("y",height + 15)
+		.attr("width",8)
+		.attr("height",8).style("fill","#ffffd9'")
+svg.append("text")
+		.attr("x", width/2 +72)
+		.attr("y", height + 28)
+		.text("0")
+		.style("font-size", "8px")
+		.attr("alignment-baseline","middle")
      
+            
+
+       
+svg.append("rect")
+		.attr("x",width/2 +78)
+		.attr("y",height + 15)
+		.attr("width",30)
+		.attr("height",8)
+		.style("fill","#7fcdbb")
+svg.append("text")
+		.attr("x", width/2 +80)
+		.attr("y", height + 28)
+		.text("<=25")
+		.style("font-size", "8px")
+		.attr("alignment-baseline","middle")
+
+svg.append("rect")
+		.attr("x",width/2 +108)
+		.attr("y",height + 15)
+		.attr("width",30)
+		.attr("height",8)
+		.style("fill","#225ea8")
+svg.append("text")
+		.attr("x", width/2 +112)
+		.attr("y", height + 28)
+		.text("<=50")
+		.style("font-size", "8px")
+		.attr("alignment-baseline","middle")
+
+svg.append("rect")
+		.attr("x",width/2 +138)
+		.attr("y",height + 15)
+		.attr("width",30)
+		.attr("height",8)
+		.style("fill","#081d58")
+svg.append("text")
+		.attr("x",width/2 +142)
+		.attr("y", height + 28)
+		.text("<=75")
+		.style("font-size", "8px")
+		.attr("alignment-baseline","middle")
+
+svg.append("rect")
+		.attr("x",width/2 +168)
+		.attr("y",height + 15)
+		.attr("width",30)
+		.attr("height",8)
+		.style("fill","red")
+svg.append("text")
+		.attr("x", width/2 +172)
+		.attr("y", height + 28)
+		.text("<=100")
+		.style("font-size", "8px")
+		.attr("alignment-baseline","middle")
 
 
 
-	/*canvas.append("text")
-        
-        .attr("transform", function(d) { 
-			return "translate(" + width/2 + ", " + svgPadding.top + ")"; 
-		})
-        .text(");*/
-
-
-	generateScales();
-	//drawCanvas();
- 	drawCells();
- 	drawAxes();
 }
 //*********************************************************************************
 //****************** Sankey D3****************************************************
 function showEpisode(svgContainerId, data) 
 {
-	//removeChart(svgContainerId);
+	removeChart(svgContainerId);
+	console.log(data)
 
-	// https://github.com/vasturiano/d3-sankey Version 0.4.2.
-    var margin = {
-        top: 5,
-        right: 1,
-        bottom: 6,
-        left: 1
-      };
-      width = 800 - 100 - margin.left - margin.right;
-      height = 480 - margin.top - margin.bottom;
-    //let width =950
-	//let height=650
+   var margin = {top: 15, right: 10, bottom: 40, left: 10},
+    width = 550 - margin.left - margin.right,
+    height = 250 - margin.top - margin.bottom;
+ //schemeSet1
 
-	const svgPadding = {top: 10, right: 15, bottom: 15, left: 180};
+    color = d3.scaleOrdinal(d3.schemeSet1);
 
-     
-      animDuration = 500;
+// append the svg canvas to the page
+var svg = d3.select("#" + svgContainerId).append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  	.append("g")
+    .attr("transform", 
+          "translate(" + margin.left + "," + margin.top + ")");
 
-    //var formatNumber = d3.format(",.0f"),
-    //  format = function(d) {
-     //   return formatNumber(d) + " TWh";
-     // },
-      color = d3.scaleOrdinal(d3.schemeCategory10);
-     // d3.scaleOrdinal(d3.schemeCategory10);
-
-    //var svg = d3.select("#chart").append("svg")
-    var svg = d3.select("#" + svgContainerId).select ('#chart').append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-      .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-      svg.append("text")
-	.attr("class", "Sankey_title")
+    svg.append("text")
+		.attr("class", "Sankey_title")
       .attr("transform",
             "translate(" + (width/2) + " ," + 
-                           (0+margin.top)  + ")")
+                           (0-margin.top)  + ")")
 		.style("text-anchor", "middle")
       	.text("Overview of Episode Sequence");
-		//chart.append("text")
-      //  .attr("class", "Sankey_title")
-      //  .attr("transform", function(d) { 
-		//	return "translate(" + width/2 + ", " + svgPadding.top + ")"; 
-	//	})
-     //   .text("Episode Sequence");
 
-    var links = svg.append("g"),
-        nodes = svg.append("g");
+    svg.append("rect")
+		.attr("x",width -499)
+		.attr("y",height +15 )
+		.attr("width",330)
+		.attr("height",20)
+		.style("stroke", "#667292")
+  		.style("fill", "none")
+  		.style("stroke-width", 1);
+		
+    svg.append("rect")
+		.attr("x",width -495)
+		.attr("y",height+20)
+		.attr("width",5)
+		.attr("height",10).style("fill","#ff8080")
+	svg.append("text")
+		.attr("x", width -488)
+		.attr("y", height+27)
+		.text("Prediagnostic")
+		.style("font-size", "8px")
+		.attr("alignment-baseline","middle")
+	
+	svg.append("rect")
+		.attr("x",width -430)
+		.attr("y",height+20)
+		.attr("width",5)
+		.attr("height",10).style("fill","#ffb380")
+	svg.append("text")
+		.attr("x", width -423)
+		.attr("y", height+27)
+		.text("Diagnostic")
+		.style("font-size", "8px")
+		.attr("alignment-baseline","middle")
 
-    var sankey = d3.sankey()
-      .nodeWidth(15)
-      .nodePadding(10)
-      //.extent([1,1], [width-1,height-5])
-      .size([width, height])
-      .align('left');
+	svg.append("rect")
+		.attr("x",width -376)
+		.attr("y",height+20)
+		.attr("width",5)
+		.attr("height",10).style("fill","#7DCEA0")
+	svg.append("text")
+		.attr("x", width -370)
+		.attr("y", height+27)
+		.text("Treatment")
+		.style("font-size", "8px")
+		.attr("alignment-baseline","middle")
 
-    var path = sankey.link();
+	svg.append("rect")
+		.attr("x",width -325)
+		.attr("y",height+20)
+		.attr("width",5)
+		.attr("height",10).style("fill","#d9b3ff")
+	svg.append("text")
+		.attr("x", width -317)
+		.attr("y", height+27)
+		.text("Medical Decision Making")
+		.style("font-size", "8px")
+		.attr("alignment-baseline","middle")
+
+		svg.append("rect")
+		.attr("x",width -223)
+		.attr("y",height+20)
+		.attr("width",5)
+		.attr("height",10).style("fill","#4dc3ff")
+	svg.append("text")
+		.attr("x", width -214)
+		.attr("y", height+27)
+		.text("Follow-Up")
+		.style("font-size", "8px")
+		.attr("alignment-baseline","middle")
+
+
+  /*var borderPath = svg.append("rect")
+  .attr("x", 0)
+  .attr("y", 0)
+  .attr("height", height)
+  .attr("width", width)
+  .style("stroke", "black")
+  .style("fill", "none")
+  .style("stroke-width", 1);*/
+ 
+// Set the sankey diagram properties
+var sankey = d3.sankey()
+    .nodeWidth(10)
+    .nodePadding(10)
+    .size([width, height]);
+ 
+var path = sankey.link();
+ 
+// load the data
+
+    var nodeMap = {};
+    data.nodes.forEach(function(x) { nodeMap[x.name] = x; });
+    data.links = data.links.map(function(x) {
+      return {
+        source: nodeMap[x.source],
+        target: nodeMap[x.target],
+        value: x.value,
+        patienList: x.patienList
+      };
+    });
+ 
+  sankey
+      .nodes(data.nodes)
+      .links(data.links)
+      .layout(35);
+ 
+// add in the links
+  var link = svg.append("g").selectAll(".link")
+      .data(data.links)
+    .enter().append("path")
+      .attr("class", "link")
+      .attr("d", path)
+      .style("stroke-width", function(d) { return Math.max(1, d.dy); })
+      .sort(function(a, b) { return b.dy - a.dy; })
+      .on("click", function(d) {  
+         	let clickedCell = d3.select(this);	
+         	patientByLabel = d.patienList;
+         	console.log(d.patienList)
+        	removeChart("patients")
+        	showPatientsListLabel("patients", d.patienList)
+        	getEpisodeLabel(d.patienList)
+
+        	}) 
+ 
+// add the link titles
+  link.append("title")
+        .text(function(d) {
+      	return d.source.name.substr(0,d.source.name.indexOf(' ')) + " → " + 
+                d.target.name.substr(0,d.target.name.indexOf(' ')) + "\n" + d.value; })
     
-   // var data1=data.episode
-      sankey
-        .nodes(data.nodes)
-        .links(data.links)
-        .layout(32);
-
-      d3Digest();
-
-    
-
-    function d3Digest() {
-
-      var link = links.selectAll(".link")
-        .data(sankey.links());
-
-      var newLink = link.enter().append("path")
-          .attr("class", "link")
-          .attr("d", path)
-          .style("stroke-width", function (d) {
-            return Math.max(1, d.dy);
-          })
-         .sort(function(a, b) { return b.dy - a.dy; });
-
-      newLink.append("title")
-        .text(function (d) {
-          return d.source.name.substr(0,d.source.name.indexOf(' ')) + " → " + d.target.name.substr(0,d.target.name.indexOf(' ')) + "\n" +" Value : " + d.value;
-        });
-
-      link = newLink.merge(link);
-
-    link.transition().duration(animDuration)
-        .attr("d", path)
-        .style("stroke-width", function (d) {
-          return Math.max(1, d.dy) + 'px';
-        });
-
-      var node = nodes.selectAll(".node")
-        .data(sankey.nodes());
-
-      var newNode = node.enter().append("g")
-        .attr("class", "node");
-
-      newNode.attr("transform", function (d) {
-        return "translate(" + d.x + "," + d.y + ")";
-      });
-
-      node.transition().duration(animDuration)
-        .attr("transform", function (d) {
-          return "translate(" + d.x + "," + d.y + ")";
-        })
-       
-
-      node = newNode.merge(node);
-
-      newNode.append('rect');
-      newNode.append('text');
-
-      newNode.select("rect")
-        .attr("width", sankey.nodeWidth())
-        .attr("height", function (d) {
-          return d.dy/10;
-        })
-        .append("title")
-          .text(function (d) {
-            return d.name.substr(0,d.name.indexOf(' ')) + "\n" +"Value : " +d.value;
-          });
-
-      node.select("rect")
-        .style("fill", function (d) {
-          return d.color = color(d.name.replace(/ .*/, ""));
-        })
-        .style("stroke", function (d) {
-          return d3.rgb(d.color).darker(2);
-        })
-        .transition().duration(animDuration)
-          .attr("height", function (d) {
-            return d.dy;
-          });
-
-      /*newNode.select("text")
-        .attr("dy", ".35em")
-        .attr("transform", null)
-        .attr("y", function (d) {
-          return d.dy / 2;
-        }); 
-
-      node.select("text")
-        .text(function (d) {
-          return d.name;
-        })
-        .attr("x", -6)
-        .attr("text-anchor", "end")
-        .filter(function (d) {
-          return d.x < width / 2;
-        })
-          .attr("x", 6 + sankey.nodeWidth())
-          .attr("text-anchor", "start"); */
-
-      node.select('text').transition().duration(animDuration)
-        .attr("y", function (d) {
-          return d.dy / 2;
-        });
-    }
-
-    // Radio button change
-    //d3.selectAll('.sankey-align').on('change', function() {
-    //  sankey.align(this.value)
-           // .layout(32);
-     // d3Digest();
-   // });
+ 
+// add in the nodes
+  var node = svg.append("g").selectAll(".node")
+      .data(data.nodes)
+    .enter().append("g")
+      .attr("class", "node")
+      .attr("transform", function(d) { 
+		  return "translate(" + d.x + "," + d.y + ")"; })
+    .call(d3.drag()
+     .subject(function(d) { return d; })
+      .on("start", function() { 
+		  this.parentNode.appendChild(this); })
+      .on("drag", dragmove));
+ 
+// add the rectangles for the nodes
+  node.append("rect")
+      .attr("height", function(d) { return d.dy; })
+      .attr("width", sankey.nodeWidth())
+      .style("fill", function(d) { 
+		  return d.color = color(d.name.replace(/ .*/, "")); })
+      .style("stroke", function(d) { 
+		  return d3.rgb(d.color).darker(1); })
+    .append("title")
+      .text(function(d) { 
+		  return d.name.substr(0,d.name.indexOf(' ')) + "\n" + d.value; })
+      
+ 
+// add in the title for the nodes
+ /* node.append("text")
+      .attr("x", -6)
+      .attr("y", function(d) { return d.dy / 2; })
+      .attr("dy", ".35em")
+      .attr("text-anchor", "end")
+      .attr("transform", null)
+      .text(function(d) { return d.name; })
+    .filter(function(d) { return d.x < width / 2; })
+      .attr("x", 6 + sankey.nodeWidth())
+      .attr("text-anchor", "start");*/
+ 
+// the function for moving the nodes
+  function dragmove(d) {
+    d3.select(this).attr("transform", 
+        "translate(" + (
+        	   d.x = Math.max(0, Math.min(width - d.dx, d3.event.x))
+        	) + "," + (
+                   d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))
+            ) + ")");
+    sankey.relayout();
+    link.attr("d", path);
+  }
 
 }
 //********************************************************************************
@@ -2142,6 +2592,7 @@ function getDiagnosis(patientIds) {
 	    dataType : 'json' 
 	})
 	.done(function(response) {
+		console.log("hello diagnosis")
 	    showDiagnosisChart("diagnosis", response);
 	})
 	.fail(function () { 
@@ -2156,16 +2607,67 @@ function getLabelSummary(patientIds) {
 	    dataType : 'json' 
 	})
 	.done(function(response) {
+		//console.log("hello")
+		//console.log(response.label)
 		showHeatMap("HeatMap", response.label);
-		console.log("This is the Label response");
-		console.log(response.label)
+		showHeatMap1("HeatMap1", response.label);
+		//console.log("This is the Label response");
+		//console.log(response.label)
 		
-		console.log("This is the Episode Response")
-		console.log('response', response.episode);
+		//console.log("This is the Episode Response")
+		//console.log('response', response.episode);
 		showEpisode("sankey", response.episode);
 	})
 	.fail(function () { 
 	    console.log("Ajax error - can't get patients labels info");
 	});
 }
+function getLabelEpisode(patientIds){
+$.ajax({
+	    url: baseUri + '/labels/' + patientIds.join('+'),
+	    method: 'GET', 
+	    async : true,
+	    dataType : 'json' 
+	})
+	.done(function(response) {
+		//console.log("hello")
+		//console.log(response.label)
+		//showHeatMap("HeatMap", response.label);
+		//console.log("This is the Label response");
+		//console.log(response.label)
+		
+		//console.log("This is the Episode Response")
+		//console.log('response', response.episode);
+		showEpisode("sankey", response.episode);
+	})
+	.fail(function () { 
+	    console.log("Ajax error - can't get patients labels info");
+	});
+}
+function getEpisodeLabel(patientIds){
+$.ajax({
+	    url: baseUri + '/labels/' + patientIds.join('+'),
+	    method: 'GET', 
+	    async : true,
+	    dataType : 'json' 
+	})
+	.done(function(response) {
+		//console.log("hello")
+		//console.log(response.label)
+		showHeatMap("HeatMap", response.label);
+		showHeatMap1("HeatMap1", response.label);
+		//console.log("This is the Label response");
+		//console.log(response.label)
+		
+		//console.log("This is the Episode Response")
+		//console.log('response', response.episode);
+		//showEpisode("sankey", response.episode);
+	})
+	.fail(function () { 
+	    console.log("Ajax error - can't get patients labels info");
+	});
+}
+
+
+
 

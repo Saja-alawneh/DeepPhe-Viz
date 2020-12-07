@@ -8,7 +8,7 @@
 
 var sankey = function() {
   var sankey = {},
-      nodeWidth = 24,
+      nodeWidth = 20,
       nodePadding = 8,
       size = [1, 1],
       align = 'justify', // left, right, center or justify
