@@ -1,0 +1,95 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DeepPhe-Viz</title>
+<div class="header">
+	<span class="logo">DeepPhe-Viz | </span> <span class="current_patient">Cohort DeepPhe</span>
+	</div>
+
+<script src="js/d3.v5.min.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/d3/4.2.0/d3.min.js"></script>
+<script src="js/jquery-3.1.1.min.js"></script>
+<!--<script scr="js/jqueryUI-v1.11.4.js"></script>-->
+<!--<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>-->
+<script src="https://unpkg.com/d3-sankey@0.7"></script>
+<script src="/js/cohort.js"></script>
+ <script src="/js/d3-sankey.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/css/normalize.css">
+<link rel="stylesheet" type="text/css" href="/css/deepphe.css">
+<link rel="stylesheet" type="text/css" href="/css/HeatMapstyle.css"> 
+<style>
+
+.container {
+  height: 200px;
+  position: relative;
+  border: 3px #D66061;
+}
+
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.button {
+  background-color: #D66061; 
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  font-size:24px;
+  border-radius: 12px;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+  
+}
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+
+</style>
+</head>
+<body>
+	<h2 style="text-align: center;"> Welcome To DeepPhe-Viz tool for Cancer Cohort identification</h2>
+	<div class="container">
+		<div class="center">
+		<button class= "button" onclick="location.href='http://localhost:8383/cohortAnalysis'" type="button"><span>
+         start</span></button>
+		
+	</div>
+</div>
+</body>
+
+</html>

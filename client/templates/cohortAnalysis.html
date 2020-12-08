@@ -1,4 +1,4 @@
-	<div class="header">
+<div class="header">
 	<span class="logo">DeepPhe-Viz | </span> <span class="current_patient">Cohort Analysis</span>
 	</div>
 
@@ -8,118 +8,36 @@
 		<div class="filters clearfix">
 		<div id="stage_patient_count" class="cohort_chart"></div>
 		<div id="stage_patient_age" class="cohort_chart"></div>
+		<div id="biomarkers_overview"></div>
+		<div id="patients_with_biomarkers"></div>
+		
+
 	</div>
 
 
 	<!-- Results -->
 	<div class="results clearfix">
 		<div id="results_title"></div>
-		<div id="patients"></div>
-		<div id="biomarkers_overview"></div>
-		<div id="patients_with_biomarkers"></div>
-		<div id="diagnosis"></div>
-		<div id="HeatMap" > 
-			<!--Draw Legend -->
-			<svg id="canvas">
-  				<rect x="100" y="320" width="10" height="10" fill="black"/>
-  				<text x="100" y="340" font-family="sans-serif" font-size="8px" fill="darkblue">0</text>
-  				<rect x="110" y="320" width="40" height="10" fill="#9370DB"/>
-  				<text x="120" y="340" font-family="sans-serif" font-size="8px" fill="darkblue"><=25</text>
-  				<rect x="150" y="320" width="40" height="10" fill="#34568B"/>
-  				<text x="160" y="340" font-family="sans-serif" font-size="8px" fill="darkblue"> <=50</text>
-  				<rect x="190" y="320" width="40" height="10" fill="#8d9db6"/>
-  				<text x="200" y="340" font-family="sans-serif" font-size="8px" fill="darkblue"><=75</text>
-  				<rect x="230" y="320" width="40" height="10" fill="#40E0D0"/>
-  				<text x="240" y="340" font-family="sans-serif" font-size="8px" fill="darkblue"><=100</text>
-  				<rect x="270" y="320" width="40" height="10" fill="#618685"/>
-  				<text x="280" y="340" font-family="sans-serif" font-size="8px" fill="darkblue"><=200</text>
-  				<rect x="310" y="320" width="40" height="10" fill="#88B04B"/>
-  				<text x="320" y="340" font-family="sans-serif" font-size="8px" fill="darkblue"><=300</text>
-  				<rect x="350" y="320" width="40" height="10" fill="#FFD700"/>
-  				<text x="360" y="340" font-family="sans-serif" font-size="8px" fill="darkblue"><=500</text>
-  				<rect x="390" y="320" width="40" height="10" fill="#622569"/>
-  				<text x="400" y="340" font-family="sans-serif" font-size="8px" fill="darkblue"><=1000</text>
-  				<rect x="430" y="320" width="40" height="10" fill="red"/>
-  				<text x="440" y="340" font-family="sans-serif" font-size="8px" fill="darkblue">>1000</text>
-  				</svg>	
-			</div>
 		
-		<div id ="sankey">
-			<svg id= "chart">
-				<rect x="3" y="500" width="15" height="15" fill ="white"stroke-width="2" stroke="black"/>
-				<text x="8" y="512" font-family="sans-serif" font-size="10px" fill="darkblue">0</text>
+		
+		<div id ="sankey" class="relative"></div>
+		<div id="HeatMap" class="relative"> </div>
+		<div id="HeatMap1" class="relative"> </div>
+		<div id="diagnosis"></div>
+		<div id="patients"></div>
+		<button id="myBtn">Submit</button>
+		<div id="myModal" class="modal">
 
-				<rect x="45" y="500" width="15" height="15" fill ="white"stroke-width="2" stroke="black"/>
-				<text x="50" y="512" font-family="sans-serif" font-size="10px" fill="darkblue">1</text>
+  		<!-- Modal content -->
+  		<div class="modal-content">
+    	<span class="close">&times;</span>
+    	<textarea id="msg" name="msg" placeholder="Write your answer ..." style="height:100px"></textarea>
+    	
+    	<input type="button" id="next" onclick="location.href='http://localhost:8383/';" value="Next Task" />
+    	<input type="button" id="bt" value="Save " onclick="saveFile()" />
+    
+  		</div>
 
-				<rect x="87" y="500" width="15" height="15" fill ="white"stroke-width="2" stroke="black"/>
-				<text x="92" y="512" font-family="sans-serif" font-size="10px" fill="darkblue">2</text>
-
-				<rect x="130" y="500" width="15" height="15" fill ="white"stroke-width="2" stroke="black"/>
-				<text x="135" y="512" font-family="sans-serif" font-size="10px" fill="darkblue">3</text>
-
-				<rect x="173" y="500" width="15" height="15" fill ="white"stroke-width="2" stroke="black"/>
-				<text x="178" y="512" font-family="sans-serif" font-size="10px" fill="darkblue">4</text>
-
-				<rect x="217" y="500" width="15" height="15" fill ="white"stroke-width="2" stroke="black"/>
-				<text x="222" y="512" font-family="sans-serif" font-size="10px" fill="darkblue">5</text>
-
-				<rect x="259" y="500" width="15" height="15" fill ="white"stroke-width="2" stroke="black"/>
-				<text x="264" y="512" font-family="sans-serif" font-size="10px" fill="darkblue">6</text>
-
-				<rect x="301" y="500" width="15" height="15" fill ="white"stroke-width="2" stroke="black"/>
-				<text x="306" y="512" font-family="sans-serif" font-size="10px" fill="darkblue">7</text>
-
-				<rect x="344" y="500" width="15" height="15" fill ="white"stroke-width="2" stroke="black"/>
-				<text x="349" y="512" font-family="sans-serif" font-size="10px" fill="darkblue">8</text>
-
-				<rect x="387" y="500" width="15" height="15" fill ="white"stroke-width="2" stroke="black"/>
-				<text x="392" y="512" font-family="sans-serif" font-size="10px" fill="darkblue">9</text>
-
-				<rect x="431" y="500" width="15" height="15" fill ="white"stroke-width="2" stroke="black"/>
-				<text x="433" y="512" font-family="sans-serif" font-size="10px" fill="darkblue">10</text>
-
-
-				<rect x="475" y="500" width="15" height="15" fill ="white"stroke-width="2" stroke="black"/>
-				<text x="478" y="512" font-family="sans-serif" font-size="10px" fill="darkblue">11</text>
-
-				<rect x="519" y="500" width="15" height="15" fill ="white"stroke-width="2" stroke="black"/>
-				<text x="520" y="512" font-family="sans-serif" font-size="10px" fill="darkblue">12</text>
-
-				<rect x="563" y="500" width="15" height="15" fill ="white"stroke-width="2" stroke="black"/>
-				<text x="565" y="512" font-family="sans-serif" font-size="10px" fill="darkblue">13</text>
-
-				<rect x="607" y="500" width="15" height="15" fill ="white"stroke-width="2" stroke="black"/>
-				<text x="609" y="512" font-family="sans-serif" font-size="10px" fill="darkblue">14</text>
-
-				<rect x="651" y="500" width="15" height="15" fill ="white"stroke-width="2" stroke="black"/>
-				<text x="653" y="512" font-family="sans-serif" font-size="10px" fill="darkblue">15</text>
-
-
-				<rect x="695" y="500" width="15" height="15" fill ="white"stroke-width="2" stroke="black"/>
-				<text x="697" y="512" font-family="sans-serif" font-size="10px" fill="darkblue">16</text>
-
-				<text x="330" y="540" font-family="sans-serif" font-size="12px" fill="darkblue">Document-Episode Levels</text>
-
-				<rect x="100" y="580" width="10" height="30" fill="#5DADE2"/>
-  				<text x="115" y="600" font-family="sans-serif" font-size="8px" fill="darkblue">Prediagnostic</text>
-  				<rect x="170" y="580" width="10" height="30" fill="#C39BD3"/>
-  				<text x="185" y="600" font-family="sans-serif" font-size="8px" fill="darkblue">Diagnostic</text>
-  				<rect x="240" y="580" width="10" height="30" fill="#7DCEA0"/>
-  				<text x="255" y="600" font-family="sans-serif" font-size="8px" fill="darkblue">Treatment</text>
-  				<rect x="310" y="580" width="10" height="30" fill="#F0B27A"/>
-  				<text x="325" y="600" font-family="sans-serif" font-size="8px" fill="darkblue">Follow-Up</text>
-  				<rect x="380" y="580" width="10" height="30" fill="#EC7063"/>
-  				<text x="395" y="600" font-family="sans-serif" font-size="8px" fill="darkblue">Medical Decision Making</text>-->
-
-		<!--	<svg align="center">
-	    		<b>Layout alignment: </b>
-	    		<input class="sankey-align" type="radio" name="sankey-align" value="left"> Left &nbsp;
-	    		<input class="sankey-align" type="radio" name="sankey-align" value="center"> Center &nbsp;
-	    		<input class="sankey-align" type="radio" name="sankey-align" value="right"> Right &nbsp;
-	    		<input class="sankey-align" type="radio" name="sankey-align" value="justify" checked="checked"> Justify &nbsp;
-	  		</svg>-->
-			</svg>
 		</div>
 	</div>
 </div>
@@ -128,7 +46,151 @@
 	const baseUri = '{{baseUri}}';
 
 	showCohort();
+var modal = document.getElementById("myModal");
 
-	</script>
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
 
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
 
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+let saveFile = () => {
+      
+        // Get the data from each element on the form.
+        const msg = document.getElementById('msg');
+        
+        // This variable stores all the data.
+        let data = 
+            '\r  Message: ' + msg.value;
+        
+        // Convert the text to BLOB.
+        const textToBLOB = new Blob([data], { type: 'text/plain' });
+        const sFileName = 'task.txt';    // The file to save the data.
+
+        let newLink = document.createElement("a");
+        newLink.download = sFileName;
+
+        if (window.webkitURL != null) {
+            newLink.href = window.webkitURL.createObjectURL(textToBLOB);
+        }
+        else {
+            newLink.href = window.URL.createObjectURL(textToBLOB);
+            newLink.style.display = "none";
+            document.body.appendChild(newLink);
+        }
+
+        newLink.click(); 
+    }
+</script>
+<style>
+#myBtn
+{
+	position:static;
+	margin-bottom: 70%;
+	margin-top: 20%;
+	background-color: #D66061; 
+  	border: none;
+	color: white;
+  	padding: 10px 30px;
+  	text-align: center;
+  	text-decoration: none;
+  	display: inline-block;
+  	cursor: pointer;
+  	font-size:15px;
+  	border-radius: 12px; 
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+{
+  box-sizing: border-box;
+ }
+  div 
+  {
+  	padding: 10px;
+  	overflow: hidden;
+   }
+   input[type=text], textarea, select 
+  {
+      font: 17px Calibri;
+      width: 98%;
+      float: left;
+       padding: 12px;
+       border: 1px solid #ccc;
+       border-radius: 4px;
+       margin-bottom: 20px;
+   }
+input[type=button]{
+
+            font: 20px ;
+            width: auto;
+            height: auto;
+            position: relative;
+            float: right;
+            margin-left: 20px;
+            cursor: pointer;
+            padding: 20px;
+            position:relative;
+			background-color: #667292; 
+  			border: none;
+			color: white;
+  			text-align: center;
+  			text-decoration: none;
+  	display: inline-block;
+  	cursor: pointer;
+  	font-size:15px;
+  	border-radius: 12px; 
+        }
+</style>
