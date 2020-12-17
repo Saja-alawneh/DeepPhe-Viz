@@ -128,7 +128,7 @@ function showPatientCountPerStageChart(svgContainerId, data) {
 
 	// set the dimensions and margins of the graph
 	const svgWidth = 400;
-	const svgHeight = 300;
+	const svgHeight = 250;
 	// svgPadding.top is used to position the chart title
 	// svgPadding.left is the space for Y axis labels
 	const svgPadding = {top: 1, right: 10, bottom: 15, left: 90};
@@ -210,7 +210,7 @@ function showPatientCountPerStageChart(svgContainerId, data) {
 		.append("text")
 		.attr("class", "count_axis_label")
 		.attr("x", chartWidth)
-		.attr("y", -3)
+		.attr("y", -8)
 		.text("Number of patients");
   
 
@@ -436,7 +436,7 @@ function showPatientFirstEncounterAgePerStageChart(svgContainerId, data) {
 
 	// set the dimensions and margins of the graph
 	const svgWidth = 400;
-	const svgHeight = 300;
+	const svgHeight = 250;
 
 	// svgPadding.top is used to position the chart title
 	// svgPadding.left is the space for Y axis labels
@@ -1318,7 +1318,7 @@ function highlightTargetPatients(patientsArr) {
 function showBiomarkersOverviewChart(svgContainerId, data) {
     const svgWidth = 380;
     const svgHeight = 100;
-	const svgPadding = {top: 5, right: 10, bottom: 10, left: 140};
+	const svgPadding = {top: 1, right: 10, bottom: 15, left: 140};
 	const chartWidth = svgWidth - svgPadding.left - svgPadding.right;
 	const chartHeight = svgHeight - svgPadding.top - svgPadding.bottom;
 	const chartTopMargin = 35;
@@ -1436,7 +1436,7 @@ function showBiomarkersOverviewChart(svgContainerId, data) {
 function showPatientsWithBiomarkersChart(svgContainerId, data) {
     const svgWidth = 370;
     const svgHeight = 130;
-	const svgPadding = {top: 10, right: 10, bottom: 15, left: 50};
+	const svgPadding = {top: 1, right: 10, bottom: 15, left: 50};
 	const chartWidth = svgWidth - svgPadding.left - svgPadding.right;
 	const chartHeight = svgHeight - svgPadding.top - svgPadding.bottom;
 	const chartTopMargin = 30;
@@ -1686,7 +1686,7 @@ function showHeatMap(svgContainerId, data)
 	
 // set the dimensions and margins of the graph
 var margin = {top: 15, right: 30, bottom: 30, left: 60},
-  width = 720 - margin.left - margin.right,
+  width = 700 - margin.left - margin.right,
   height = 220 - margin.top - margin.bottom;
 
 values=data;
@@ -1811,7 +1811,7 @@ var Labels=["FindingCount", "DrugCount", "DisorderCount", "LabCount", "Procedure
       .html("Year" + " " + d.year + 
       		"<br> month: " + d.month +  
     		"<br> Label: " + d.field.substr(0,d.field.indexOf('C')) + 
-    		"<br> value: " + d.value )
+    		"<br> Label Prevalence: " + d.value1 )
       .style("left", (d3.mouse(this)[0]+100) + "px")
       .style("top", (d3.mouse(this)[1] + 10)+"px")
   }
@@ -1834,33 +1834,32 @@ var Labels=["FindingCount", "DrugCount", "DisorderCount", "LabCount", "Procedure
      .attr("ry", 2)
       .attr("width", 10 )
       .attr("height", 10 )
+
       .style('fill', function(d) 
         {
-            frequency= d.value
+            frequency= d.value1
             if(frequency == 0){
-            	return '#ffffd9'
+            	return '#a6cee3'
          	}
-          if(frequency <= 25){
-                return '#edf8b1'
-            }else if(frequency<=50){
-                return  '#c7e9b4'
-            } else if(frequency <=75) {
-                return '##7fcdbb'
-            } else if(frequency <=100){
-                return '#41b6c4'
-            }else if(frequency <=200){
-                return '#1d91c0'
-            }else if(frequency <= 300){
-                return '#225ea8'
-            } else if(frequency <=500){
-                return '#253494'
-            }else if (frequency <=1000){
-            return '#081d58'
-            } else { return 'Red'}
+          if(frequency <= 5){
+                return '#1f78b4'
+            } else if(frequency <=10) {
+                return '#b2df8a'
+            } else if(frequency <=15){
+                return '#33a02c'
+            }else if(frequency <=20){
+                return '#fb9a99'}
+             else if(frequency<=25){
+             	return '#e31a1c'
+            }else if(frequency <= 30){
+                return '#ff7f00'
+            } else if(frequency <=50){
+                return '#cab2d6'
+            } else { return '#6a3d9a'}
         })
       .style("stroke-width", 4)
       .style("stroke", "none")
-      .style("opacity", 0.8)
+      .style("opacity", 10)
     .on("mouseover", mouseover)
     .on("mousemove", mousemove)
     .on("mouseleave", mouseleave)
@@ -1911,7 +1910,7 @@ svg.append("text")
                            (height-180  ) + ")")
         .attr("text-anchor", "middle")
         .style("font-size", "10px")
-        .text("Label Frequency: Document Records from 2000 to 2014");
+        .text("Label Prevalence: Document Records from 2000 to 2014");
 
         //create Legend   
 svg.append("rect")
@@ -1919,7 +1918,7 @@ svg.append("rect")
 		.attr("x",width/2 +60)
 		.attr("y",height + 15)
 		.attr("width",8)
-		.attr("height",8).style("fill","#ffffd9")
+		.attr("height",8).style("fill","#a6cee3")
 svg.append("text")
 		.attr("x", width/2 +62)
 		.attr("y", height + 28)
@@ -1932,11 +1931,11 @@ svg.append("rect")
 		.attr("y",height + 15)
 		.attr("width",30)
 		.attr("height",8)
-		.style("fill","#edf8b1")
+		.style("fill","#1f78b4")
 svg.append("text")
-		.attr("x", width/2 +70)
+		.attr("x", width/2 +76)
 		.attr("y", height + 28)
-		.text("<=25")
+		.text("<=5")
 		.style("font-size", "8px")
 		.attr("alignment-baseline","middle")
 
@@ -1945,24 +1944,23 @@ svg.append("rect")
 		.attr("y",height + 15)
 		.attr("width",30)
 		.attr("height",8)
-		.style("fill","#c7e9b4")
+		.style("fill","#b2df8a")
 svg.append("text")
 		.attr("x", width/2 +102)
 		.attr("y", height + 28)
-		.text("<=50")
+		.text("<=10")
 		.style("font-size", "8px")
 		.attr("alignment-baseline","middle")
-
 svg.append("rect")
 		.attr("x",width/2 +128)
 		.attr("y",height + 15)
 		.attr("width",30)
 		.attr("height",8)
-		.style("fill","#7fcdbb")
+		.style("fill","#33a02c")
 svg.append("text")
 		.attr("x",width/2 +132)
 		.attr("y", height + 28)
-		.text("<=75")
+		.text("<=15")
 		.style("font-size", "8px")
 		.attr("alignment-baseline","middle")
 
@@ -1971,11 +1969,11 @@ svg.append("rect")
 		.attr("y",height + 15)
 		.attr("width",30)
 		.attr("height",8)
-		.style("fill","#41b6c4")
+		.style("fill","#fb9a99")
 svg.append("text")
 		.attr("x", width/2 +162)
 		.attr("y", height + 28)
-		.text("<=100")
+		.text("<=20")
 		.style("font-size", "8px")
 		.attr("alignment-baseline","middle")
 
@@ -1984,11 +1982,11 @@ svg.append("rect")
 		.attr("y",height + 15)
 		.attr("width",30)
 		.attr("height",8)
-		.style("fill","#1d91c0")
+		.style("fill","#e31a1c")
 svg.append("text")
 		.attr("x", width/2 +192)
 		.attr("y", height + 28)
-		.text("<=200")
+		.text("<=25")
 		.style("font-size", "8px")
 		.attr("alignment-baseline","middle")
 
@@ -1997,11 +1995,11 @@ svg.append("rect")
 		.attr("y",height + 15)
 		.attr("width",30)
 		.attr("height",8)
-		.style("fill","#225ea8")
+		.style("fill","#ff7f00")
 svg.append("text")
 		.attr("x", width/2 +222)
 		.attr("y", height + 28)
-		.text("<=300")
+		.text("<=30")
 		.style("font-size", "8px")
 		.attr("alignment-baseline","middle")
 
@@ -2010,11 +2008,11 @@ svg.append("rect")
 		.attr("y",height + 15)
 		.attr("width",30)
 		.attr("height",8)
-		.style("fill","#253494")
+		.style("fill","#cab2d6")
 svg.append("text")
-		.attr("x", width/2 +249)
+		.attr("x", width/2 +252)
 		.attr("y", height + 28)
-		.text("<=500")
+		.text("<=50")
 		.style("font-size", "8px")
 		.attr("alignment-baseline","middle")
 
@@ -2023,23 +2021,11 @@ svg.append("rect")
 		.attr("y",height + 15)
 		.attr("width",30)
 		.attr("height",8)
-		.style("fill","#081d58")
+		.style("fill","#6a3d9a")
 svg.append("text")
-		.attr("x", width/2 +279)
+		.attr("x", width/2 +286)
 		.attr("y", height + 28)
-		.text("<=1000")
-		.style("font-size", "8px")
-		.attr("alignment-baseline","middle")
-svg.append("rect")
-		.attr("x",width/2 +308)
-		.attr("y",height + 15)
-		.attr("width",25)
-		.attr("height",8)
-		.style("fill","red")
-svg.append("text")
-		.attr("x", width/2 +311)
-		.attr("y", height + 28)
-		.text(">1000")
+		.text(">50")
 		.style("font-size", "8px")
 		.attr("alignment-baseline","middle")
 
@@ -2178,7 +2164,7 @@ var Labels=["FindingCount", "DrugCount", "DisorderCount", "LabCount", "Procedure
       .html("Year" + " " + d.year + 
       		"<br> month: " + d.month +  
     		"<br> Label: " + d.field.substr(0,d.field.indexOf('C')) + 
-    		"<br> value: " + d.value1 + "%")
+    		"<br> Frequency: " + d.value )
       .style("left", (d3.mouse(this)[0]+100) + "px")
       .style("top", (d3.mouse(this)[1] + 10)+"px")
   }
@@ -2203,27 +2189,25 @@ var Labels=["FindingCount", "DrugCount", "DisorderCount", "LabCount", "Procedure
       .attr("height", 10 )
       .style('fill', function(d) 
         {
-            frequency= d.value1
-            if(frequency == 0)
-            {
-            	return '#ffffd9'
-            }
-          	else if(frequency <= 25)
-          	{
-                return '#7fcdbb'
-            }
-            else if(frequency<=50)
-            {
-                return  '#225ea8'
-            } 
-            else if(frequency <=75)
-            {
-                return '#081d58'
-            } 
-            else (frequency <=100)
-            {
-                return 'Red'
-            }
+        	frequency= d.value
+            if(frequency == 0){
+            	return '#a6cee3'
+         	}
+          if(frequency <= 25){
+                return '#1f78b4'
+            } else if(frequency <=75) {
+                return '#b2df8a'
+            } else if(frequency <=100){
+                return '#33a02c'
+            }else if(frequency <=200){
+                return '#fb9a99'}
+             else if(frequency<=300){
+             	return '#e31a1c'
+            }else if(frequency <= 500){
+                return '#ff7f00'
+            } else if(frequency <=1000){
+                return '#cab2d6'
+            } else { return '#6a3d9a'}
           
         })
       .style("stroke-width", 4)
@@ -2279,78 +2263,124 @@ svg.append("text")
                            (height-180  ) + ")")
         .attr("text-anchor", "middle")
         .style("font-size", "10px")
-        .text("Label Prevlance per each month");
+        .text("Label Frequency ");
 
         //create Legend 
 svg.append("rect")
 		
-		.attr("x",width/2 +70)
+		.attr("x",width/2 +60)
 		.attr("y",height + 15)
 		.attr("width",8)
-		.attr("height",8).style("fill","#ffffd9'")
+		.attr("height",8).style("fill","#a6cee3")
 svg.append("text")
-		.attr("x", width/2 +72)
+		.attr("x", width/2 +62)
 		.attr("y", height + 28)
 		.text("0")
 		.style("font-size", "8px")
 		.attr("alignment-baseline","middle")
-     
-            
 
-       
 svg.append("rect")
-		.attr("x",width/2 +78)
+		.attr("x",width/2 +68)
 		.attr("y",height + 15)
 		.attr("width",30)
 		.attr("height",8)
-		.style("fill","#7fcdbb")
+		.style("fill","#1f78b4")
 svg.append("text")
-		.attr("x", width/2 +80)
+		.attr("x", width/2 +76)
 		.attr("y", height + 28)
 		.text("<=25")
 		.style("font-size", "8px")
 		.attr("alignment-baseline","middle")
 
 svg.append("rect")
-		.attr("x",width/2 +108)
+		.attr("x",width/2 +98)
 		.attr("y",height + 15)
 		.attr("width",30)
 		.attr("height",8)
-		.style("fill","#225ea8")
+		.style("fill","#b2df8a")
 svg.append("text")
-		.attr("x", width/2 +112)
-		.attr("y", height + 28)
-		.text("<=50")
-		.style("font-size", "8px")
-		.attr("alignment-baseline","middle")
-
-svg.append("rect")
-		.attr("x",width/2 +138)
-		.attr("y",height + 15)
-		.attr("width",30)
-		.attr("height",8)
-		.style("fill","#081d58")
-svg.append("text")
-		.attr("x",width/2 +142)
+		.attr("x", width/2 +102)
 		.attr("y", height + 28)
 		.text("<=75")
 		.style("font-size", "8px")
 		.attr("alignment-baseline","middle")
-
 svg.append("rect")
-		.attr("x",width/2 +168)
+		.attr("x",width/2 +128)
 		.attr("y",height + 15)
 		.attr("width",30)
 		.attr("height",8)
-		.style("fill","red")
+		.style("fill","#33a02c")
 svg.append("text")
-		.attr("x", width/2 +172)
+		.attr("x",width/2 +132)
 		.attr("y", height + 28)
 		.text("<=100")
 		.style("font-size", "8px")
 		.attr("alignment-baseline","middle")
 
+svg.append("rect")
+		.attr("x",width/2 +158)
+		.attr("y",height + 15)
+		.attr("width",30)
+		.attr("height",8)
+		.style("fill","#fb9a99")
+svg.append("text")
+		.attr("x", width/2 +162)
+		.attr("y", height + 28)
+		.text("<=200")
+		.style("font-size", "8px")
+		.attr("alignment-baseline","middle")
 
+svg.append("rect")
+		.attr("x",width/2 +188)
+		.attr("y",height + 15)
+		.attr("width",30)
+		.attr("height",8)
+		.style("fill","#e31a1c")
+svg.append("text")
+		.attr("x", width/2 +192)
+		.attr("y", height + 28)
+		.text("<=300")
+		.style("font-size", "8px")
+		.attr("alignment-baseline","middle")
+
+svg.append("rect")
+		.attr("x",width/2 +218)
+		.attr("y",height + 15)
+		.attr("width",30)
+		.attr("height",8)
+		.style("fill","#ff7f00")
+svg.append("text")
+		.attr("x", width/2 +222)
+		.attr("y", height + 28)
+		.text("<=500")
+		.style("font-size", "8px")
+		.attr("alignment-baseline","middle")
+
+svg.append("rect")
+		.attr("x",width/2 +248)
+		.attr("y",height + 15)
+		.attr("width",30)
+		.attr("height",8)
+		.style("fill","#cab2d6")
+svg.append("text")
+		.attr("x", width/2 +252)
+		.attr("y", height + 28)
+		.text("<=1000")
+		.style("font-size", "8px")
+		.attr("alignment-baseline","middle")
+
+svg.append("rect")
+		.attr("x",width/2 +278)
+		.attr("y",height + 15)
+		.attr("width",30)
+		.attr("height",8)
+		.style("fill","#6a3d9a")
+svg.append("text")
+		.attr("x", width/2 +286)
+		.attr("y", height + 28)
+		.text(">1000")
+		.style("font-size", "8px")
+		.attr("alignment-baseline","middle")
 
 }
 //*********************************************************************************
@@ -2361,8 +2391,8 @@ function showEpisode(svgContainerId, data)
 	console.log(data)
 
    var margin = {top: 15, right: 10, bottom: 40, left: 10},
-    width = 550 - margin.left - margin.right,
-    height = 250 - margin.top - margin.bottom;
+    width = 700 - margin.left - margin.right,
+    height = 270 - margin.top - margin.bottom;
  //schemeSet1
 
     color = d3.scaleOrdinal(d3.schemeSet1);
@@ -2381,9 +2411,9 @@ var svg = d3.select("#" + svgContainerId).append("svg")
             "translate(" + (width/2) + " ," + 
                            (0-margin.top)  + ")")
 		.style("text-anchor", "middle")
-      	.text("Overview of Episode Sequence");
+      	.text("Overview of Episode transitions");
 
-    svg.append("rect")
+   /* svg.append("rect")
 		.attr("x",width -499)
 		.attr("y",height +15 )
 		.attr("width",330)
@@ -2450,7 +2480,7 @@ var svg = d3.select("#" + svgContainerId).append("svg")
 		.attr("y", height+27)
 		.text("Follow-Up")
 		.style("font-size", "8px")
-		.attr("alignment-baseline","middle")
+		.attr("alignment-baseline","middle")*/
 
 
   /*var borderPath = svg.append("rect")
@@ -2510,7 +2540,7 @@ var path = sankey.link();
   link.append("title")
         .text(function(d) {
       	return d.source.name.substr(0,d.source.name.indexOf(' ')) + " → " + 
-                d.target.name.substr(0,d.target.name.indexOf(' ')) + "\n" + d.value; })
+                d.target.name.substr(0,d.target.name.indexOf(' ')) + "\n" +"Transition value : " + d.value; })
     
  
 // add in the nodes
@@ -2530,13 +2560,13 @@ var path = sankey.link();
   node.append("rect")
       .attr("height", function(d) { return d.dy; })
       .attr("width", sankey.nodeWidth())
-      .style("fill", function(d) { 
+      .attr("fill", function(d) { 
 		  return d.color = color(d.name.replace(/ .*/, "")); })
-      .style("stroke", function(d) { 
-		  return d3.rgb(d.color).darker(1); })
+      .attr("stroke", function(d) { 
+		  return d3.rgb(d.color).darker(0); })
     .append("title")
       .text(function(d) { 
-		  return d.name.substr(0,d.name.indexOf(' ')) + "\n" + d.value; })
+		  return d.name.substr(0,d.name.indexOf(' ')) + "\n" + "Value: " + d.value; })
       
  
 // add in the title for the nodes
@@ -2562,7 +2592,34 @@ var path = sankey.link();
     sankey.relayout();
     link.attr("d", path);
   }
+   var legendRectSize = 5;  
+   var legendSpacing = 3;
+ var legend = svg.selectAll('.legend1')                     // NEW
+          .data(color.domain())                                   // NEW
+          .enter()                                                // NEW
+          .append('g')                                            // NEW
+          .attr('class', 'legend1')                                // NEW
+          .attr('transform', function(d, i) {                     // NEW
+            var height = legendRectSize + legendSpacing;          // NEW
+           // var offset =  height * color.domain().length / 2;     // NEW
+            var horz = 120 * legendRectSize;                       // NEW
+            var vert = i*height+5  //+ offset;                       // NEW
+            return 'translate(' + horz + ',' + vert + ')';        // NEW
+          });                                                     // NEW
 
+        legend.append('rect')                                     // NEW
+          .attr('width', legendRectSize)                          // NEW
+          .attr('height', legendRectSize) 
+                             // NEW
+          .style('fill', color)                                   // NEW
+          .style('stroke', color);                                // NEW
+          
+        legend.append('text')                                     // NEW
+          .attr('x', legendRectSize + legendSpacing )              // NEW
+          .attr('y', legendRectSize - legendSpacing + 4)              // NEW
+          .text(function(d) { return d; });                       // NEW
+
+      
 }
 //********************************************************************************
 
