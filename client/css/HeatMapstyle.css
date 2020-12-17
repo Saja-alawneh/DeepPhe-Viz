@@ -10,9 +10,19 @@ div.HeatMap, div.sankey
     margin:10px;
     padding:10px;
     float:left;
-    display: flex;
+    display: contents;
     width: 700;
     height: 300;
+}
+div.sankey
+{
+  background:#fff;
+  margin:10px;
+  padding:10px;
+  float:right;
+  display: block;
+  width: 700;
+  height: 300;
 }
 
 .cell:hover{
@@ -29,8 +39,8 @@ div.tooltip {
   position: absolute;
   text-align: left;
   background-color: #FFE4E1;
-  width: 80px;
-  min-height: 50px;
+  width: 100px;
+  min-height: 40px;
   padding: 2px;
   font: 10px  sans-serif ;
   font-weight: bold;
@@ -55,7 +65,7 @@ g{
     margin-top: 2px;
     text-align: left;
     color: #000;
-    font-size: 15px;
+    font-size: 10px;
 }*/
 .legend{
     color: #000;
@@ -64,6 +74,15 @@ g{
    /* text-align: center;*/
    /* min-height: 200px;*/
 }
+.legend1 
+{
+  font-size:  8px;
+
+}
+rect {
+  stroke-width: 2;
+}
+
 #title{
     font-size: 28px;
     color: #163D57;

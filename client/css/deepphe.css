@@ -23,7 +23,7 @@ font-weight: bold;
 }
 
 .main {
-padding:5px 10px;
+padding:1px 1px;
 }
 
 .section_heading {
@@ -58,7 +58,7 @@ border: 1px solid #ddd;
 {
 	background: darkblue;
 	border:1px solid darkblue;
-	margin:10px;
+	margin:5px;
 	padding:0px;
 	float:left;
 }
@@ -70,9 +70,9 @@ border: 1px solid #ddd;
 background:#fff;
 border:1px solid #fff;
 margin:10px;
-padding:0px;
-float:left;
+float:right;
 }
+
 #HeatMap
 {
 	
@@ -88,17 +88,17 @@ float:left;
 }
 #patients_with_biomarkers
 {
-	float: left
+	float: inline end
 }
 
 #patients
 {
 background:#fff;
 border:1px solid #fff;
-margin:10 px;
-padding:0px;
+margin:15 px;
+padding:5px;
 float:left;	
-font-size: 8px;
+font-size: 10px;
 }
 
 /* Minimize the text rendering inconsistency across browsers */
@@ -224,16 +224,16 @@ padding:10px;
 
 .patient_list
  {
-width:200px;
+width:500px;
 list-style: none;
-margin:0;
+margin:10;
 padding:5;
 
 }
 
 .patient_list_click
  {
-width:300px;
+width:500px;
 list-style: none;
 margin:0;
 padding:0;
@@ -241,8 +241,8 @@ padding:0;
 
 .patient_list li {
 float:right;
-width:80px;
-margin:1px 2px 1px 0;
+width:130px;
+margin:8px 10px 8px 2;
 }
 
 .highlighted_target_patient_in_diagnosis {
@@ -255,8 +255,8 @@ text-decoration: underline;
 
 /* Biomarkers chart */
 #biomarkers_overview {
-margin-bottom:20px;
-float: left;
+margin-bottom:10px;
+float: inline end;
 }
 
 .stages_chart_title,
