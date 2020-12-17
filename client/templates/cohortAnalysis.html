@@ -8,9 +8,22 @@
 		<div class="filters clearfix">
 		<div id="stage_patient_count" class="cohort_chart"></div>
 		<div id="stage_patient_age" class="cohort_chart"></div>
-		<div id="biomarkers_overview"></div>
-		<div id="patients_with_biomarkers"></div>
 		
+    <button id="myBtn">Submit</button>
+    <div id="myModal" class="modal">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+      <span class="close">&times;</span>
+      <textarea id="msg" name="msg" placeholder="Write your answer ..." style="height:100px"></textarea>
+      
+      <input type="button" id="next" onclick="location.href='http://localhost:8383/';" value="Next Task" />
+      <input type="button" id="bt" value="Save " onclick="saveFile()" />
+    
+      </div>
+    </div>
+		<div id="biomarkers_overview"></div>
+    <div id="patients_with_biomarkers"></div>
 
 	</div>
 
@@ -20,27 +33,18 @@
 		<div id="results_title"></div>
 		
 		
-		<div id ="sankey" class="relative"></div>
+		
 		<div id="HeatMap" class="relative"> </div>
-		<div id="HeatMap1" class="relative"> </div>
+   <!--<div id="HeatMap1" class="relative"> </div>-->
+    <div id ="sankey" class="relative"></div>
+	 
 		<div id="diagnosis"></div>
 		<div id="patients"></div>
-		<button id="myBtn">Submit</button>
-		<div id="myModal" class="modal">
-
-  		<!-- Modal content -->
-  		<div class="modal-content">
-    	<span class="close">&times;</span>
-    	<textarea id="msg" name="msg" placeholder="Write your answer ..." style="height:100px"></textarea>
-    	
-    	<input type="button" id="next" onclick="location.href='http://localhost:8383/';" value="Next Task" />
-    	<input type="button" id="bt" value="Save " onclick="saveFile()" />
-    
-  		</div>
+		
 
 		</div>
 	</div>
-</div>
+
 
 	<script type="text/javascript">
 	const baseUri = '{{baseUri}}';
@@ -101,19 +105,18 @@ let saveFile = () => {
 <style>
 #myBtn
 {
-	position:static;
-	margin-bottom: 70%;
-	margin-top: 20%;
+	
+  float: right;
 	background-color: #D66061; 
-  	border: none;
+  border: none;
 	color: white;
-  	padding: 10px 30px;
-  	text-align: center;
-  	text-decoration: none;
-  	display: inline-block;
-  	cursor: pointer;
-  	font-size:15px;
-  	border-radius: 12px; 
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  font-size:15px;
+  border-radius: 12px; 
 }
 
 .modal {
