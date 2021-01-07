@@ -24,7 +24,7 @@
 <style>
 
 .container {
-  height: 200px;
+  height: 80px;
   position: relative;
   border: 3px #D66061;
 }
@@ -39,18 +39,18 @@
 }
 
 .button {
-  background-color: #D66061; 
-  border: none;
+  background-color: #667292; 
+  border: white;
   color: white;
-  padding: 15px 32px;
+  padding: 10px 550px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   margin: 4px 2px;
   cursor: pointer;
-  font-size:24px;
-  border-radius: 12px;
-  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+  font-size:15px;
+  border-radius: 10px;
+  
   
 }
 .button span {
@@ -70,26 +70,98 @@
 }
 
 .button:hover span {
-  padding-right: 25px;
+  padding-right: 15px;
 }
 
 .button:hover span:after {
   opacity: 1;
   right: 0;
 }
+a {
+color: blue;
+}
+a:link {
+color: #cc0000;
+}
+a:visited {
+color: #999999;
+}
+a:hover {
+color: grey;
+}
+
+h2 {
+    color:#069;
+}
 
 
 </style>
 </head>
 <body>
-	<h2 style="text-align: center;"> Welcome To DeepPhe-Viz tool for Cancer Cohort identification</h2>
-	<div class="container">
-		<div class="center">
-		<button class= "button" onclick="location.href='http://localhost:8383/cohortAnalysis'" type="button"><span>
-         start</span></button>
+	<h2 style="text-align: center;">Welcome To DeepPhe-Viz tool for Cancer Cohort identification</h2>
+	<h2 style="text-align: center;" style="font-size: 30px" style="color: #069"> List of Tasks</h2>
+<ul> 
+	<button class= "button" onclick="window.open('http://localhost:8383/cohortAnalysis','_blank')" type="button"><span> Task 1</span></button>
+	<ol>
+  		<a onclick="window.open('http://localhost:8383/cohortAnalysis','_blank')"  style= "font-size:15px"><li>How many patients are in the cohort?</li></a>
+  		<a onclick="window.open('http://localhost:8383/cohortAnalysis','_blank')"  style= "font-size:15px"><li>What is the range of ages at first encounter in the cohort?</li></a>
+ 		<a onclick="window.open('http://localhost:8383/cohortAnalysis','_blank')"  style= "font-size:15px"><li>What is the percentage of the patients with biomarkers in the cohort?</li></a>
+ 		<a onclick="window.open('http://localhost:8383/cohortAnalysis','_blank')"  style= "font-size:15px"><li>The label prevalence chart shows the distribution of documents types during each month of a patient’s treatment. The overall number of months in this view will give an indication of the length of treatment for the patient with the longest time span in the cohort. What are the start and end months for this timespan?</li></a>
+
+	</ol> </ul>
+
+	<ul>
+	<button class= "button" onclick="window.open('http://localhost:8383/cohortAnalysis','_blank')" type="button"><span> Task 2</span></button>
+	<ol>
+
+		<a onclick="window.open('http://localhost:8383/cohortAnalysis','_blank')"  style= "font-size:15px"><li>How many patients with stage 2 diagnosis?</li></a>
+		<a onclick="window.open('http://localhost:8383/cohortAnalysis','_blank')"  style= "font-size:15px"><li>How many patients in the cohort were between 30 and 40 years old at the time of their first encounter? </li></a>
+		<a onclick="window.open('http://localhost:8383/cohortAnalysis','_blank')"  style= "font-size:15px"><li>From the diagnosis chart, how many patients have a diagnosis of Epithelial Neoplasm? Name one of them?</li></a></ol> 
+	</ul>
+
+	<ul>
+	<button class= "button" onclick="window.open('http://localhost:8383/cohortAnalysis','_blank')" type="button"><span> Task 3</span></button>
+		<ol>
 		
-	</div>
-</div>
+		<a onclick="window.open('http://localhost:8383/cohortAnalysis','_blank')"  style= "font-size:15px"><li>Find one or more patient with stage 0? What is the distribution of biomarkers found for those patients? </li></a>
+		<a onclick="window.open('http://localhost:8383/cohortAnalysis','_blank')"  style= "font-size:15px"><li>For one of the stages, no patients in the cohort have biomarkers. Which stage is this? Name one patient with this stage of cancer as their summary diagnosis?</li></a>
+		<a onclick="window.open('http://localhost:8383/cohortAnalysis','_blank')"  style= "font-size:15px"><li>Using the episode transition chart, find a patient who experienced a transition from a treatment episode to a medical decision-making episode. For that patient, what month and label have the highest term prevalence in the term prevalence chart?</li></a>
+		<a onclick="window.open('http://localhost:8383/cohortAnalysis','_blank')"  style= "font-size:15px"><li>In the term prevalence chart, for finding mentions in month 2, what is the highest number of documents (transition value) that have the episode sequence of pre-diagnostic to diagnostic in the episode transition chart?</li></a></ol>
+	</ul>
+		
+	<ul>
+	<button class= "button" onclick="window.open('http://localhost:8383/cohortAnalysis','_blank')" type="button"><span> Task 4</span></button>
+		<ol>
+		
+		<a onclick="window.open('http://localhost:8383/cohortAnalysis','_blank')"  style= "font-size:15px"><li>From the term prevalence chart, find number of patient(s) with term prevalence of 6 of drug mentions in month 5? </li></a>
+
+		<a onclick="window.open('http://localhost:8383/cohortAnalysis','_blank')"  style= "font-size:15px"><li>From the episode transition chart, find number of patients who have the following sequence of episodes: </li></a>
+		<ul> 
+			<a onclick="window.open('http://localhost:8383/cohortAnalysis','_blank')"  style= "font-size:15px"><li>treatment episode then follow-up? </li></a>
+			<a onclick="window.open('http://localhost:8383/cohortAnalysis','_blank')"  style= "font-size:15px"><li>follow-up then pre-diagnostic?  </li></a>
+			<a onclick="window.open('http://localhost:8383/cohortAnalysis','_blank')"  style= "font-size:15px"><li>Treatment then pre-diagnostic?  </li></a>
+			<a onclick="window.open('http://localhost:8383/cohortAnalysis','_blank')"  style= "font-size:15px"><li>Pre-diagnostic then diagnostic -> 	pre-diagnostic -> diagnostic -> pre-diagnostic -> diagnostic-> pre-diagnostic -> diagnostic ? </li></a></ul>
+	</ol></ul>
+
+	<ul>
+		<button class= "button" onclick="window.open('http://localhost:8383/cohortAnalysis','_blank')" type="button"><span> Task 5</span></button>
+		<ol>
+		
+		<a onclick="window.open('http://localhost:8383/cohortAnalysis','_blank')"  style= "font-size:15px"><li>Find a patient with treatment to follow-up episode sequence and transition value (path value) of 1 in the episode transition chart what are the primary tumors for that patient in the patient level view?
+ 		</li></a>
+ 		
+		<a onclick="window.open('http://localhost:8383/cohortAnalysis','_blank')"  style= "font-size:15px"><li>Using term prevalence chart, find a patient who has finding mentions in month 18. For that patient:</li></a>
+		<ul>
+		<a onclick="window.open('http://localhost:8383/cohortAnalysis','_blank')"  style= "font-size:15px"><li>Find how many documents have a treatment episode?</li></a>
+		<a onclick="window.open('http://localhost:8383/cohortAnalysis','_blank')"  style= "font-size:15px"><li>What type of documents they are?</li></a>
+		</ul>
+		<a onclick="window.open('http://localhost:8383/cohortAnalysis','_blank')"  style= "font-size:15px"><li>How many surgical pathology reports for the patient with stage 2A and first encounter age between 30 and 36 and has finding mentions in month 2 and has episode sequence from diagnostic to medical decision making ?</li></a>
+
+		</li></a>
+		
+	</ol></ul>
+		
+
 </body>
 
 </html>
