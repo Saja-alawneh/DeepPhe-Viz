@@ -1434,7 +1434,7 @@ function showBiomarkersOverviewChart(svgContainerId, data) {
 
 // We do NOT remove the biomarkers chart on each redraw, due to the animation
 function showPatientsWithBiomarkersChart(svgContainerId, data) {
-    const svgWidth = 370;
+    const svgWidth = 350;
     const svgHeight = 130;
 	const svgPadding = {top: 1, right: 10, bottom: 15, left: 50};
 	const chartWidth = svgWidth - svgPadding.left - svgPadding.right;
@@ -1685,8 +1685,8 @@ function showHeatMap(svgContainerId, data)
 	removeChart(svgContainerId);
 	
 // set the dimensions and margins of the graph
-var margin = {top: 15, right: 30, bottom: 30, left: 60},
-  width = 700 - margin.left - margin.right,
+var margin = {top: 15, right: 30, bottom: 30, left: 50},
+  width = 690 - margin.left - margin.right,
   height = 220 - margin.top - margin.bottom;
 
 values=data;
@@ -1897,8 +1897,8 @@ var borderPath = svg.append("rect")
   svg.append("text")
       .attr("transform",
             "translate(" + (width/2) + " ," + 
-                           (height+20  ) + ")")
-      .attr('font-size', 9)
+                           (height+25  ) + ")")
+      .attr('font-size', 10)
 		.style("text-anchor", "middle")
       	.text("Number of Months");
 
@@ -1910,121 +1910,122 @@ svg.append("text")
                            (height-180  ) + ")")
         .attr("text-anchor", "middle")
         .style("font-size", "10px")
-        .text("Label Prevalence: Document Records from 2000 to 2014");
+        .style("fill", 'darkblue')
+        .text("Label Prevalence");
 
         //create Legend   
 svg.append("rect")
 		
 		.attr("x",width/2 +60)
-		.attr("y",height + 15)
+		.attr("y",height - 191)
 		.attr("width",8)
 		.attr("height",8).style("fill","#a6cee3")
 svg.append("text")
 		.attr("x", width/2 +62)
-		.attr("y", height + 28)
+		.attr("y", height - 178)
 		.text("0")
 		.style("font-size", "8px")
 		.attr("alignment-baseline","middle")
 
 svg.append("rect")
 		.attr("x",width/2 +68)
-		.attr("y",height + 15)
+		.attr("y",height - 191)
 		.attr("width",30)
 		.attr("height",8)
 		.style("fill","#1f78b4")
 svg.append("text")
-		.attr("x", width/2 +76)
-		.attr("y", height + 28)
+		.attr("x", width/2 +73)
+		.attr("y", height - 178)
 		.text("<=5")
 		.style("font-size", "8px")
 		.attr("alignment-baseline","middle")
 
 svg.append("rect")
 		.attr("x",width/2 +98)
-		.attr("y",height + 15)
+		.attr("y",height - 191)
 		.attr("width",30)
 		.attr("height",8)
 		.style("fill","#b2df8a")
 svg.append("text")
 		.attr("x", width/2 +102)
-		.attr("y", height + 28)
+		.attr("y", height - 178)
 		.text("<=10")
 		.style("font-size", "8px")
 		.attr("alignment-baseline","middle")
 svg.append("rect")
 		.attr("x",width/2 +128)
-		.attr("y",height + 15)
+		.attr("y",height - 191)
 		.attr("width",30)
 		.attr("height",8)
 		.style("fill","#33a02c")
 svg.append("text")
 		.attr("x",width/2 +132)
-		.attr("y", height + 28)
+		.attr("y", height - 178)
 		.text("<=15")
 		.style("font-size", "8px")
 		.attr("alignment-baseline","middle")
 
 svg.append("rect")
 		.attr("x",width/2 +158)
-		.attr("y",height + 15)
+		.attr("y",height - 191)
 		.attr("width",30)
 		.attr("height",8)
 		.style("fill","#fb9a99")
 svg.append("text")
 		.attr("x", width/2 +162)
-		.attr("y", height + 28)
+		.attr("y", height - 178)
 		.text("<=20")
 		.style("font-size", "8px")
 		.attr("alignment-baseline","middle")
 
 svg.append("rect")
 		.attr("x",width/2 +188)
-		.attr("y",height + 15)
+		.attr("y",height - 191)
 		.attr("width",30)
 		.attr("height",8)
 		.style("fill","#e31a1c")
 svg.append("text")
 		.attr("x", width/2 +192)
-		.attr("y", height + 28)
+		.attr("y", height -178)
 		.text("<=25")
 		.style("font-size", "8px")
 		.attr("alignment-baseline","middle")
 
 svg.append("rect")
 		.attr("x",width/2 +218)
-		.attr("y",height + 15)
+		.attr("y",height -191)
 		.attr("width",30)
 		.attr("height",8)
 		.style("fill","#ff7f00")
 svg.append("text")
 		.attr("x", width/2 +222)
-		.attr("y", height + 28)
+		.attr("y", height -178)
 		.text("<=30")
 		.style("font-size", "8px")
 		.attr("alignment-baseline","middle")
 
 svg.append("rect")
 		.attr("x",width/2 +248)
-		.attr("y",height + 15)
+		.attr("y",height -191)
 		.attr("width",30)
 		.attr("height",8)
 		.style("fill","#cab2d6")
 svg.append("text")
 		.attr("x", width/2 +252)
-		.attr("y", height + 28)
+		.attr("y", height -178)
 		.text("<=50")
 		.style("font-size", "8px")
 		.attr("alignment-baseline","middle")
 
 svg.append("rect")
 		.attr("x",width/2 +278)
-		.attr("y",height + 15)
+		.attr("y",height -191)
 		.attr("width",30)
 		.attr("height",8)
 		.style("fill","#6a3d9a")
 svg.append("text")
 		.attr("x", width/2 +286)
-		.attr("y", height + 28)
+		.attr("y", height -178)
 		.text(">50")
 		.style("font-size", "8px")
 		.attr("alignment-baseline","middle")
@@ -2033,356 +2034,246 @@ svg.append("text")
 
 //Prevlance of the Label per each month
 
-function showHeatMap1(svgContainerId, data) 
+
+//***********************************
+function showDocBarChart(svgContainerId, data) 
+
 {
 	removeChart(svgContainerId);
-	
-// set the dimensions and margins of the graph
-var margin = {top: 15, right: 30, bottom: 30, left: 60},
-  width = 720 - margin.left - margin.right,
-  height = 220 - margin.top - margin.bottom;
 
-values=data;
-// append the svg object to the body of the page
-var svg = d3.select("#HeatMap1").append('svg')
-		.attr("width", width + margin.left + margin.right)
-  		.attr("height", height + margin.top + margin.bottom)
-		.append("g")
-  		.attr("transform",
-        "translate(" + margin.left + "," + margin.top + ")");
+	var t = d3.transition()
+            .duration(1500);
 
-//Read the data
-var Labels=["FindingCount", "DrugCount", "DisorderCount", "LabCount", "ProcedureCount","OtherCount"]
-
-  // Labels of row and columns -> unique identifier of the column called 'group' and 'variable'
-  
-
-  // Build X scales and axis:
-
-  minMonth= d3.min(values, (item) => {
-            return item['month']
-        })
-        //console.log(minMonth)
-
-  maxMonth=d3.max(values, (item) => {
-          return item['month']
-        })
-  var months=[];
-  values.forEach(function(m){   
-  		months.push(m.month)})   
-    	
- var x = d3.scaleBand()
-        .domain(months)
-        .range([minMonth, maxMonth +500])
-        .padding(5)
-        svg.append("g")
-    	.style("font-size", 8)
-    	.attr("transform", "translate(0," + height + ")")
-    	.call(d3.axisBottom(x).tickSize(0).ticks(20))
-    	.select(".domain").remove()
-
-
-
-
-
-  var y= d3.scaleBand()//d3.scaleTime
-         .domain(Labels)
-         .range([height,0])
-          .padding(0.5)
-         
-         svg.append("g")
-    	.style("font-size", 8)
-    	.call(d3.axisLeft(y).tickSize(0))
-    	.call(g => g.select(".domain").remove())
-    	.selectAll("text")
-    	.text(function(d) 
-				{
-				if (d === "FindingCount") 
-					{
-                    return "Finding";
-					} 
-					else if (d === "DrugCount") 
-					{
-                    return "Drug";
-					}
-					else if (d === "LabCount") 
-					{
-					return "LAB";
-					} 
-					else if (d === "DisorderCount") 
-					{
-					return "Disorder";
-					} 
-					else if (d === "ProcedureCount") 
-					{
-					return "Procedure";
-					} 
-					else if (d === "OtherCount")
-					 {
-					return "Other";
-					} 
-					else 
-					{
-					return d.replace("_", " ");
-					}
-
-				})
-
-    	
-		
-
-  // Build color scale
- // var myColor =d3.scaleSequentialQuantile().domain([100, 1, 13]) //d3.scaleSequential()
-  //.interpolator(d3.interpolateCubehelixDefault)
-  //.interpolator(d3.interpolatePRGn)
-    //.interpolator(d3.interpolate("purple", "orange"))
-    //.domain([1,500])
-    //d3.scaleSequentialLog(d3.interpolatePuBuGn).domain([1e-8, 1e8])
-
-  // create a tooltip
-  var tooltip = d3.select("#HeatMap1")
-    .append("div")
-    .style("opacity", 0)
-    .attr("class", "tooltip")
-    .style("background-color", "white")
-    .style("border", "solid")
-    .style("border-width", "2px")
-    .style("border-radius", "5px")
-    .style("padding", "5px")
-
-  // Three function that change the tooltip when user hover / move / leave a cell
-  var mouseover = function(d) {
-    tooltip
-      .style("opacity", 1)
-    d3.select(this)
-      .style("stroke", "black")
-      .style("opacity", 1)
-  }
-  var mousemove = function(d) {
-    tooltip
+	//var svg = d3.select("#" + svgContainerId).append("svg")
+	var docs=["Rad", "Path","Prog","Dis","clinical"]
     
-      .html("Year" + " " + d.year + 
-      		"<br> month: " + d.month +  
-    		"<br> Label: " + d.field.substr(0,d.field.indexOf('C')) + 
-    		"<br> Frequency: " + d.value )
-      .style("left", (d3.mouse(this)[0]+100) + "px")
-      .style("top", (d3.mouse(this)[1] + 10)+"px")
-  }
-  var mouseleave = function(d) {
-    tooltip
-      .style("opacity", 0)
-    d3.select(this)
-      .style("stroke", "none")
-      .style("opacity", 0.8)
-  }
+var width = 600;
+var height = 300;
+var margin = { top: 20, right: 10, bottom: 30, left: 60};
 
-  // add the squares
-  svg.selectAll()
-    .data(data, function(d) {return d.month+':'+d.field;})
-    .enter()
-    .append("rect")
-      .attr("x", function(d) { return x(d.month) })
-      .attr("y", function(d) { return y(d.field) })
-     .attr("rx", 2)
-     .attr("ry", 2)
-      .attr("width", 10 )
-      .attr("height", 10 )
-      .style('fill', function(d) 
-        {
-        	frequency= d.value
-            if(frequency == 0){
-            	return '#a6cee3'
-         	}
-          if(frequency <= 25){
-                return '#1f78b4'
-            } else if(frequency <=75) {
-                return '#b2df8a'
-            } else if(frequency <=100){
-                return '#33a02c'
-            }else if(frequency <=200){
-                return '#fb9a99'}
-             else if(frequency<=300){
-             	return '#e31a1c'
-            }else if(frequency <= 500){
-                return '#ff7f00'
-            } else if(frequency <=1000){
-                return '#cab2d6'
-            } else { return '#6a3d9a'}
-          
-        })
-      .style("stroke-width", 4)
-      .style("stroke", "none")
-      .style("opacity", 0.8)
-    .on("mouseover", mouseover)
-    .on("mousemove", mousemove)
-    .on("mouseleave", mouseleave)
-    .on("click", function(d) {  
-			let clickedCell = d3.select(this);	
-         	hasBeenClicked = true;
-         	if(hasBeenClicked){
-         	patientByLabel = d.patienList;
-         	getLabelEpisode(d.patienList);
-         	console.log(d.patienList)
-        	removeChart("patients");
-        	showPatientsListLabel("patients", patientByLabel)
-        	hasBeenClicked= false
-        	}
-        	else{
-        	patientByLabel = allPatients;
-         	getLabelEpisode(patientByLabel);
-         	//console.log(d.patienList)
-        	removeChart("patients");
-        	showPatientsListLabel("patients", patientByLabel)
-        	hasBeenClicked= true
-        	}
+for(var i=0;i<data.length; i++)
+    {
+    
 
-        	}) 
+    if(typeof data[i].Rad == 'undefined') 
+    {
+   		 data[i].Rad= 0
+    }
 
-var borderPath = svg.append("rect")
-  .attr("x", 0)
-  .attr("y", 0)
-  .attr("height", height)
-  .attr("width", width)
-  .style("stroke", "black")
-  .style("fill", "none")
-  .style("stroke-width", 1);
+    if(typeof data[i].Path == 'undefined') 
+    {
+   		 data[i].Path= 0
+    }
+
+    if(typeof data[i].Dis == 'undefined') 
+    {
+   		 data[i].Dis= 0
+    }
+
+    if(typeof data[i].Prog == 'undefined') 
+    {
+   		 data[i].Prog= 0
+    }
+
+    if(typeof data[i].clinical == 'undefined') 
+    {
+   		 data[i].clinical= 0
+    }
+ 
+
+}
+
+console.log("data New =", data)
+
+var svg = d3.select("#documents")
+  .append("svg")
+  .attr("width", width + margin.left + margin.right)
+  .attr("height", height + margin.top + margin.bottom);
+var g = svg.append("g")
+  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+  var tooltip = svg.append("g")
+  .attr("class", "tooltip")
+  .style("display", "none");
+    
+tooltip.append("rect")
+  .attr("width", 60)
+  .attr("height", 15)
+  .attr("fill", "lightblue")
+  .style("stroke", "lightblue")
+     
+  .style("opacity", 0.5);
+
+tooltip.append("text")
+  .attr("x", 30)
+  .attr("dy", "1em")
+  .style("text-anchor", "middle")
+  .attr("font-size", "10px")
+  .attr("font-weight", "bold")
+  .style('fill', 'darkblue')
 
   svg.append("text")
-      .attr("transform",
+        .attr("transform",
             "translate(" + (width/2) + " ," + 
-                           (height+20  ) + ")")
-      .attr('font-size', 9)
+                           (height-290  ) + ")")
+        .attr("text-anchor", "middle")
+        .style("font-size", "10px")
+        .style('fill', 'darkblue')
+        .text("Document Distribution");
+
+ svg.append("text")
+      .attr("transform",
+            "translate(" + (width - 250) + " ," + 
+                           (height+50	  ) + ")")
+      .style('font-size', "10px")
 		.style("text-anchor", "middle")
       	.text("Number of Months");
 
 
-// Add title to graph
-svg.append("text")
-        .attr("transform",
-            "translate(" + (width/2) + " ," + 
-                           (height-180  ) + ")")
-        .attr("text-anchor", "middle")
-        .style("font-size", "10px")
-        .text("Label Frequency ");
+var x = d3.scaleBand()
+  .rangeRound([0, width])
+  .padding(0.4)
+  .align(0);
 
-        //create Legend 
-svg.append("rect")
-		
-		.attr("x",width/2 +60)
-		.attr("y",height + 15)
-		.attr("width",8)
-		.attr("height",8).style("fill","#a6cee3")
-svg.append("text")
-		.attr("x", width/2 +62)
-		.attr("y", height + 28)
-		.text("0")
-		.style("font-size", "8px")
-		.attr("alignment-baseline","middle")
+var y = d3.scaleLinear()
+  .rangeRound([height, 0]);
 
-svg.append("rect")
-		.attr("x",width/2 +68)
-		.attr("y",height + 15)
-		.attr("width",30)
-		.attr("height",8)
-		.style("fill","#1f78b4")
-svg.append("text")
-		.attr("x", width/2 +76)
-		.attr("y", height + 28)
-		.text("<=25")
-		.style("font-size", "8px")
-		.attr("alignment-baseline","middle")
+var z = d3.scaleOrdinal()
+.range(["steelblue", "#618685", "lightblue", "darkorange", "#c94c4c"]);
 
-svg.append("rect")
-		.attr("x",width/2 +98)
-		.attr("y",height + 15)
-		.attr("width",30)
-		.attr("height",8)
-		.style("fill","#b2df8a")
-svg.append("text")
-		.attr("x", width/2 +102)
-		.attr("y", height + 28)
-		.text("<=75")
-		.style("font-size", "8px")
-		.attr("alignment-baseline","middle")
-svg.append("rect")
-		.attr("x",width/2 +128)
-		.attr("y",height + 15)
-		.attr("width",30)
-		.attr("height",8)
-		.style("fill","#33a02c")
-svg.append("text")
-		.attr("x",width/2 +132)
-		.attr("y", height + 28)
-		.text("<=100")
-		.style("font-size", "8px")
-		.attr("alignment-baseline","middle")
+//.range(["#8dd3c7", "#ffffb3", "#bebada", "#fb8072", "#80b1d3"]);
 
-svg.append("rect")
-		.attr("x",width/2 +158)
-		.attr("y",height + 15)
-		.attr("width",30)
-		.attr("height",8)
-		.style("fill","#fb9a99")
-svg.append("text")
-		.attr("x", width/2 +162)
-		.attr("y", height + 28)
-		.text("<=200")
-		.style("font-size", "8px")
-		.attr("alignment-baseline","middle")
+ // .range(["#717C8B", "#7FDDC3", "#39B3CD", "red", "yellow"]);
+var keys = ['Rad', 'Path', 'Prog', 'Dis', 'clinical'];
+var stack = d3.stack();
+data.forEach(function(d) {
+  d.month = +d['month'];
+  d.Rad = typeof d.Rad === 'number' ? d.Rad : +d['Rad']
+  d.Path = typeof d.Path === 'number' ? d.Path : +d['Path']
+  d.Prog = typeof d.Prog === 'number' ? d.Prog : +d['Prog']
+  d.Dis = typeof d.Dis === 'number' ? d.Dis : +d['Dis']
+  d.clinical = typeof d.clinical === 'number' ? d.clinical : +d['clinical']
+  d.total = d.Rad + d.Path + d.Prog+ d.Dis+ d.clinical;
+});
 
-svg.append("rect")
-		.attr("x",width/2 +188)
-		.attr("y",height + 15)
-		.attr("width",30)
-		.attr("height",8)
-		.style("fill","#e31a1c")
-svg.append("text")
-		.attr("x", width/2 +192)
-		.attr("y", height + 28)
-		.text("<=300")
-		.style("font-size", "8px")
-		.attr("alignment-baseline","middle")
 
-svg.append("rect")
-		.attr("x",width/2 +218)
-		.attr("y",height + 15)
-		.attr("width",30)
-		.attr("height",8)
-		.style("fill","#ff7f00")
-svg.append("text")
-		.attr("x", width/2 +222)
-		.attr("y", height + 28)
-		.text("<=500")
-		.style("font-size", "8px")
-		.attr("alignment-baseline","middle")
+x.domain(data.map(function(d) {
+  return d.month;
+}));
+y.domain([0, d3.max(data, function(d) {
+  return d.total;
 
-svg.append("rect")
-		.attr("x",width/2 +248)
-		.attr("y",height + 15)
-		.attr("width",30)
-		.attr("height",8)
-		.style("fill","#cab2d6")
-svg.append("text")
-		.attr("x", width/2 +252)
-		.attr("y", height + 28)
-		.text("<=1000")
-		.style("font-size", "8px")
-		.attr("alignment-baseline","middle")
+})]).nice();
+var keys = ['Rad', 'Path', 'Prog', 'Dis','clinical'];
+z.domain(keys);
 
-svg.append("rect")
-		.attr("x",width/2 +278)
-		.attr("y",height + 15)
-		.attr("width",30)
-		.attr("height",8)
-		.style("fill","#6a3d9a")
-svg.append("text")
-		.attr("x", width/2 +286)
-		.attr("y", height + 28)
-		.text(">1000")
-		.style("font-size", "8px")
-		.attr("alignment-baseline","middle")
+//console.log(d3.stack().keys(keys)(data))
+g.selectAll(".serie")
+  .data(d3.stack().keys(keys)(data))
+  .enter()
 
+  .append("g")
+  .attr("fill", function(d) { return z(d.key); })
+  .selectAll("rect")
+  .data(function(d) {
+    return d;
+  })
+  .enter().append("rect")
+  .attr("x", function(d) {
+    return x(d.data.month);
+  })
+  .attr("y", function(d) {
+    return y(d[1]);
+  })
+  .attr("height", function(d) {
+    return y(d[0]) - y(d[1] );
+  })
+  
+  .attr("width", x.bandwidth())
+  //.on('mouseover', function(d,i,j) { tip.show(d, docs[docs.length - 1 - j]); })
+  //.on('mouseout', tip.hide);
+   .on("mouseover", function() { tooltip.style("display", null); })
+  .on("mouseout", function() { tooltip.style("display", "none"); })
+  .on("mousemove", function(d) {
+    var xPosition = d3.mouse(this)[0] - 5;
+    var yPosition = d3.mouse(this)[1] - 5;
+    var subgroupName = d3.select(this.parentNode).datum().key;
+    var subgroupValue = d.data[subgroupName];
+    tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
+  	//tooltip.html("subgroup: " + subgroupName + "<br>" + "Value: " + subgroupValue)
+       // .style("opacity", 1)
+    tooltip.select("text")
+  	.text(subgroupName +  ": " + subgroupValue)//d[1]-d[0] + " " + d3.mouse(this)[keys]) //.text(d3.mouse(this))// + "\n" + "Dis :" + d.data.Dis)//text(d[1]-d[0]);
+    	
+  });
+  
+
+
+
+  var text = svg.selectAll(".text")
+			.data(data, d => d.month);
+			text.exit().remove()
+
+		/*text.enter().append("text")
+			.attr("class", "text")
+			.attr("text-anchor", "middle")
+			.attr("font-size","7px")
+			.attr("font-weight","bold")
+			
+			.attr("x", d => x(d.month) + 65)
+			.attr("y", d => y(d.total) )
+			.text(d => d.total)*/
+
+g.append("g")
+  .attr("class", "axis axis--x")
+  //.transition(t)
+  .attr("transform", "translate(0," + height + ")")
+  .attr('x', 10)
+  .call(d3.axisBottom(x).tickSize(0).ticks(20))
+  //.call(d3.axisBottom(x));
+
+var sum=0;
+g.append("g")
+  .attr("class", "axis axis--y")
+ // .transition(t)
+  .call(d3.axisLeft(y))
+  .append("text")
+  .attr("x", 2)
+  .attr("y", y(y.ticks(10).pop()))
+  .attr("dy", "0.35em")
+  .attr("text-anchor", "start")
+  .attr("fill", "red");
+
+var legend = g.selectAll(".legend")
+  .data(keys.reverse())
+  .enter().append("g")
+  .attr("class", "legend")
+  .attr('transform', function(d, i) {
+    var horz = width - margin.right - (50 * i); // NEW
+    var vert = -20;
+    return 'translate(' + horz + ',' + vert + ')'; // NEW
+  })
+  .style("font", "8px sans-serif");
+
+legend.append("rect")
+  .attr("x", "0")
+  .attr("width", 10)
+  .attr("height", 10)
+  .attr("fill", z);
+
+legend.append("text")
+  .attr("x", "-5")
+  .attr("y", 5)
+  .attr("dy", ".35em")
+  .attr("text-anchor", "end")
+  .text(function(d) {
+    return d;
+  });
+  
+	
 }
+	
 //*********************************************************************************
 //****************** Sankey D3****************************************************
 function showEpisode(svgContainerId, data) 
@@ -2391,7 +2282,7 @@ function showEpisode(svgContainerId, data)
 	console.log(data)
 
    var margin = {top: 15, right: 10, bottom: 40, left: 10},
-    width = 700 - margin.left - margin.right,
+    width = 450 - margin.left - margin.right,
     height = 270 - margin.top - margin.bottom;
  //schemeSet1
 
@@ -2401,6 +2292,7 @@ function showEpisode(svgContainerId, data)
 var svg = d3.select("#" + svgContainerId).append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
+    .attr("padding", "10px")
   	.append("g")
     .attr("transform", 
           "translate(" + margin.left + "," + margin.top + ")");
@@ -2410,88 +2302,12 @@ var svg = d3.select("#" + svgContainerId).append("svg")
       .attr("transform",
             "translate(" + (width/2) + " ," + 
                            (0-margin.top)  + ")")
+      .style('font-size',"10px")
+      .style('fill', 'darkblue')
 		.style("text-anchor", "middle")
-      	.text("Overview of Episode transitions");
+      	.text("Overview of Episode Transitions");
 
-   /* svg.append("rect")
-		.attr("x",width -499)
-		.attr("y",height +15 )
-		.attr("width",330)
-		.attr("height",20)
-		.style("stroke", "#667292")
-  		.style("fill", "none")
-  		.style("stroke-width", 1);
-		
-    svg.append("rect")
-		.attr("x",width -495)
-		.attr("y",height+20)
-		.attr("width",5)
-		.attr("height",10).style("fill","#ff8080")
-	svg.append("text")
-		.attr("x", width -488)
-		.attr("y", height+27)
-		.text("Prediagnostic")
-		.style("font-size", "8px")
-		.attr("alignment-baseline","middle")
-	
-	svg.append("rect")
-		.attr("x",width -430)
-		.attr("y",height+20)
-		.attr("width",5)
-		.attr("height",10).style("fill","#ffb380")
-	svg.append("text")
-		.attr("x", width -423)
-		.attr("y", height+27)
-		.text("Diagnostic")
-		.style("font-size", "8px")
-		.attr("alignment-baseline","middle")
-
-	svg.append("rect")
-		.attr("x",width -376)
-		.attr("y",height+20)
-		.attr("width",5)
-		.attr("height",10).style("fill","#7DCEA0")
-	svg.append("text")
-		.attr("x", width -370)
-		.attr("y", height+27)
-		.text("Treatment")
-		.style("font-size", "8px")
-		.attr("alignment-baseline","middle")
-
-	svg.append("rect")
-		.attr("x",width -325)
-		.attr("y",height+20)
-		.attr("width",5)
-		.attr("height",10).style("fill","#d9b3ff")
-	svg.append("text")
-		.attr("x", width -317)
-		.attr("y", height+27)
-		.text("Medical Decision Making")
-		.style("font-size", "8px")
-		.attr("alignment-baseline","middle")
-
-		svg.append("rect")
-		.attr("x",width -223)
-		.attr("y",height+20)
-		.attr("width",5)
-		.attr("height",10).style("fill","#4dc3ff")
-	svg.append("text")
-		.attr("x", width -214)
-		.attr("y", height+27)
-		.text("Follow-Up")
-		.style("font-size", "8px")
-		.attr("alignment-baseline","middle")*/
-
-
-  /*var borderPath = svg.append("rect")
-  .attr("x", 0)
-  .attr("y", 0)
-  .attr("height", height)
-  .attr("width", width)
-  .style("stroke", "black")
-  .style("fill", "none")
-  .style("stroke-width", 1);*/
- 
+   
 // Set the sankey diagram properties
 var sankey = d3.sankey()
     .nodeWidth(10)
@@ -2569,17 +2385,7 @@ var path = sankey.link();
 		  return d.name.substr(0,d.name.indexOf(' ')) + "\n" + "Value: " + d.value; })
       
  
-// add in the title for the nodes
- /* node.append("text")
-      .attr("x", -6)
-      .attr("y", function(d) { return d.dy / 2; })
-      .attr("dy", ".35em")
-      .attr("text-anchor", "end")
-      .attr("transform", null)
-      .text(function(d) { return d.name; })
-    .filter(function(d) { return d.x < width / 2; })
-      .attr("x", 6 + sankey.nodeWidth())
-      .attr("text-anchor", "start");*/
+
  
 // the function for moving the nodes
   function dragmove(d) {
@@ -2594,16 +2400,16 @@ var path = sankey.link();
   }
    var legendRectSize = 5;  
    var legendSpacing = 3;
- var legend = svg.selectAll('.legend1')                     // NEW
-          .data(color.domain())                                   // NEW
-          .enter()                                                // NEW
-          .append('g')                                            // NEW
-          .attr('class', 'legend1')                                // NEW
-          .attr('transform', function(d, i) {                     // NEW
+ var legend = svg.selectAll('.legend1')                     
+          .data(color.domain())                                   
+          .enter()                                                
+          .append('g')                                            
+          .attr('class', 'legend1')                                
+          .attr('transform', function(d, i) {                     
             var height = legendRectSize + legendSpacing;          // NEW
            // var offset =  height * color.domain().length / 2;     // NEW
-            var horz = 120 * legendRectSize;                       // NEW
-            var vert = i*height+5  //+ offset;                       // NEW
+            var horz = 16 * i*legendRectSize;                       // NEW
+            var vert = height+220  //+ offset;                       // NEW
             return 'translate(' + horz + ',' + vert + ')';        // NEW
           });                                                     // NEW
 
@@ -2618,6 +2424,9 @@ var path = sankey.link();
           .attr('x', legendRectSize + legendSpacing )              // NEW
           .attr('y', legendRectSize - legendSpacing + 4)              // NEW
           .text(function(d) { return d; });                       // NEW
+
+
+
 
       
 }
@@ -2667,13 +2476,14 @@ function getLabelSummary(patientIds) {
 		//console.log("hello")
 		//console.log(response.label)
 		showHeatMap("HeatMap", response.label);
-		showHeatMap1("HeatMap1", response.label);
+		//showHeatMap1("HeatMap1", response.label);
 		//console.log("This is the Label response");
 		//console.log(response.label)
 		
 		//console.log("This is the Episode Response")
 		//console.log('response', response.episode);
 		showEpisode("sankey", response.episode);
+		showDocBarChart("documents", response.doc);
 	})
 	.fail(function () { 
 	    console.log("Ajax error - can't get patients labels info");
@@ -2696,6 +2506,7 @@ $.ajax({
 		//console.log("This is the Episode Response")
 		//console.log('response', response.episode);
 		showEpisode("sankey", response.episode);
+		showDocBarChart("documents", response.doc);
 	})
 	.fail(function () { 
 	    console.log("Ajax error - can't get patients labels info");
@@ -2712,7 +2523,8 @@ $.ajax({
 		//console.log("hello")
 		//console.log(response.label)
 		showHeatMap("HeatMap", response.label);
-		showHeatMap1("HeatMap1", response.label);
+		showDocBarChart("documents", response.doc);
+		
 		//console.log("This is the Label response");
 		//console.log(response.label)
 		
