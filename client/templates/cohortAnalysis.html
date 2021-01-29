@@ -8,6 +8,9 @@
 		<div class="filters clearfix">
 		<div id="stage_patient_count" class="cohort_chart"></div>
 		<div id="stage_patient_age" class="cohort_chart"></div>
+		<div id="biomarkers_overview"></div>
+    <div id="patients_with_biomarkers"></div>
+
 		
     <button id="myBtn">Submit</button>
     <div id="myModal" class="modal">
@@ -17,14 +20,12 @@
       <span class="close">&times;</span>
       <textarea id="msg" name="msg" placeholder="Write your answer ..." style="height:100px"></textarea>
       
-      <input type="button" id="next" onclick="location.href='http://localhost:8383/';" value="Next Task" />
+      <input type="button" id="next" onclick="location.href=location.protocol+'//'+ location.host ;" value="Next Task" />
       <input type="button" id="bt" value="Save " onclick="saveFile()" />
     
       </div>
     </div>
-		<div id="biomarkers_overview"></div>
-    <div id="patients_with_biomarkers"></div>
-
+		
 	</div>
 
 
