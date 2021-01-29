@@ -19,7 +19,7 @@ div.sankey
   background:#fff;
   margin:10px;
   
-  padding:10px 10px 50px 50px
+  padding:10px 10px 50px 50px;
   float:right;
   display: block;
   width: 700;
@@ -91,7 +91,7 @@ rect {
     text-transform: uppercase;
     margin-top: 10px;
     margin-bottom: 10px;
-    align-items: : center;
+    align-items:  center;
 }
 .node rect {
   cursor: move;
