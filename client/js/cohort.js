@@ -58,7 +58,18 @@ const topLevelStages = [
 let minAge;
 let maxAge;
 
+var forEach = Array.prototype.forEach;
+var links = document.getElementsByTagName('a');
+forEach.call(links, function (link) {
+link.onclick = function () {
+  console.log('Clicked');
+    }
+
+});
+
 // Return the intersection of two patient arrays
+
+
 function getTargetPatients(patientsByStage, patientsByFirstEncounterAge) {
 	// Create a list of IDs
 	let patientsByStageIds = patientsByStage.map(function(obj) {
@@ -179,7 +190,9 @@ function showPatientCountPerStageChart(svgContainerId, data) {
         	// to position the text based on upper left corner
 			return "translate(" + svgWidth/2 + ", " + svgPadding.top + ")"; 
 		})
-        .text("Patient Count Per Stage");
+		.style("fill", 'red')
+		.style("font-weight", "bold")
+        .text("Figure 1 - Patient Count Per Stage");
 
     // Render the boxplots before rendering the Y axis
     // so the Y axis vertical line covers the bar border
@@ -440,7 +453,7 @@ function showPatientFirstEncounterAgePerStageChart(svgContainerId, data) {
 
 	// svgPadding.top is used to position the chart title
 	// svgPadding.left is the space for Y axis labels
-	const svgPadding = {top: 10, right: 3, bottom: 10, left: 90};
+	const svgPadding = {top: 1, right: 3, bottom: 20, left: 90};
 	const chartWidth = svgWidth - svgPadding.left - svgPadding.right;
 	const chartHeight = svgHeight - svgPadding.top - svgPadding.bottom;
 	// Gap between svg top and chart top, nothing to do with svgPadding.top
@@ -498,7 +511,9 @@ function showPatientFirstEncounterAgePerStageChart(svgContainerId, data) {
         	// to position the text based on upper left corner
 			return "translate(" + svgWidth/2 + ", " + svgPadding.top + ")"; 
 		})
-        .text("Patient Age of First Encounter Per Stage");
+		.style("fill", 'red')
+		.style("font-weight", "bold")
+        .text("Figure 2 - Patient Age of First Encounter Per Stage");
 
     // Render the bars before rendering the Y axis
     // so the Y axis vertical line covers the bar border
@@ -977,6 +992,48 @@ function showResultsTitle(containerId, data, stage, firstEncounterAgeRange) {
     $("#" + containerId).html(html);
 }
 
+function showResultsTitle2(containerId, data, m, f){
+    removeChart(containerId);
+    if (f === "FindingCount") 
+		{
+          f= "Finding"
+		} 
+	else if (f === "DrugCount") 
+		{
+            f= "Drug";
+		}
+	else if (f === "LabCount") 
+		{
+			f= "LAB";
+		} 
+	else if (f === "DisorderCount") 
+		{
+			f= "Disorder";
+		} 
+	else if (f === "ProcedureCount") 
+		{
+			f= "Procedure";
+		} 
+	else 
+		{
+			f= "Other";
+		} 
+					
+
+
+    let html = 'Number of patients with mentions of ' + f + ' in month ' + m + ' is ' +  data.length ;
+
+
+    $("#" + containerId).html(html);
+}
+
+function showResultsTitle3(containerId, data, node, link) {
+    removeChart(containerId);
+
+    let html = 'Number of patients with episode transition from ' + link.substr(0,link.indexOf(' ')) + ' episode to ' +  node.substr(0,node.indexOf(' ')) + ' episode is  '+ data.length ;
+
+    $("#" + containerId).html(html);
+}
 // All patients is a separate call
 // patients of each stage is alrady loaded data
 function showPatientsList(containerId, data, stage, firstEncounterAgeRange) {
@@ -1028,14 +1085,14 @@ function showDiagnosisChart(svgContainerId, data) {
     const diagnosisDotRadius = 4;
     const highlightedDotRadius = 5;
     const overviewDotRadius = 1.5;
-    const svgPadding = {top: 2, right: 30, bottom: 5, left: 100};
+    const svgPadding = {top: 1, right: 20, bottom: 20, left: 170};
     const gapBetweenYAxisAndXAxis = 10;
     const chartTopMargin = 20;
     const xAxisHeight = 20;
     // 15 is the line height of each Y axis label
     const yAxisHeight = data.diagnosisGroups.length * 15;
     const overviewHeight = data.diagnosisGroups.length * overviewDotRadius * 3;
-    const svgWidth = 470;
+    const svgWidth = 500;
     const svgHeight = xAxisHeight + yAxisHeight + chartTopMargin + overviewHeight + gapBetweenYAxisAndXAxis * 2;
     const chartWidth = svgWidth - svgPadding.left - svgPadding.right;
     const overviewWidth = chartWidth - gapBetweenYAxisAndXAxis;
@@ -1101,9 +1158,11 @@ function showDiagnosisChart(svgContainerId, data) {
     svg.append("text")
         .attr("class", "diagnosis_chart_title")
         .attr("transform", function(d) { 
-			return "translate(" + svgWidth/2 + ", " + svgPadding.top + ")"; 
+			return "translate(" + (svgWidth/2 +50) + ", " + (svgHeight-15) + ")"; 
 		})
-        .text("Diagnosis");
+		.style("fill", 'red')
+		.style("font-weight", "bold")
+        .text("Figure 8 - Diagnosis");
 
 	// Patient diagnosis dots
 	diagnosisChartGrp.selectAll(".diagnosis_dot")
@@ -1318,7 +1377,7 @@ function highlightTargetPatients(patientsArr) {
 function showBiomarkersOverviewChart(svgContainerId, data) {
     const svgWidth = 380;
     const svgHeight = 100;
-	const svgPadding = {top: 1, right: 10, bottom: 15, left: 140};
+	const svgPadding = {top: 1, right: 45, bottom: 15, left: 140};
 	const chartWidth = svgWidth - svgPadding.left - svgPadding.right;
 	const chartHeight = svgHeight - svgPadding.top - svgPadding.bottom;
 	const chartTopMargin = 35;
@@ -1359,7 +1418,9 @@ function showBiomarkersOverviewChart(svgContainerId, data) {
 	        .attr("transform", function(d) { 
 				return "translate(" + svgWidth/2 + ", " + svgPadding.top + ")"; 
 			})
-	        .text("Biomarkers Overview");
+			.style("fill", 'red')
+			.style("font-weight", "bold")
+	        .text("Figure 3 - Biomarkers Overview");
 
 		let biomarkersPatientsChartGrp = svg.append("g")
 			    .attr("class", "biomarkers_overview_chart_group")
@@ -1436,7 +1497,7 @@ function showBiomarkersOverviewChart(svgContainerId, data) {
 function showPatientsWithBiomarkersChart(svgContainerId, data) {
     const svgWidth = 350;
     const svgHeight = 130;
-	const svgPadding = {top: 1, right: 10, bottom: 15, left: 50};
+	const svgPadding = {top: 1, right: 15, bottom: 15, left: 50};
 	const chartWidth = svgWidth - svgPadding.left - svgPadding.right;
 	const chartHeight = svgHeight - svgPadding.top - svgPadding.bottom;
 	const chartTopMargin = 30;
@@ -1493,7 +1554,9 @@ function showPatientsWithBiomarkersChart(svgContainerId, data) {
 	        .attr("transform", function(d) { 
 				return "translate(" + svgWidth/2 + ", " + svgPadding.top + ")"; 
 			})
-	        .text("Patients With Biomarkers Found");
+			.style("fill", 'red')
+			.style("font-weight", "bold")
+	        .text("Figure 4 - Patients With Biomarkers Found");
 
 	    let biomarkerStatusGrp = biomarkersChartGrp.selectAll(".biomarker_status_group")
 			.data(stackData)
@@ -1686,7 +1749,7 @@ function showHeatMap(svgContainerId, data)
 	
 // set the dimensions and margins of the graph
 var margin = {top: 15, right: 20, bottom: 30, left: 70},
-  width = 680 - margin.left - margin.right,
+  width = 650 - margin.left - margin.right,
   height = 220 - margin.top - margin.bottom;
 
 values=data;
@@ -1720,12 +1783,12 @@ var Labels=["FindingCount", "DrugCount", "DisorderCount", "LabCount", "Procedure
     	
  var x = d3.scaleBand()
         .domain(months)
-        .range([minMonth, maxMonth +490])
+        .range([minMonth, maxMonth +450])
         .padding(5)
         svg.append("g")
     	.style("font-size", 8)
     	.attr("transform", "translate(0," + height + ")")
-    	.call(d3.axisBottom(x).tickSize(0).ticks(20))
+    	.call(d3.axisBottom(x).tickSize(4).ticks(20))
     	.select(".domain").remove()
 
 function myFunction (data,label,month)
@@ -1760,8 +1823,10 @@ return (patientLabelList)
           .padding(0.7)
         
          svg.append("g")
-    	.style("font-size", 8)
-    	.call(d3.axisLeft(y).tickSize(0))
+    	.style("font-size", 10)
+    	.style("font-weight", "bold")
+
+    	.call(d3.axisLeft(y).tickSize(3))
     	.call(g => g.select(".domain").remove())
 
     	
@@ -1914,6 +1979,7 @@ return (patientLabelList)
          	//console.log(d.patienList)
         	removeChart("patients");
         	showPatientsListLabel("patients", patientByLabel)
+        	showResultsTitle2("results_title", patientByLabel, d.month, d.field)
         	hasBeenClicked= false
         	}
         	else{
@@ -1939,26 +2005,29 @@ var borderPath = svg.append("rect")
   svg.append("text")
       .attr("transform",
             "translate(" + (width/2) + " ," + 
-                           (height+25  ) + ")")
+                           (height+30  ) + ")")
       .attr('font-size', 10)
 		.style("text-anchor", "middle")
+		.style("fill", 'darkblue')
+		.style("font-weight", "bold")
       	.text("Number of Months");
 
 
 // Add title to graph
 svg.append("text")
         .attr("transform",
-            "translate(" + (width/2) + " ," + 
+            "translate(" + (width/3) + " ," + 
                            (height-180  ) + ")")
         .attr("text-anchor", "middle")
         .style("font-size", "10px")
-        .style("fill", 'darkblue')
-        .text("Label Prevalence");
+        .style("font-weight","bold")
+        .style("fill", 'red')
+        .text("Figure 5 - Label Prevalence");
 
         //create Legend   
 svg.append("rect")
 		
-		.attr("x",width/2 +50)
+		.attr("x",width/2 +52)
 		.attr("y",height - 191)
 		.attr("width",8)
 		.attr("height",8).style("fill","#a6cee3")
@@ -1970,9 +2039,9 @@ svg.append("text")
 		.attr("alignment-baseline","middle")
 
 svg.append("rect")
-		.attr("x",width/2 +58)
+		.attr("x",width/2 +60)
 		.attr("y",height - 191)
-		.attr("width",30)
+		.attr("width",25)
 		.attr("height",8)
 		.style("fill","#1f78b4")
 svg.append("text")
@@ -1983,90 +2052,90 @@ svg.append("text")
 		.attr("alignment-baseline","middle")
 
 svg.append("rect")
-		.attr("x",width/2 +88)
+		.attr("x",width/2 +85)
 		.attr("y",height - 191)
-		.attr("width",30)
+		.attr("width",25)
 		.attr("height",8)
 		.style("fill","#b2df8a")
 svg.append("text")
-		.attr("x", width/2 +92)
+		.attr("x", width/2 +87)
 		.attr("y", height - 178)
 		.text("<=10")
 		.style("font-size", "8px")
 		.attr("alignment-baseline","middle")
 svg.append("rect")
-		.attr("x",width/2 +118)
+		.attr("x",width/2 +110)
 		.attr("y",height - 191)
-		.attr("width",30)
+		.attr("width",25)
 		.attr("height",8)
 		.style("fill","#33a02c")
 svg.append("text")
-		.attr("x",width/2 +122)
+		.attr("x",width/2 +112)
 		.attr("y", height - 178)
 		.text("<=15")
 		.style("font-size", "8px")
 		.attr("alignment-baseline","middle")
 
 svg.append("rect")
-		.attr("x",width/2 +148)
+		.attr("x",width/2 +134)
 		.attr("y",height - 191)
-		.attr("width",30)
+		.attr("width",25)
 		.attr("height",8)
 		.style("fill","#fb9a99")
 svg.append("text")
-		.attr("x", width/2 +152)
+		.attr("x", width/2 +139)
 		.attr("y", height - 178)
 		.text("<=20")
 		.style("font-size", "8px")
 		.attr("alignment-baseline","middle")
 
 svg.append("rect")
-		.attr("x",width/2 +178)
+		.attr("x",width/2 +159)
 		.attr("y",height - 191)
-		.attr("width",30)
+		.attr("width",25)
 		.attr("height",8)
 		.style("fill","#e31a1c")
 svg.append("text")
-		.attr("x", width/2 +182)
+		.attr("x", width/2 +163)
 		.attr("y", height -178)
 		.text("<=25")
 		.style("font-size", "8px")
 		.attr("alignment-baseline","middle")
 
 svg.append("rect")
-		.attr("x",width/2 +208)
+		.attr("x",width/2 +184)
 		.attr("y",height -191)
-		.attr("width",30)
+		.attr("width",25)
 		.attr("height",8)
 		.style("fill","#ff7f00")
 svg.append("text")
-		.attr("x", width/2 +212)
+		.attr("x", width/2 +186)
 		.attr("y", height -178)
 		.text("<=30")
 		.style("font-size", "8px")
 		.attr("alignment-baseline","middle")
 
 svg.append("rect")
-		.attr("x",width/2 +238)
+		.attr("x",width/2 +209)
 		.attr("y",height -191)
-		.attr("width",30)
+		.attr("width",25)
 		.attr("height",8)
 		.style("fill","#cab2d6")
 svg.append("text")
-		.attr("x", width/2 +242)
+		.attr("x", width/2 +212)
 		.attr("y", height -178)
 		.text("<=50")
 		.style("font-size", "8px")
 		.attr("alignment-baseline","middle")
 
 svg.append("rect")
-		.attr("x",width/2 +268)
+		.attr("x",width/2 +233)
 		.attr("y",height -191)
-		.attr("width",30)
+		.attr("width",25)
 		.attr("height",8)
 		.style("fill","#6a3d9a")
 svg.append("text")
-		.attr("x", width/2 +276)
+		.attr("x", width/2 +241)
 		.attr("y", height -178)
 		.text(">50")
 		.style("font-size", "8px")
@@ -2089,9 +2158,9 @@ function showDocBarChart(svgContainerId, data)
 	//var svg = d3.select("#" + svgContainerId).append("svg")
 	var docs=["Rad", "Path","Prog","Dis","clinical"]
     
-var width = 600;
+var width = 565;
 var height = 300;
-var margin = { top: 20, right: 10, bottom: 30, left: 60};
+var margin = { top: 20, right: 10, bottom: 30, left: 75};
 
 for(var i=0;i<data.length; i++)
     {
@@ -2161,8 +2230,9 @@ tooltip.append("text")
                            (height +30 ) + ")")
         .attr("text-anchor", "middle")
         .style("font-size", "10px")
-        .style('fill', 'darkblue')
-        .text("Document Distribution For Patients in the Cohort");
+        .style("fill", 'red')
+		.style("font-weight", "bold")
+        .text("Figure 7 - Document Distribution For Patients in the Cohort");
 
  svg.append("text")
       .attr("transform",
@@ -2277,8 +2347,9 @@ g.append("g")
   .attr("class", "axis axis--x")
   //.transition(t)
   .attr("transform", "translate(0," + 0 + ")")
-  .attr('x', 10)
-  .call(d3.axisTop(x).tickSize(0).ticks(20))
+  .attr('x', 0)
+
+  .call(d3.axisTop(x).tickSize(4).ticks(20))
   //.call(d3.axisBottom(x));
 
 
@@ -2289,17 +2360,25 @@ g.append("g")
   .call(d3.axisLeft(y))
   .append("text")
   .attr("x", 2)
-  .attr("y", y(y.ticks(10).pop()))
+  .attr("y", y(y.ticks(5).pop()))
   .attr("dy", "0.35em")
   .attr("text-anchor", "start")
-  .attr("fill", "red");
+  .attr("fill", "darkblue")
+  .style("font-weight", 'bold')
+  .attr("transform", "rotate(-90)")
+  .attr("y", -40)
+  .attr("x", -80)
+  .style("text-anchor", "end")
+  .style("fill", 'darkblue')
+	.style("font-weight", "bold")
+  .text("Document Count Per Type");
 
 var legend = g.selectAll(".legend")
   .data(keys.reverse())
   .enter().append("g")
   .attr("class", "legend")
   .attr('transform', function(d, i) {
-    var horz = width - margin.right - (50 * i); // NEW
+    var horz = width - margin.right - (44 * i); // NEW
     var vert = 300;
     return 'translate(' + horz + ',' + vert + ')'; // NEW
   })
@@ -2330,8 +2409,8 @@ function showEpisode(svgContainerId, data)
 	removeChart(svgContainerId);
 	console.log(data)
 
-   var margin = {top: 15, right: 10, bottom: 40, left: 10},
-    width = 450 - margin.left - margin.right,
+   var margin = {top: 15, right: 10, bottom: 60, left: 10},
+    width = 460 - margin.left - margin.right,
     height = 270 - margin.top - margin.bottom;
  //schemeSet1
 
@@ -2352,9 +2431,10 @@ var svg = d3.select("#" + svgContainerId).append("svg")
             "translate(" + (width/2) + " ," + 
                            (0-margin.top)  + ")")
       .style('font-size',"10px")
-      .style('fill', 'darkblue')
+      .style('fill', 'red')
 		.style("text-anchor", "middle")
-      	.text("Overview of Episode Transitions");
+		.attr("font-weight", "bold")
+      	.text("Figure 6 - Overview of Episode Transitions");
 
    
 // Set the sankey diagram properties
@@ -2397,6 +2477,7 @@ var path = sankey.link();
          	console.log(d.patienList)
         	removeChart("patients")
         	showPatientsListLabel("patients", d.patienList)
+        	showResultsTitle3("results_title",d.patienList , d.target.name,d.source.name,d.value )
         	getEpisodeLabel(d.patienList)
 
         	}) 
@@ -2405,7 +2486,7 @@ var path = sankey.link();
   link.append("title")
         .text(function(d) {
       	return d.source.name.substr(0,d.source.name.indexOf(' ')) + " → " + 
-                d.target.name.substr(0,d.target.name.indexOf(' ')) + "\n" +"Transition value : " + d.value; })
+                d.target.name.substr(0,d.target.name.indexOf(' ')) + "\n" +"number of patient : " + d.value; })
     
  
 // add in the nodes
@@ -2431,7 +2512,7 @@ var path = sankey.link();
 		  return d3.rgb(d.color).darker(0); })
     .append("title")
       .text(function(d) { 
-		  return d.name.substr(0,d.name.indexOf(' ')) + "\n" + "Value: " + d.value; })
+		  return d.name.substr(0,d.name.indexOf(' ')) + "\n" + "Number of Patient: " + d.value; })
       
  
 
@@ -2455,24 +2536,24 @@ var path = sankey.link();
           .append('g')                                            
           .attr('class', 'legend1')                                
           .attr('transform', function(d, i) {                     
-            var height = legendRectSize + legendSpacing;          // NEW
-           // var offset =  height * color.domain().length / 2;     // NEW
-            var horz = 16 * i*legendRectSize;                       // NEW
-            var vert = height+220  //+ offset;                       // NEW
-            return 'translate(' + horz + ',' + vert + ')';        // NEW
-          });                                                     // NEW
+            var height = legendRectSize + legendSpacing;          
+           // var offset =  height * color.domain().length / 2;     
+            var horz = 2 * i*legendRectSize;                       
+            var vert = height +370  //+ offset;                       
+            return 'translate(' + vert   + ',' + (horz + 200) + ')';        
+          });                                                     
 
-        legend.append('rect')                                     // NEW
-          .attr('width', legendRectSize)                          // NEW
+        legend.append('rect')                                     
+          .attr('width', legendRectSize)                          
           .attr('height', legendRectSize) 
-                             // NEW
-          .style('fill', color)                                   // NEW
-          .style('stroke', color);                                // NEW
+                             
+          .style('fill', color)                                   
+          .style('stroke', color);                                
           
-        legend.append('text')                                     // NEW
-          .attr('x', legendRectSize + legendSpacing )              // NEW
-          .attr('y', legendRectSize - legendSpacing + 4)              // NEW
-          .text(function(d) { return d; });                       // NEW
+        legend.append('text')                                     
+          .attr('x', legendRectSize + legendSpacing )              
+          .attr('y', legendRectSize - legendSpacing + 4)              
+          .text(function(d) { return d; });                       
 
 
 
