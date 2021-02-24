@@ -17,6 +17,7 @@
 <script src="https://unpkg.com/d3-sankey@0.7"></script>
 <script src="/js/cohort.js"></script>
  <script src="/js/d3-sankey.js"></script>
+ 
 
 <link rel="stylesheet" type="text/css" href="/css/normalize.css">
 <link rel="stylesheet" type="text/css" href="/css/deepphe.css">
@@ -24,7 +25,7 @@
 <style>
 
 .container {
-  height: 80px;
+  height: 80px;	
   position: relative;
   border: 3px #D66061;
 }
@@ -80,18 +81,64 @@
 a {
 color: blue;
 }
-a:link {
-color: #cc0000;
+
+.link a:visited {
+
+background-color: yellow;
+border-color: hotpink;
+ color: hotpink;
 }
-a:visited {
-color: #999999;
-}
-a:hover {
-color: grey;
+
+a[tabindex]:focus {
+    color:red;
+    outline: none;
 }
 
 h2 {
     color:#069;
+}
+li {
+    padding-bottom: 20px;
+    color: #484f4f;
+    font:15px "Arial",san-serif;
+    margin-left: 2em;
+
+
+}
+.active {
+    color: white;
+}
+details > summary {
+  padding: 15px;
+  width: 1160px;
+  background-color: #eeeeee;
+  border: blue;
+  box-shadow: 2px 2px 6px black;
+  margin-left: 2em;
+  margin-top: .3em;
+  cursor: pointer;
+}
+
+
+summary {
+	color: darkblue;
+	font:20px "Arial",san-serif;
+	border-style: : solid;
+}
+label {
+    display: block;
+    font:20px "Arial",san-serif;
+}
+
+input[type="checkbox"] {
+  display:none;
+  font: 30px;
+}
+
+#demo:checked + label, #demo1:checked + label, #demo2:checked + label, #demo3:checked + label,
+#demo4:checked + label,#demo5:checked + label, #demo6:checked + label, #demo7:checked + label, #demo8:checked + label, #demo9:checked + label, #demo10:checked + label, #demo10:checked + label, #demo11:checked + label, #demo12:checked + label, #demo13:checked + label, #demo14:checked + label, #demo15:checked + label, #demo16:checked + label, #demo17:checked + label {
+    background: darkblue;
+    color: white;
 }
 
 
@@ -100,68 +147,136 @@ h2 {
 <body>
 	<h2 style="text-align: center;">Welcome To DeepPhe-Viz tool for Cancer Cohort identification</h2>
 	<h2 style="text-align: center;" style="font-size: 30px" style="color: #069"> List of Tasks</h2>
-<ul> 
-	<button class= "button" onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')" type="button"><span> Task 1</span></button>
-	<ol>
-  		<a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')"  style= "font-size:15px"><li>How many patients are in the cohort?</li></a>
-  		<a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')"  style= "font-size:15px"><li>What is the range of ages at first encounter in the cohort?</li></a>
- 		<a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')"  style= "font-size:15px"><li>What is the percentage of the patients with biomarkers in the cohort?</li></a>
- 		<a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')"  style= "font-size:15px"><li>The label prevalence chart shows the distribution of documents types during each month of a patient’s treatment. The overall number of months in this view will give an indication of the length of treatment for the patient with the longest time span in the cohort. What are the start and end months for this timespan?</li></a>
+<details id="task" class="details-example" >
+    <summary style="font-size: 20px"  style="color: red"> Task 1</summary>
+ <ul  class="firstTask">
+    
+    <a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')" ><li class="navbar-brand nav-item" style="margin-right: 9%">
+      <input type="checkbox" id="demo"/>
 
-	</ol> </ul>
+      <label for="demo">How many patients are in the cohort?</label>
+    </li></a>
+    <a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')" ><li class="navbar-brand nav-item" style="margin-right: 9%">
+      <input type="checkbox" id="demo1"/>
+      <label for="demo1">What is the range of ages of first encounter in the cohort in figure 2?</label>
+    </li></a>
 
-	<ul>
-	<button class= "button" onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')" type="button"><span> Task 2</span></button>
-	<ol>
 
-		<a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')"  style= "font-size:15px"><li>How many patients with stage 2 diagnosis?</li></a>
-		<a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')"  style= "font-size:15px"><li>How many patients in the cohort were between 30 and 40 years old at the time of their first encounter? </li></a>
-		<a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')"  style= "font-size:15px"><li>From the diagnosis chart, how many patients have a diagnosis of Epithelial Neoplasm? Name one of them?</li></a></ol> 
-	</ul>
+   <a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')" ><li class="navbar-brand nav-item" style="margin-right: 9%">
+      <input type="checkbox" id="demo2"/>
+      <label for="demo2">What is the percentage of patients with biomarkers in the cohort in figure 3? </label>
+    </li></a>
+    <a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')" ><li class="navbar-brand nav-item" style="margin-right: 9%">
+      <input type="checkbox" id="demo3"/>
+      <label for="demo3">What are the start and end months of the cohort in the label prevalence chart in figure 4?</label>
+    </li></a>
+</ul>
+</details>
 
-	<ul>
-	<button class= "button" onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')" type="button"><span> Task 3</span></button>
-		<ol>
-		
-		<a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')"  style= "font-size:15px"><li>Find one or more patient with stage 0? What is the distribution of biomarkers found for those patients? </li></a>
-		<a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')"  style= "font-size:15px"><li>For one of the stages, no patients in the cohort have biomarkers. Which stage is this? Name one patient with this stage of cancer as their summary diagnosis?</li></a>
-		<a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')"  style= "font-size:15px"><li>Using the episode transition chart, find a patient who experienced a transition from a treatment episode to a medical decision-making episode. For that patient, what month and label have the highest term prevalence in the term prevalence chart?</li></a>
-		<a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')"  style= "font-size:15px"><li>In the term prevalence chart, for finding mentions in month 2, what is the highest number of documents (transition value) that have the episode sequence of pre-diagnostic to diagnostic in the episode transition chart?</li></a></ol>
-	</ul>
-		
-	<ul>
-	<button class= "button" onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')" type="button"><span> Task 4</span></button>
-		<ol>
-		
-		<a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')"  style= "font-size:15px"><li>From the term prevalence chart, find number of patient(s) with term prevalence of 6 of drug mentions in month 5? </li></a>
 
-		<a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')"  style= "font-size:15px"><li>From the episode transition chart, find number of patients who have the following sequence of episodes: </li></a>
-		<ul> 
-			<a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')"  style= "font-size:15px"><li>Treatment episode then follow-up? </li></a>
-			<a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')"  style= "font-size:15px"><li>Follow-up then pre-diagnostic?  </li></a>
-			<a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')"  style= "font-size:15px"><li>Treatment then pre-diagnostic?  </li></a>
-			<a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')"  style= "font-size:15px"><li>Pre-diagnostic then diagnostic -> 	pre-diagnostic -> diagnostic -> pre-diagnostic -> diagnostic-> pre-diagnostic -> diagnostic ? </li></a></ul>
-	</ol></ul>
+  <details id="task" class="details-example">
+    <summary style="font-size: 20px" style="color: #069"> Task 2</summary>
+    
+<ul  class=" secondTask">
+    
+    <a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')" ><li class="navbar-brand nav-item" style="margin-right: 9%">
+      <input type="checkbox" id="demo4"/>
 
-	<ul>
-		<button class= "button" onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')" type="button"><span> Task 5</span></button>
-		<ol>
-		
-		<a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')"  style= "font-size:15px"><li>Find a patient with treatment to follow-up episode sequence and transition value (path value) of 1 in the episode transition chart what are the primary tumors for that patient in the patient level view?
- 		</li></a>
- 		
-		<a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')"  style= "font-size:15px"><li>Using term prevalence chart, find a patient who has finding mentions in month 18. For that patient:</li></a>
-		<ul>
-		<a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')"  style= "font-size:15px"><li>Find how many documents have a treatment episode?</li></a>
-		<a onclick="window.open('http://localhost:8383/cohortAnalysis','_blank')"  style= "font-size:15px"><li>What type of documents they are?</li></a>
-		</ul>
-		<a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')"  style= "font-size:15px"><li>How many surgical pathology reports for the patient with stage 2A and first encounter age between 30 and 36 and has finding mentions in month 2 and has episode sequence from diagnostic to medical decision making ?</li></a>
+      <label for="demo4">How many patients have <strong>stage 2 diagnosis?</strong></label>
+    </li></a>
+    <a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')" ><li class="navbar-brand nav-item" style="margin-right: 9%">
+      <input type="checkbox" id="demo5"/>
+      <label for="demo5">How many patients in the cohort with <strong> age range between 30 and 40 years old inclusive </strong> at the time of their first encounter in figure 2?</label>
+    </li></a>
 
-		</li></a>
-		
-	</ol></ul>
+   <a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')" ><li class="navbar-brand nav-item" style="margin-right: 9%">
+      <input type="checkbox" id="demo6"/>
+      <label for="demo6">How many patients have a diagnosis of <strong> Epithelial Neoplasm  </strong>in the Diagnosis chart in figure 8? Name one of them? </label>
+    </li></a>
+    
+</ul>
+</details>
+
+<details id="task" class="details-example">
+<summary style="font-size: 20px" style="color: #069"> Task 3</summary>
+<ul  class=" thirdTask">
+    
+    <a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')" ><li class="navbar-brand nav-item" style="margin-right: 9%">
+      <input type="checkbox" id="demo7"/>
+
+      <label for="demo7">For one of the stages in figure 1, no patients in the cohort have biomarkers. Which stage is this? <br> Name one patient with this stage of cancer?</label>
+    </li></a>
+    <a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')" ><li class="navbar-brand nav-item" style="margin-right: 9%">
+      <input type="checkbox" id="demo8"/>
+      <label for="demo8">Find one or more patient with <strong> stage 0 </strong>in figure 1? <br> What is the distribution of biomarkers found for those patients in figure 3?</label>
+    </li></a>
+
+
+   <a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')" ><li class="navbar-brand nav-item" style="margin-right: 9%">
+      <input type="checkbox" id="demo9"/>
+      <label for="demo9">Using the episode transition chart in figure 6: <br> 1. Find a patient who experienced a transition from a <strong> treatment episode to a medical episode </strong> <br> 2. For that patient, what the month and label have the highest prevalence in the Label prevalence chart in figure 5? </label>
+    </li></a>
+
+    <a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')" ><li class="navbar-brand nav-item" style="margin-right: 9%">
+      <input type="checkbox" id="demo10"/>
+      <label for="demo10">For <strong>Finding mentions in month 2 </strong> in the Label prevalence chart in figure 5:<br> What is the highest number of patinets that have the episode sequence of <strong> pre-diagnostic to diagnostic </strong> in the episode transition chart in figure 6?</label>
+    </li></a>
+    
+    
+</ul>
+</details>
+
+
+<details id="task" class="details-example">
+<summary style="font-size: 20px" style="color: #069"> Task 4</summary>
+    <ul  class=" fourthTask">
+    
+    <a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')" ><li class="navbar-brand nav-item" style="margin-right: 9%">
+      <input type="checkbox" id="demo11"/>
+
+      <label for="demo11">Find number of patient(s) with <strong>Drug mention in month 5</strong> from the Label prevalence chart in figure 5?</label>
+    </li></a>
+    <a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')" ><li class="navbar-brand nav-item" style="margin-right: 9%">
+      <input type="checkbox" id="demo12"/>
+      <label for="demo12">Find the highest number of patients who have <strong> Medical episode to pre-diagnostic </strong> sequence in the episode transition chart in figure 6 ? </label>
+    </li></a>
+
+   <a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')" ><li class="navbar-brand nav-item" style="margin-right: 9%">
+      <input type="checkbox" id="demo13"/>
+      <label for="demo13">Find the highest number of patients who have <strong> Treatment then pre-diagnostic </strong> transition in the episode transition chart in figure 6 ?</label>
+    </li></a>
+  <a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')" ><li class="navbar-brand nav-item" style="margin-right: 9%">
+      <input type="checkbox" id="demo14"/>
+      <label for="demo14">Find the highest number of patients who have <strong> Pre-diagnostic -> diagnostic-> pre-diagnostic -> diagnostic </strong> transitions in the episode transition chart in figure 6 ?</label>
+    </li></a>
+ </ul>
+</details>
+<details id="task" class="details-example">
+<summary style="font-size: 20px" style="color: #069"> Task 5</summary>
+    <ul class=" fifthTask">
+	<a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')" ><li class="navbar-brand nav-item" style="margin-right: 9%">
+      <input type="checkbox" id="demo15"/>
+
+      <label for="demo15">Find a patient with <strong> treatment to follow-up </strong> episode sequence in the episode transition chart in figure 6.<br> What is the <strong> treatment </strong> for that patient in the <strong>Cancer and Tumor Summary </strong> in the patient level view?</label>
+    </li></a>
+    <a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')" ><li class="navbar-brand nav-item" style="margin-right: 9%">
+      <input type="checkbox" id="demo16"/>
+      <label for="demo16">Find a patient who has <strong> Finding mentions in month 18 </strong> using Label prevalence chart in figure 5. For that patient:<br> 1. Find how many documents have <strong> treatment episode </strong> in the patient level view? <br> 2. What type of documents they are? </label>
+    </li></a>
+
+   <a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')" ><li class="navbar-brand nav-item" style="margin-right: 9%">
+      <input type="checkbox" id="demo17"/>
+      <label for="demo17">How many <strong> surgical pathology reports </strong> in the patient level view for the patient with<strong> stage 2A, first encounter age between 30 and 36, Finding mentions in month 2 and episode sequence from diagnostic to medical? </strong></label>
+    </li></a>
+      
+  </ul>
+</details>
+
+<ul>
 		
 
 </body>
+
+
 
 </html>

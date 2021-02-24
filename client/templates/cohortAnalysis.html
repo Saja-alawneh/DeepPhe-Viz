@@ -12,17 +12,16 @@
     <div id="patients_with_biomarkers"></div>
 
 		
-    <button id="myBtn">Submit</button>
+    <button id="myBtn" onclick="print()">Submit</button>
     <div id="myModal" class="modal">
-
-      <!-- Modal content -->
-      <div class="modal-content">
+     <div class="modal-content" id="Task" action= "/" method ="POST">
       <span class="close">&times;</span>
       <textarea id="msg" name="msg" placeholder="Write your answer ..." style="height:100px"></textarea>
       
-      <input type="button" id="next" onclick="location.href=location.protocol+'//'+ location.host ;" value="Next Task" />
-      <input type="button" id="bt" value="Save " onclick="saveFile()" />
+      <input type="button" id="next" onclick="location.href=location.protocol+'//'+ location.host;"
+      value="Next Task" />
     
+    </div>
       </div>
     </div>
 		
@@ -52,7 +51,7 @@
 	<script type="text/javascript">
 	const baseUri = '{{baseUri}}';
 
-	showCohort();
+showCohort();
 var modal = document.getElementById("myModal");
 
 // Get the button that opens the modal
@@ -77,34 +76,31 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
-let saveFile = () => {
-      
-        // Get the data from each element on the form.
-        const msg = document.getElementById('msg');
-        
-        // This variable stores all the data.
-        let data = 
-            '\r  Message: ' + msg.value;
-        
-        // Convert the text to BLOB.
-        const textToBLOB = new Blob([data], { type: 'text/plain' });
-        const sFileName = 'task.txt';    // The file to save the data.
 
-        let newLink = document.createElement("a");
-        newLink.download = sFileName;
+let print= () => { console.log('Submit task')}
 
-        if (window.webkitURL != null) {
-            newLink.href = window.webkitURL.createObjectURL(textToBLOB);
-        }
-        else {
-            newLink.href = window.URL.createObjectURL(textToBLOB);
-            newLink.style.display = "none";
-            document.body.appendChild(newLink);
-        }
 
-        newLink.click(); 
-    }
+
+  $('#next').click(function() {
+  console.log('submit clicked')
+  var data = $('#msg').val()
+  data.toString(data)
+  data = data.replace(/\n/g, " ")
+ console.log(data)
+
+  $.ajax({
+    type: "POST",
+    url: baseUri + '/Task/' + data,
+    data: $('#msg').val(),
+    });
+}) ;
+
+
+
 </script>
+
+
+
 <style>
 #myBtn
 {
@@ -113,7 +109,7 @@ let saveFile = () => {
 	background-color: #D66061; 
   border: none;
 	color: white;
-  padding: 10px 25px;
+  padding: 10px 20px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -124,19 +120,24 @@ let saveFile = () => {
 
 .modal {
   display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
+  position: absolute; /* Stay in place */
+  z-index: 10; /* Sit on top */
+  padding-top: 200px;
+  padding-left: 50px;
+   /* Location of the box */
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
+  width: 40%; /* Full width */
+  height: 40%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  background-color: rgba(0,0,0,0); /* Black w/ opacity */
 }
 
 /* Modal Content */
+.modal-header{
+  cursor: move;
+}
 .modal-content {
   background-color: #fefefe;
   margin: auto;
@@ -149,7 +150,7 @@ let saveFile = () => {
 .close {
   color: #aaaaaa;
   float: right;
-  font-size: 28px;
+  font-size: 20px;
   font-weight: bold;
 }
 
@@ -171,7 +172,7 @@ let saveFile = () => {
    input[type=text], textarea, select 
   {
       font: 17px Calibri;
-      width: 98%;
+      width: 70%;
       float: left;
        padding: 12px;
        border: 1px solid #ccc;
@@ -180,15 +181,15 @@ let saveFile = () => {
    }
 input[type=button]{
 
-            font: 20px ;
-            width: auto;
-            height: auto;
-            position: relative;
-            float: right;
-            margin-left: 20px;
-            cursor: pointer;
-            padding: 20px;
-            position:relative;
+      font: 10px ;
+      width: auto;
+      height: auto;
+      position: relative;
+      float: right;
+      margin-left: 20px;
+      cursor: pointer;
+      padding: 10px;
+      position:relative;
 			background-color: #667292; 
   			border: none;
 			color: white;
