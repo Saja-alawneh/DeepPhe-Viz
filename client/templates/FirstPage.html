@@ -18,6 +18,28 @@
 <script src="/js/cohort.js"></script>
  <script src="/js/d3-sankey.js"></script>
  
+ <script type="text/javascript">
+ 	const baseUri = '{{baseUri}}';
+
+$('a').on('click',function() {
+    console.log("click ");
+});
+ $(document).on('click', '#navbar-brand nav-item', function() {
+  console.log('clicked ');
+})
+
+ $(document).delegate("input", 'click', function (e) {
+	console.log('Task Start')
+	var data = 'Task start'
+
+  $.ajax({
+    type: "POST",
+    url: baseUri + '/TaskStart/' + data,
+    data: data,
+    });
+});
+ </script>
+ 
 
 <link rel="stylesheet" type="text/css" href="/css/normalize.css">
 <link rel="stylesheet" type="text/css" href="/css/deepphe.css">
@@ -147,11 +169,12 @@ input[type="checkbox"] {
 <body>
 	<h2 style="text-align: center;">Welcome To DeepPhe-Viz tool for Cancer Cohort identification</h2>
 	<h2 style="text-align: center;" style="font-size: 30px" style="color: #069"> List of Tasks</h2>
+	<div id="test">
 <details id="task" class="details-example" >
     <summary style="font-size: 20px"  style="color: red"> Task 1</summary>
  <ul  class="firstTask">
     
-    <a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')" ><li class="navbar-brand nav-item" style="margin-right: 9%">
+    <a onclick="window.open(location.protocol+'//'+ location.host +'/cohortAnalysis','_blank')" ><li class="navbar-brand nav-item" id="link" style="margin-right: 9%">
       <input type="checkbox" id="demo"/>
 
       <label for="demo">How many patients are in the cohort?</label>
@@ -273,6 +296,8 @@ input[type="checkbox"] {
 </details>
 
 <ul>
+</ul>
+</div>
 		
 
 </body>
