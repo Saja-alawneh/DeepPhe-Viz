@@ -21,23 +21,17 @@
  <script type="text/javascript">
  	const baseUri = '{{baseUri}}';
 
-$('a').on('click',function() {
-    console.log("click ");
-});
- $(document).on('click', '#navbar-brand nav-item', function() {
-  console.log('clicked ');
-})
-
  $(document).delegate("input", 'click', function (e) {
 	console.log('Task Start')
-	var data = 'Task start'
+	var data = "start"
 
   $.ajax({
     type: "POST",
-    url: baseUri + '/TaskStart/' + data,
-    data: data,
+    url: baseUri + '/Task/' + data  ,
+    data: "start",
     });
 });
+
  </script>
  
 
